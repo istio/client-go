@@ -1,5 +1,5 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/istio/tools)](https://goreportcard.com/report/github.com/istio/tools)
-[![GoDoc](https://godoc.org/github.com/istio/tools?status.svg)](https://godoc.org/github.com/istio/tools)
-[![GolangCI](https://golangci.com/badges/github.com/istio/tools.svg)](https://golangci.com/r/github.com/istio/tools)
+[![Go Report Card](https://goreportcard.com/badge/github.com/istio/client-go)](https://goreportcard.com/report/github.com/istio/client-go)
+[![GolangCI](https://golangci.com/badges/github.com/istio/client-go.svg)](https://golangci.com/r/github.com/istio/client-go)
+[![GoDoc](https://godoc.org/istio.io/client-go?status.svg)](https://godoc.org/istio.io/client-go)
 
-# Performance Testing
+# Golang Client Libraries for Istio API

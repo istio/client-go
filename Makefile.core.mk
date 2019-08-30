@@ -16,7 +16,7 @@ build:
 
 test:
 
-lint:
+lint: lint-all
 
 fmt:
 
