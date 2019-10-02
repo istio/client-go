@@ -14,9 +14,11 @@
 
 default: all
 
-all: clean generate build
+all: clean gen build
 
-generate: generate-k8s-client
+gen: generate-k8s-client
+
+gen-check: clean gen check-clean-repo
 
 build: build-k8s-client
 
@@ -112,10 +114,6 @@ clean-k8s-client:
     # remove generated code
 	@rm -rf pkg/
 
-test:
-
 lint: lint-all
-
-fmt:
 
 include common/Makefile.common.mk
