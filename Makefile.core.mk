@@ -18,7 +18,10 @@ all: clean gen build
 
 gen: generate-k8s-client
 
-gen-check: clean gen check-clean-repo
+tidy:
+	@go mod tidy
+
+gen-check: clean gen tidy check-clean-repo
 
 build: build-k8s-client
 
