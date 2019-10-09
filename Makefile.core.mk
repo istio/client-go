@@ -75,7 +75,7 @@ kube_informers_package = $(kube_base_output_package)/informers
 # file header text
 kube_go_header_text = header.go.txt
 
-ifeq ($(BUILD_WITH_CONTAINER),1)
+ifeq ($(IN_BUILD_CONTAINER),1)
 	# k8s code generators rely on GOPATH, using $GOPATH/src as the base package
 	# directory.  Using --output-base . does not work, as that ends up generating
 	# code into ./<package>, e.g. ./istio.io/client-go/pkg/apis/...  To work
