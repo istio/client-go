@@ -3,9 +3,11 @@
 [![GoDoc](https://godoc.org/istio.io/client-go?status.svg)](https://godoc.org/istio.io/client-go)
 
 # Golang Client Library for Istio APIs
+
 This go library contains clients that talk to Istio resources in a Kubernetes cluster.
 
 ## How to get it?
+
 If you are using go1.11+, you can simply use the following command to get the lastest client code:
 
 ```sh
