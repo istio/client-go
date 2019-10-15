@@ -4,7 +4,6 @@ go 1.12
 
 require (
 	github.com/evanphx/json-patch v4.5.0+incompatible // indirect
-	github.com/gogo/protobuf v1.3.0 // indirect
 	github.com/golang/groupcache v0.0.0-20190702054246-869f871628b6 // indirect
 	github.com/google/btree v1.0.0 // indirect
 	github.com/googleapis/gnostic v0.3.1 // indirect
@@ -25,8 +24,7 @@ require (
 	google.golang.org/grpc v1.23.1 // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
-	istio.io/api v0.0.0-20190925180116-1b594bcab992
-	istio.io/gogo-genproto v0.0.0-20190906190748-4801a8955c3d // indirect
+	istio.io/api v0.0.0-20191015210738-bfa91e88abf1
 	k8s.io/api v0.0.0-20190817221950-ebce17126a01 // indirect
 	k8s.io/apimachinery v0.0.0-20190817221809-bf4de9df677c
 	k8s.io/client-go v10.0.0+incompatible
