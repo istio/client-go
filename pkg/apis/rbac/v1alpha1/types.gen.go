@@ -10,8 +10,8 @@ import (
 //
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// RbacConfig implements the ClusterRbaConfig Custom Resource Definition for controlling Istio RBAC behavior.
-// The ClusterRbaConfig Custom Resource is a singleton where only one ClusterRbaConfig should be created
+// RbacConfig implements the ClusterRbacConfig Custom Resource Definition for controlling Istio RBAC behavior.
+// The ClusterRbacConfig Custom Resource is a singleton where only one ClusterRbacConfig should be created
 // globally in the mesh and the namespace should be the same to other Istio components, which usually is `istio-system`.
 //
 // Below is an example of an `ClusterRbacConfig` resource called `istio-rbac-config` which enables Istio RBAC for all
@@ -62,8 +62,8 @@ type RbacConfigList struct {
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// RbacConfig implements the ClusterRbaConfig Custom Resource Definition for controlling Istio RBAC behavior.
-// The ClusterRbaConfig Custom Resource is a singleton where only one ClusterRbaConfig should be created
+// RbacConfig implements the ClusterRbacConfig Custom Resource Definition for controlling Istio RBAC behavior.
+// The ClusterRbacConfig Custom Resource is a singleton where only one ClusterRbacConfig should be created
 // globally in the mesh and the namespace should be the same to other Istio components, which usually is `istio-system`.
 //
 // Below is an example of an `ClusterRbacConfig` resource called `istio-rbac-config` which enables Istio RBAC for all
