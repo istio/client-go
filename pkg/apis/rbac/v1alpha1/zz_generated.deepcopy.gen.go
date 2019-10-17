@@ -39,7 +39,7 @@ func (in *ClusterRbacConfig) DeepCopyObject() runtime.Object {
 func (in *ClusterRbacConfigList) DeepCopyInto(out *ClusterRbacConfigList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]ClusterRbacConfig, len(*in))
@@ -99,7 +99,7 @@ func (in *RbacConfig) DeepCopyObject() runtime.Object {
 func (in *RbacConfigList) DeepCopyInto(out *RbacConfigList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]RbacConfig, len(*in))
@@ -186,7 +186,7 @@ func (in *ServiceRoleBinding) DeepCopyObject() runtime.Object {
 func (in *ServiceRoleBindingList) DeepCopyInto(out *ServiceRoleBindingList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]ServiceRoleBinding, len(*in))
@@ -219,7 +219,7 @@ func (in *ServiceRoleBindingList) DeepCopyObject() runtime.Object {
 func (in *ServiceRoleList) DeepCopyInto(out *ServiceRoleList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]ServiceRole, len(*in))
