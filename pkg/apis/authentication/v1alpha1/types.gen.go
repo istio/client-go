@@ -3,7 +3,7 @@
 package v1alpha1
 
 import (
-	v1alpha1 "istio.io/api/authentication/v1alpha1"
+	authenticationv1alpha1 "istio.io/api/authentication/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -98,7 +98,7 @@ type Policy struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec v1alpha1.Policy `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec authenticationv1alpha1.Policy `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -203,7 +203,7 @@ type MeshPolicy struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec v1alpha1.Policy `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec authenticationv1alpha1.Policy `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
