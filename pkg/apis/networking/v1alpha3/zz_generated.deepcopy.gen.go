@@ -39,7 +39,7 @@ func (in *DestinationRule) DeepCopyObject() runtime.Object {
 func (in *DestinationRuleList) DeepCopyInto(out *DestinationRuleList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]DestinationRule, len(*in))
@@ -99,7 +99,7 @@ func (in *EnvoyFilter) DeepCopyObject() runtime.Object {
 func (in *EnvoyFilterList) DeepCopyInto(out *EnvoyFilterList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]EnvoyFilter, len(*in))
@@ -159,7 +159,7 @@ func (in *Gateway) DeepCopyObject() runtime.Object {
 func (in *GatewayList) DeepCopyInto(out *GatewayList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]Gateway, len(*in))
@@ -219,7 +219,7 @@ func (in *ServiceEntry) DeepCopyObject() runtime.Object {
 func (in *ServiceEntryList) DeepCopyInto(out *ServiceEntryList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]ServiceEntry, len(*in))
@@ -279,7 +279,7 @@ func (in *Sidecar) DeepCopyObject() runtime.Object {
 func (in *SidecarList) DeepCopyInto(out *SidecarList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]Sidecar, len(*in))
@@ -339,7 +339,7 @@ func (in *VirtualService) DeepCopyObject() runtime.Object {
 func (in *VirtualServiceList) DeepCopyInto(out *VirtualServiceList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]VirtualService, len(*in))

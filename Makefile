@@ -50,13 +50,13 @@ else
     $(error This system's OS $(LOCAL_OS) isn't supported)
 endif
 
-export TARGET_OUT ?= $(shell pwd)/out/$(TARGET_ARCH)_$(TARGET_OS)
+export TARGET_OUT ?= $(shell pwd)/out/$(TARGET_OS)_$(TARGET_ARCH)
 
 ifeq ($(BUILD_WITH_CONTAINER),1)
-export TARGET_OUT = /work/out/$(TARGET_ARCH)_$(TARGET_OS)
+export TARGET_OUT = /work/out/$(TARGET_OS)_$(TARGET_ARCH)
 CONTAINER_CLI ?= docker
 DOCKER_SOCKET_MOUNT ?= -v /var/run/docker.sock:/var/run/docker.sock
-IMG ?= gcr.io/istio-testing/build-tools:2019-10-11T13-37-52
+IMG ?= gcr.io/istio-testing/build-tools:2019-10-22T04-14-16
 UID = $(shell id -u)
 PWD = $(shell pwd)
 
@@ -67,12 +67,14 @@ $(info Building with the build container: $(IMG).)
 # the path of the file.
 TIMEZONE=`readlink $(READLINK_FLAGS) /etc/localtime | sed -e 's/^.*zoneinfo\///'`
 
-RUN = $(CONTAINER_CLI) run --net=host -t -i --sig-proxy=true -u $(UID):docker --rm \
+RUN = $(CONTAINER_CLI) run -t -i --sig-proxy=true -u $(UID):docker --rm \
 	-e IN_BUILD_CONTAINER="$(BUILD_WITH_CONTAINER)" \
 	-e TZ="$(TIMEZONE)" \
 	-e TARGET_ARCH="$(TARGET_ARCH)" \
 	-e TARGET_OS="$(TARGET_OS)" \
 	-e TARGET_OUT="$(TARGET_OUT)" \
+	-e HUB="$(HUB)" \
+	-e TAG="$(TAG)" \
 	-v /etc/passwd:/etc/passwd:ro \
 	$(DOCKER_SOCKET_MOUNT) \
 	$(CONTAINER_OPTIONS) \
@@ -80,11 +82,6 @@ RUN = $(CONTAINER_CLI) run --net=host -t -i --sig-proxy=true -u $(UID):docker --
 	--mount type=volume,source=go,destination="/go" \
 	--mount type=volume,source=gocache,destination="/gocache" \
 	-w /work $(IMG)
-else
-$(info Building with your local toolchain.)
-RUN =
-GOBIN ?= $(GOPATH)/bin
-endif
 
 MAKE = $(RUN) make --no-print-directory -e -f Makefile.core.mk
 
@@ -95,3 +92,11 @@ default:
 	@$(MAKE)
 
 .PHONY: default
+
+else
+
+$(info Building with your local toolchain.)
+GOBIN ?= $(GOPATH)/bin
+include Makefile.core.mk
+
+endif
