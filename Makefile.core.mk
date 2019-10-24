@@ -16,12 +16,9 @@ default: all
 
 all: clean gen build
 
-gen: generate-k8s-client
+gen: generate-k8s-client tidy-go mirror-licenses
 
-tidy:
-	@go mod tidy
-
-gen-check: clean gen tidy check-clean-repo
+gen-check: clean gen check-clean-repo
 
 build: build-k8s-client
 
