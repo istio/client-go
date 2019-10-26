@@ -3,6 +3,8 @@
 package versioned
 
 import (
+	"fmt"
+
 	authenticationv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/authentication/v1alpha1"
 	configv1alpha2 "istio.io/client-go/pkg/clientset/versioned/typed/config/v1alpha2"
 	networkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3"
@@ -16,20 +18,10 @@ import (
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	AuthenticationV1alpha1() authenticationv1alpha1.AuthenticationV1alpha1Interface
-	// Deprecated: please explicitly pick a version if possible.
-	Authentication() authenticationv1alpha1.AuthenticationV1alpha1Interface
 	ConfigV1alpha2() configv1alpha2.ConfigV1alpha2Interface
-	// Deprecated: please explicitly pick a version if possible.
-	Config() configv1alpha2.ConfigV1alpha2Interface
 	NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3Interface
-	// Deprecated: please explicitly pick a version if possible.
-	Networking() networkingv1alpha3.NetworkingV1alpha3Interface
 	RbacV1alpha1() rbacv1alpha1.RbacV1alpha1Interface
-	// Deprecated: please explicitly pick a version if possible.
-	Rbac() rbacv1alpha1.RbacV1alpha1Interface
 	SecurityV1beta1() securityv1beta1.SecurityV1beta1Interface
-	// Deprecated: please explicitly pick a version if possible.
-	Security() securityv1beta1.SecurityV1beta1Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
@@ -48,20 +40,8 @@ func (c *Clientset) AuthenticationV1alpha1() authenticationv1alpha1.Authenticati
 	return c.authenticationV1alpha1
 }
 
-// Deprecated: Authentication retrieves the default version of AuthenticationClient.
-// Please explicitly pick a version.
-func (c *Clientset) Authentication() authenticationv1alpha1.AuthenticationV1alpha1Interface {
-	return c.authenticationV1alpha1
-}
-
 // ConfigV1alpha2 retrieves the ConfigV1alpha2Client
 func (c *Clientset) ConfigV1alpha2() configv1alpha2.ConfigV1alpha2Interface {
-	return c.configV1alpha2
-}
-
-// Deprecated: Config retrieves the default version of ConfigClient.
-// Please explicitly pick a version.
-func (c *Clientset) Config() configv1alpha2.ConfigV1alpha2Interface {
 	return c.configV1alpha2
 }
 
@@ -70,31 +50,13 @@ func (c *Clientset) NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3In
 	return c.networkingV1alpha3
 }
 
-// Deprecated: Networking retrieves the default version of NetworkingClient.
-// Please explicitly pick a version.
-func (c *Clientset) Networking() networkingv1alpha3.NetworkingV1alpha3Interface {
-	return c.networkingV1alpha3
-}
-
 // RbacV1alpha1 retrieves the RbacV1alpha1Client
 func (c *Clientset) RbacV1alpha1() rbacv1alpha1.RbacV1alpha1Interface {
 	return c.rbacV1alpha1
 }
 
-// Deprecated: Rbac retrieves the default version of RbacClient.
-// Please explicitly pick a version.
-func (c *Clientset) Rbac() rbacv1alpha1.RbacV1alpha1Interface {
-	return c.rbacV1alpha1
-}
-
 // SecurityV1beta1 retrieves the SecurityV1beta1Client
 func (c *Clientset) SecurityV1beta1() securityv1beta1.SecurityV1beta1Interface {
-	return c.securityV1beta1
-}
-
-// Deprecated: Security retrieves the default version of SecurityClient.
-// Please explicitly pick a version.
-func (c *Clientset) Security() securityv1beta1.SecurityV1beta1Interface {
 	return c.securityV1beta1
 }
 
@@ -107,9 +69,14 @@ func (c *Clientset) Discovery() discovery.DiscoveryInterface {
 }
 
 // NewForConfig creates a new Clientset for the given config.
+// If config's RateLimiter is not set and QPS and Burst are acceptable,
+// NewForConfig will generate a rate-limiter in configShallowCopy.
 func NewForConfig(c *rest.Config) (*Clientset, error) {
 	configShallowCopy := *c
 	if configShallowCopy.RateLimiter == nil && configShallowCopy.QPS > 0 {
+		if configShallowCopy.Burst <= 0 {
+			return nil, fmt.Errorf("Burst is required to be greater than 0 when RateLimiter is not set and QPS is set to greater than 0")
+		}
 		configShallowCopy.RateLimiter = flowcontrol.NewTokenBucketRateLimiter(configShallowCopy.QPS, configShallowCopy.Burst)
 	}
 	var cs Clientset
