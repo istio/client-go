@@ -39,7 +39,7 @@ func (in *AttributeManifest) DeepCopyObject() runtime.Object {
 func (in *AttributeManifestList) DeepCopyInto(out *AttributeManifestList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]AttributeManifest, len(*in))
@@ -126,7 +126,7 @@ func (in *HTTPAPISpecBinding) DeepCopyObject() runtime.Object {
 func (in *HTTPAPISpecBindingList) DeepCopyInto(out *HTTPAPISpecBindingList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]HTTPAPISpecBinding, len(*in))
@@ -159,7 +159,7 @@ func (in *HTTPAPISpecBindingList) DeepCopyObject() runtime.Object {
 func (in *HTTPAPISpecList) DeepCopyInto(out *HTTPAPISpecList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]HTTPAPISpec, len(*in))
@@ -219,7 +219,7 @@ func (in *Handler) DeepCopyObject() runtime.Object {
 func (in *HandlerList) DeepCopyInto(out *HandlerList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]Handler, len(*in))
@@ -279,7 +279,7 @@ func (in *Instance) DeepCopyObject() runtime.Object {
 func (in *InstanceList) DeepCopyInto(out *InstanceList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]Instance, len(*in))
@@ -366,7 +366,7 @@ func (in *QuotaSpecBinding) DeepCopyObject() runtime.Object {
 func (in *QuotaSpecBindingList) DeepCopyInto(out *QuotaSpecBindingList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]QuotaSpecBinding, len(*in))
@@ -399,7 +399,7 @@ func (in *QuotaSpecBindingList) DeepCopyObject() runtime.Object {
 func (in *QuotaSpecList) DeepCopyInto(out *QuotaSpecList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]QuotaSpec, len(*in))
@@ -459,7 +459,7 @@ func (in *Rule) DeepCopyObject() runtime.Object {
 func (in *RuleList) DeepCopyInto(out *RuleList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]Rule, len(*in))

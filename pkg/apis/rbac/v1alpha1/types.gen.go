@@ -3,7 +3,7 @@
 package v1alpha1
 
 import (
-	v1alpha1 "istio.io/api/rbac/v1alpha1"
+	rbacv1alpha1 "istio.io/api/rbac/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -45,7 +45,7 @@ type RbacConfig struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec v1alpha1.RbacConfig `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec rbacv1alpha1.RbacConfig `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -97,7 +97,7 @@ type ClusterRbacConfig struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec v1alpha1.RbacConfig `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec rbacv1alpha1.RbacConfig `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -128,7 +128,7 @@ type ServiceRole struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec v1alpha1.ServiceRole `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec rbacv1alpha1.ServiceRole `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -159,7 +159,7 @@ type ServiceRoleBinding struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec v1alpha1.ServiceRoleBinding `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec rbacv1alpha1.ServiceRoleBinding `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
