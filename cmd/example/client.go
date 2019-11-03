@@ -21,9 +21,10 @@ import (
 	"log"
 	"os"
 
-	versionedclient "istio.io/client-go/pkg/clientset/versioned"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/tools/clientcmd"
+
+	versionedclient "istio.io/client-go/pkg/clientset/versioned"
 )
 
 func main() {
