@@ -138,7 +138,7 @@ type ServiceEntryList struct {
 //
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// Sidecar describes the configuration of the sidecar proxy that mediates
+// `Sidecar` describes the configuration of the sidecar proxy that mediates
 // inbound and outbound communication of the workload instance to which it is
 // attached.
 //
