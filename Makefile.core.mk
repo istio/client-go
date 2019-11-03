@@ -107,7 +107,7 @@ generate-k8s-client:
 .PHONY: verify-k8s-client
 build-k8s-client:
 	# verifying k8s client
-	@go build ./pkg/...
+	@go build ./pkg/... ./cmd/...
 
 .PHONY: clean-k8s-client
 clean-k8s-client:
