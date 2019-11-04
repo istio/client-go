@@ -14,13 +14,15 @@
 
 default: all
 
-all: clean gen build
+all: clean gen build verify
 
 gen: generate-k8s-client tidy-go mirror-licenses
 
 gen-check: clean gen check-clean-repo
 
 build: build-k8s-client
+
+verify: verify-k8s-client
 
 clean: clean-k8s-client
 
@@ -104,10 +106,14 @@ generate-k8s-client:
 	@$(move_generated)
 	@$(rename_generated_files)
 
-.PHONY: verify-k8s-client
+.PHONY: build-k8s-client verify-k8s-client
 build-k8s-client:
-	# verifying k8s client
-	@go build ./pkg/... ./cmd/...
+	# building k8s client
+	@go build ./pkg/...
+
+verify-k8s-client:
+	# verifying generated client code
+	@go build ./cmd/...
 
 .PHONY: clean-k8s-client
 clean-k8s-client:
