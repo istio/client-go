@@ -15,10 +15,9 @@ require (
 	golang.org/x/time v0.0.0-20190921001708-c4c64cad1fd0 // indirect
 	google.golang.org/appengine v1.6.5 // indirect
 	google.golang.org/genproto v0.0.0-20190916214212-f660b8655731 // indirect
-	google.golang.org/grpc v1.23.1 // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
-	istio.io/api v0.0.0-20191015210738-bfa91e88abf1
+	istio.io/api v0.0.0-20191104215044-0a1dbc17b555
 	k8s.io/api v0.0.0-20191025225708-5524a3672fbb // indirect
 	k8s.io/apimachinery v0.0.0-20191025225532-af6325b3a843
 	k8s.io/client-go v0.0.0-20190620085101-78d2af792bab
