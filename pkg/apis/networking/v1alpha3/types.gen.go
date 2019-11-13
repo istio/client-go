@@ -3,7 +3,7 @@
 package v1alpha3
 
 import (
-	v1alpha3 "istio.io/api/networking/v1alpha3"
+	networkingv1alpha3 "istio.io/api/networking/v1alpha3"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -26,7 +26,7 @@ type DestinationRule struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec v1alpha3.DestinationRule `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec networkingv1alpha3.DestinationRule `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -58,7 +58,7 @@ type EnvoyFilter struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec v1alpha3.EnvoyFilter `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec networkingv1alpha3.EnvoyFilter `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -90,7 +90,7 @@ type Gateway struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec v1alpha3.Gateway `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec networkingv1alpha3.Gateway `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -122,7 +122,7 @@ type ServiceEntry struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec v1alpha3.ServiceEntry `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec networkingv1alpha3.ServiceEntry `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -155,7 +155,7 @@ type Sidecar struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec v1alpha3.Sidecar `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec networkingv1alpha3.Sidecar `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -186,7 +186,7 @@ type VirtualService struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec v1alpha3.VirtualService `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec networkingv1alpha3.VirtualService `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
