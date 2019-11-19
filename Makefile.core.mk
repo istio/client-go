@@ -88,7 +88,7 @@ endif
 
 rename_generated_files=\
 	find $(subst istio.io/client-go/, $(empty), $(subst $(comma), $(space), $(kube_api_packages)) $(kube_clientset_package) $(kube_listers_package) $(kube_informers_package)) \
-	-name "*.go" -type f -exec sh -c 'mv "$$1" "$${1%.go}".gen.go' - '{}' \;
+	-name '*.go' -and -not -name 'doc.go' -and -not -name '*.gen.go' -type f -exec sh -c 'mv "$$1" "$${1%.go}".gen.go' - '{}' \;
 
 .PHONY: generate-k8s-client
 generate-k8s-client:
