@@ -17,7 +17,7 @@ require (
 	google.golang.org/genproto v0.0.0-20190916214212-f660b8655731 // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
-	istio.io/api v0.0.0-20191109011807-2629c6ac1513
+	istio.io/api v0.0.0-20191115173247-e1a1952e5b81
 	k8s.io/api v0.0.0-20191025225708-5524a3672fbb // indirect
 	k8s.io/apimachinery v0.0.0-20191025225532-af6325b3a843
 	k8s.io/client-go v0.0.0-20190620085101-78d2af792bab
