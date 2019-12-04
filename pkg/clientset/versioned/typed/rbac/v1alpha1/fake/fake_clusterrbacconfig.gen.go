@@ -31,9 +31,9 @@ type FakeClusterRbacConfigs struct {
 	Fake *FakeRbacV1alpha1
 }
 
-var clusterrbacconfigsResource = schema.GroupVersionResource{Group: "rbac.istio.io", Version: "v1alpha1", Resource: "clusterrbacconfigs"}
+var clusterrbacconfigsResource = schema.GroupVersionResource{Group: "rbac", Version: "v1alpha1", Resource: "clusterrbacconfigs"}
 
-var clusterrbacconfigsKind = schema.GroupVersionKind{Group: "rbac.istio.io", Version: "v1alpha1", Kind: "ClusterRbacConfig"}
+var clusterrbacconfigsKind = schema.GroupVersionKind{Group: "rbac", Version: "v1alpha1", Kind: "ClusterRbacConfig"}
 
 // Get takes name of the clusterRbacConfig, and returns the corresponding clusterRbacConfig object, and an error if there is any.
 func (c *FakeClusterRbacConfigs) Get(name string, options v1.GetOptions) (result *v1alpha1.ClusterRbacConfig, err error) {

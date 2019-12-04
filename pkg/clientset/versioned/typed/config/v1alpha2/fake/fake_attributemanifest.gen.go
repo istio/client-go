@@ -32,9 +32,9 @@ type FakeAttributeManifests struct {
 	ns   string
 }
 
-var attributemanifestsResource = schema.GroupVersionResource{Group: "config.istio.io", Version: "v1alpha2", Resource: "attributemanifests"}
+var attributemanifestsResource = schema.GroupVersionResource{Group: "config", Version: "v1alpha2", Resource: "attributemanifests"}
 
-var attributemanifestsKind = schema.GroupVersionKind{Group: "config.istio.io", Version: "v1alpha2", Kind: "AttributeManifest"}
+var attributemanifestsKind = schema.GroupVersionKind{Group: "config", Version: "v1alpha2", Kind: "AttributeManifest"}
 
 // Get takes name of the attributeManifest, and returns the corresponding attributeManifest object, and an error if there is any.
 func (c *FakeAttributeManifests) Get(name string, options v1.GetOptions) (result *v1alpha2.AttributeManifest, err error) {

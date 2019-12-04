@@ -30,7 +30,7 @@ type RbacV1alpha1Interface interface {
 	ServiceRoleBindingsGetter
 }
 
-// RbacV1alpha1Client is used to interact with features provided by the rbac.istio.io group.
+// RbacV1alpha1Client is used to interact with features provided by the rbac group.
 type RbacV1alpha1Client struct {
 	restClient rest.Interface
 }

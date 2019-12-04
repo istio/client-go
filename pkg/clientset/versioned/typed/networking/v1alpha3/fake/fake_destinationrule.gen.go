@@ -32,9 +32,9 @@ type FakeDestinationRules struct {
 	ns   string
 }
 
-var destinationrulesResource = schema.GroupVersionResource{Group: "networking.istio.io", Version: "v1alpha3", Resource: "destinationrules"}
+var destinationrulesResource = schema.GroupVersionResource{Group: "networking", Version: "v1alpha3", Resource: "destinationrules"}
 
-var destinationrulesKind = schema.GroupVersionKind{Group: "networking.istio.io", Version: "v1alpha3", Kind: "DestinationRule"}
+var destinationrulesKind = schema.GroupVersionKind{Group: "networking", Version: "v1alpha3", Kind: "DestinationRule"}
 
 // Get takes name of the destinationRule, and returns the corresponding destinationRule object, and an error if there is any.
 func (c *FakeDestinationRules) Get(name string, options v1.GetOptions) (result *v1alpha3.DestinationRule, err error) {

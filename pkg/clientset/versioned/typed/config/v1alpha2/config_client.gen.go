@@ -34,7 +34,7 @@ type ConfigV1alpha2Interface interface {
 	RulesGetter
 }
 
-// ConfigV1alpha2Client is used to interact with features provided by the config.istio.io group.
+// ConfigV1alpha2Client is used to interact with features provided by the config group.
 type ConfigV1alpha2Client struct {
 	restClient rest.Interface
 }

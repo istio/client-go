@@ -32,9 +32,9 @@ type FakeSidecars struct {
 	ns   string
 }
 
-var sidecarsResource = schema.GroupVersionResource{Group: "networking.istio.io", Version: "v1alpha3", Resource: "sidecars"}
+var sidecarsResource = schema.GroupVersionResource{Group: "networking", Version: "v1alpha3", Resource: "sidecars"}
 
-var sidecarsKind = schema.GroupVersionKind{Group: "networking.istio.io", Version: "v1alpha3", Kind: "Sidecar"}
+var sidecarsKind = schema.GroupVersionKind{Group: "networking", Version: "v1alpha3", Kind: "Sidecar"}
 
 // Get takes name of the sidecar, and returns the corresponding sidecar object, and an error if there is any.
 func (c *FakeSidecars) Get(name string, options v1.GetOptions) (result *v1alpha3.Sidecar, err error) {

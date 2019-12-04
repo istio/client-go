@@ -32,9 +32,9 @@ type FakeServiceRoles struct {
 	ns   string
 }
 
-var servicerolesResource = schema.GroupVersionResource{Group: "rbac.istio.io", Version: "v1alpha1", Resource: "serviceroles"}
+var servicerolesResource = schema.GroupVersionResource{Group: "rbac", Version: "v1alpha1", Resource: "serviceroles"}
 
-var servicerolesKind = schema.GroupVersionKind{Group: "rbac.istio.io", Version: "v1alpha1", Kind: "ServiceRole"}
+var servicerolesKind = schema.GroupVersionKind{Group: "rbac", Version: "v1alpha1", Kind: "ServiceRole"}
 
 // Get takes name of the serviceRole, and returns the corresponding serviceRole object, and an error if there is any.
 func (c *FakeServiceRoles) Get(name string, options v1.GetOptions) (result *v1alpha1.ServiceRole, err error) {

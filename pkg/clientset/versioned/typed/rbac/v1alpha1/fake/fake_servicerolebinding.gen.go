@@ -32,9 +32,9 @@ type FakeServiceRoleBindings struct {
 	ns   string
 }
 
-var servicerolebindingsResource = schema.GroupVersionResource{Group: "rbac.istio.io", Version: "v1alpha1", Resource: "servicerolebindings"}
+var servicerolebindingsResource = schema.GroupVersionResource{Group: "rbac", Version: "v1alpha1", Resource: "servicerolebindings"}
 
-var servicerolebindingsKind = schema.GroupVersionKind{Group: "rbac.istio.io", Version: "v1alpha1", Kind: "ServiceRoleBinding"}
+var servicerolebindingsKind = schema.GroupVersionKind{Group: "rbac", Version: "v1alpha1", Kind: "ServiceRoleBinding"}
 
 // Get takes name of the serviceRoleBinding, and returns the corresponding serviceRoleBinding object, and an error if there is any.
 func (c *FakeServiceRoleBindings) Get(name string, options v1.GetOptions) (result *v1alpha1.ServiceRoleBinding, err error) {

@@ -32,9 +32,9 @@ type FakeServiceEntries struct {
 	ns   string
 }
 
-var serviceentriesResource = schema.GroupVersionResource{Group: "networking.istio.io", Version: "v1alpha3", Resource: "serviceentries"}
+var serviceentriesResource = schema.GroupVersionResource{Group: "networking", Version: "v1alpha3", Resource: "serviceentries"}
 
-var serviceentriesKind = schema.GroupVersionKind{Group: "networking.istio.io", Version: "v1alpha3", Kind: "ServiceEntry"}
+var serviceentriesKind = schema.GroupVersionKind{Group: "networking", Version: "v1alpha3", Kind: "ServiceEntry"}
 
 // Get takes name of the serviceEntry, and returns the corresponding serviceEntry object, and an error if there is any.
 func (c *FakeServiceEntries) Get(name string, options v1.GetOptions) (result *v1alpha3.ServiceEntry, err error) {

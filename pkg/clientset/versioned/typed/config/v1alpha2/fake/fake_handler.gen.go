@@ -32,9 +32,9 @@ type FakeHandlers struct {
 	ns   string
 }
 
-var handlersResource = schema.GroupVersionResource{Group: "config.istio.io", Version: "v1alpha2", Resource: "handlers"}
+var handlersResource = schema.GroupVersionResource{Group: "config", Version: "v1alpha2", Resource: "handlers"}
 
-var handlersKind = schema.GroupVersionKind{Group: "config.istio.io", Version: "v1alpha2", Kind: "Handler"}
+var handlersKind = schema.GroupVersionKind{Group: "config", Version: "v1alpha2", Kind: "Handler"}
 
 // Get takes name of the handler, and returns the corresponding handler object, and an error if there is any.
 func (c *FakeHandlers) Get(name string, options v1.GetOptions) (result *v1alpha2.Handler, err error) {

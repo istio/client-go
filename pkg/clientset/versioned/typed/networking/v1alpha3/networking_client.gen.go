@@ -32,7 +32,7 @@ type NetworkingV1alpha3Interface interface {
 	VirtualServicesGetter
 }
 
-// NetworkingV1alpha3Client is used to interact with features provided by the networking.istio.io group.
+// NetworkingV1alpha3Client is used to interact with features provided by the networking group.
 type NetworkingV1alpha3Client struct {
 	restClient rest.Interface
 }

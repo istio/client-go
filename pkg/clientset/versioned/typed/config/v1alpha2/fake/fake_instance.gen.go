@@ -32,9 +32,9 @@ type FakeInstances struct {
 	ns   string
 }
 
-var instancesResource = schema.GroupVersionResource{Group: "config.istio.io", Version: "v1alpha2", Resource: "instances"}
+var instancesResource = schema.GroupVersionResource{Group: "config", Version: "v1alpha2", Resource: "instances"}
 
-var instancesKind = schema.GroupVersionKind{Group: "config.istio.io", Version: "v1alpha2", Kind: "Instance"}
+var instancesKind = schema.GroupVersionKind{Group: "config", Version: "v1alpha2", Kind: "Instance"}
 
 // Get takes name of the instance, and returns the corresponding instance object, and an error if there is any.
 func (c *FakeInstances) Get(name string, options v1.GetOptions) (result *v1alpha2.Instance, err error) {

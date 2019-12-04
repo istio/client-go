@@ -32,9 +32,9 @@ type FakeEnvoyFilters struct {
 	ns   string
 }
 
-var envoyfiltersResource = schema.GroupVersionResource{Group: "networking.istio.io", Version: "v1alpha3", Resource: "envoyfilters"}
+var envoyfiltersResource = schema.GroupVersionResource{Group: "networking", Version: "v1alpha3", Resource: "envoyfilters"}
 
-var envoyfiltersKind = schema.GroupVersionKind{Group: "networking.istio.io", Version: "v1alpha3", Kind: "EnvoyFilter"}
+var envoyfiltersKind = schema.GroupVersionKind{Group: "networking", Version: "v1alpha3", Kind: "EnvoyFilter"}
 
 // Get takes name of the envoyFilter, and returns the corresponding envoyFilter object, and an error if there is any.
 func (c *FakeEnvoyFilters) Get(name string, options v1.GetOptions) (result *v1alpha3.EnvoyFilter, err error) {

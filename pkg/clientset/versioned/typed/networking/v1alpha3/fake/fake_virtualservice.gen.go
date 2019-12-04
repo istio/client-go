@@ -32,9 +32,9 @@ type FakeVirtualServices struct {
 	ns   string
 }
 
-var virtualservicesResource = schema.GroupVersionResource{Group: "networking.istio.io", Version: "v1alpha3", Resource: "virtualservices"}
+var virtualservicesResource = schema.GroupVersionResource{Group: "networking", Version: "v1alpha3", Resource: "virtualservices"}
 
-var virtualservicesKind = schema.GroupVersionKind{Group: "networking.istio.io", Version: "v1alpha3", Kind: "VirtualService"}
+var virtualservicesKind = schema.GroupVersionKind{Group: "networking", Version: "v1alpha3", Kind: "VirtualService"}
 
 // Get takes name of the virtualService, and returns the corresponding virtualService object, and an error if there is any.
 func (c *FakeVirtualServices) Get(name string, options v1.GetOptions) (result *v1alpha3.VirtualService, err error) {

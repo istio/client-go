@@ -27,7 +27,7 @@ type SecurityV1beta1Interface interface {
 	AuthorizationPoliciesGetter
 }
 
-// SecurityV1beta1Client is used to interact with features provided by the security.istio.io group.
+// SecurityV1beta1Client is used to interact with features provided by the security group.
 type SecurityV1beta1Client struct {
 	restClient rest.Interface
 }

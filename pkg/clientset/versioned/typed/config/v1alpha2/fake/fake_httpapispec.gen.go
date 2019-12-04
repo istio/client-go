@@ -32,9 +32,9 @@ type FakeHTTPAPISpecs struct {
 	ns   string
 }
 
-var httpapispecsResource = schema.GroupVersionResource{Group: "config.istio.io", Version: "v1alpha2", Resource: "httpapispecs"}
+var httpapispecsResource = schema.GroupVersionResource{Group: "config", Version: "v1alpha2", Resource: "httpapispecs"}
 
-var httpapispecsKind = schema.GroupVersionKind{Group: "config.istio.io", Version: "v1alpha2", Kind: "HTTPAPISpec"}
+var httpapispecsKind = schema.GroupVersionKind{Group: "config", Version: "v1alpha2", Kind: "HTTPAPISpec"}
 
 // Get takes name of the hTTPAPISpec, and returns the corresponding hTTPAPISpec object, and an error if there is any.
 func (c *FakeHTTPAPISpecs) Get(name string, options v1.GetOptions) (result *v1alpha2.HTTPAPISpec, err error) {

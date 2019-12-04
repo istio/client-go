@@ -28,7 +28,7 @@ type AuthenticationV1alpha1Interface interface {
 	PoliciesGetter
 }
 
-// AuthenticationV1alpha1Client is used to interact with features provided by the authentication.istio.io group.
+// AuthenticationV1alpha1Client is used to interact with features provided by the authentication group.
 type AuthenticationV1alpha1Client struct {
 	restClient rest.Interface
 }

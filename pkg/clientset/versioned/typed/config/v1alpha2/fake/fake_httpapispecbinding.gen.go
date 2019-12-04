@@ -32,9 +32,9 @@ type FakeHTTPAPISpecBindings struct {
 	ns   string
 }
 
-var httpapispecbindingsResource = schema.GroupVersionResource{Group: "config.istio.io", Version: "v1alpha2", Resource: "httpapispecbindings"}
+var httpapispecbindingsResource = schema.GroupVersionResource{Group: "config", Version: "v1alpha2", Resource: "httpapispecbindings"}
 
-var httpapispecbindingsKind = schema.GroupVersionKind{Group: "config.istio.io", Version: "v1alpha2", Kind: "HTTPAPISpecBinding"}
+var httpapispecbindingsKind = schema.GroupVersionKind{Group: "config", Version: "v1alpha2", Kind: "HTTPAPISpecBinding"}
 
 // Get takes name of the hTTPAPISpecBinding, and returns the corresponding hTTPAPISpecBinding object, and an error if there is any.
 func (c *FakeHTTPAPISpecBindings) Get(name string, options v1.GetOptions) (result *v1alpha2.HTTPAPISpecBinding, err error) {

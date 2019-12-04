@@ -32,9 +32,9 @@ type FakeAuthorizationPolicies struct {
 	ns   string
 }
 
-var authorizationpoliciesResource = schema.GroupVersionResource{Group: "security.istio.io", Version: "v1beta1", Resource: "authorizationpolicies"}
+var authorizationpoliciesResource = schema.GroupVersionResource{Group: "security", Version: "v1beta1", Resource: "authorizationpolicies"}
 
-var authorizationpoliciesKind = schema.GroupVersionKind{Group: "security.istio.io", Version: "v1beta1", Kind: "AuthorizationPolicy"}
+var authorizationpoliciesKind = schema.GroupVersionKind{Group: "security", Version: "v1beta1", Kind: "AuthorizationPolicy"}
 
 // Get takes name of the authorizationPolicy, and returns the corresponding authorizationPolicy object, and an error if there is any.
 func (c *FakeAuthorizationPolicies) Get(name string, options v1.GetOptions) (result *v1beta1.AuthorizationPolicy, err error) {

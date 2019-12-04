@@ -32,9 +32,9 @@ type FakeQuotaSpecs struct {
 	ns   string
 }
 
-var quotaspecsResource = schema.GroupVersionResource{Group: "config.istio.io", Version: "v1alpha2", Resource: "quotaspecs"}
+var quotaspecsResource = schema.GroupVersionResource{Group: "config", Version: "v1alpha2", Resource: "quotaspecs"}
 
-var quotaspecsKind = schema.GroupVersionKind{Group: "config.istio.io", Version: "v1alpha2", Kind: "QuotaSpec"}
+var quotaspecsKind = schema.GroupVersionKind{Group: "config", Version: "v1alpha2", Kind: "QuotaSpec"}
 
 // Get takes name of the quotaSpec, and returns the corresponding quotaSpec object, and an error if there is any.
 func (c *FakeQuotaSpecs) Get(name string, options v1.GetOptions) (result *v1alpha2.QuotaSpec, err error) {

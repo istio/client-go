@@ -31,9 +31,9 @@ type FakeMeshPolicies struct {
 	Fake *FakeAuthenticationV1alpha1
 }
 
-var meshpoliciesResource = schema.GroupVersionResource{Group: "authentication.istio.io", Version: "v1alpha1", Resource: "meshpolicies"}
+var meshpoliciesResource = schema.GroupVersionResource{Group: "authentication", Version: "v1alpha1", Resource: "meshpolicies"}
 
-var meshpoliciesKind = schema.GroupVersionKind{Group: "authentication.istio.io", Version: "v1alpha1", Kind: "MeshPolicy"}
+var meshpoliciesKind = schema.GroupVersionKind{Group: "authentication", Version: "v1alpha1", Kind: "MeshPolicy"}
 
 // Get takes name of the meshPolicy, and returns the corresponding meshPolicy object, and an error if there is any.
 func (c *FakeMeshPolicies) Get(name string, options v1.GetOptions) (result *v1alpha1.MeshPolicy, err error) {
