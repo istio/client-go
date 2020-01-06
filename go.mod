@@ -16,5 +16,5 @@ require (
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	istio.io/api v0.0.0-20200106191429-c785926a849c
 	k8s.io/apimachinery v0.17.0
-	k8s.io/client-go v0.0.0-20191016111102-bec269661e48
+	k8s.io/client-go v0.17.0
 )
