@@ -30,6 +30,10 @@ func (c *FakeSecurityV1beta1) AuthorizationPolicies(namespace string) v1beta1.Au
 	return &FakeAuthorizationPolicies{c, namespace}
 }
 
+func (c *FakeSecurityV1beta1) RequestAuthentications(namespace string) v1beta1.RequestAuthenticationInterface {
+	return &FakeRequestAuthentications{c, namespace}
+}
+
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
 func (c *FakeSecurityV1beta1) RESTClient() rest.Interface {

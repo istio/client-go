@@ -43,6 +43,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(SchemeGroupVersion,
 		&AuthorizationPolicy{},
 		&AuthorizationPolicyList{},
+		&RequestAuthentication{},
+		&RequestAuthenticationList{},
 	)
 	v1.AddToGroupVersion(scheme, SchemeGroupVersion)
 	return nil

@@ -24,6 +24,8 @@ import (
 type Interface interface {
 	// AuthorizationPolicies returns a AuthorizationPolicyInformer.
 	AuthorizationPolicies() AuthorizationPolicyInformer
+	// RequestAuthentications returns a RequestAuthenticationInformer.
+	RequestAuthentications() RequestAuthenticationInformer
 }
 
 type version struct {
@@ -40,4 +42,9 @@ func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakList
 // AuthorizationPolicies returns a AuthorizationPolicyInformer.
 func (v *version) AuthorizationPolicies() AuthorizationPolicyInformer {
 	return &authorizationPolicyInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// RequestAuthentications returns a RequestAuthenticationInformer.
+func (v *version) RequestAuthentications() RequestAuthenticationInformer {
+	return &requestAuthenticationInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }

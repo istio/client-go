@@ -25,6 +25,7 @@ import (
 type SecurityV1beta1Interface interface {
 	RESTClient() rest.Interface
 	AuthorizationPoliciesGetter
+	RequestAuthenticationsGetter
 }
 
 // SecurityV1beta1Client is used to interact with features provided by the security.istio.io group.
@@ -34,6 +35,10 @@ type SecurityV1beta1Client struct {
 
 func (c *SecurityV1beta1Client) AuthorizationPolicies(namespace string) AuthorizationPolicyInterface {
 	return newAuthorizationPolicies(c, namespace)
+}
+
+func (c *SecurityV1beta1Client) RequestAuthentications(namespace string) RequestAuthenticationInterface {
+	return newRequestAuthentications(c, namespace)
 }
 
 // NewForConfig creates a new SecurityV1beta1Client for the given config.
