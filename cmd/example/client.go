@@ -75,7 +75,7 @@ func main() {
 
 	for i := range pList.Items {
 		p := pList.Items[i]
-		log.Printf("Index: %d Policy Targets: %+v\n", i, p.Spec.GetTargets())
+		log.Printf("Index: %d Policy Name: %+v\n", i, p.GetName())
 	}
 
 	// Test MeshPolicies

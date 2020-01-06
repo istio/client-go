@@ -17,3 +17,5 @@
 package v1beta1
 
 type AuthorizationPolicyExpansion interface{}
+
+type RequestAuthenticationExpansion interface{}
