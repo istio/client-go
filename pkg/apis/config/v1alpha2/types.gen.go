@@ -23,6 +23,7 @@ import (
 )
 
 //
+// +kubetype-gen:lowerCaseScheme
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // AttributeManifest describes a set of Attributes produced by some component
@@ -31,6 +32,8 @@ import (
 // <!-- go code generation tags
 // +kubetype-gen
 // +kubetype-gen:groupVersion=config.istio.io/v1alpha2
+// +kubetype-gen:kubeType=AttributeManifest
+// +kubetype-gen:AttributeManifest:tag=kubetype-gen:lowerCaseScheme
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
@@ -188,6 +191,7 @@ type HTTPAPISpecBindingList struct {
 }
 
 //
+// +kubetype-gen:lowerCaseScheme
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // Handler allows the operator to configure a specific adapter implementation.
@@ -249,6 +253,8 @@ type HTTPAPISpecBindingList struct {
 // <!-- go code generation tags
 // +kubetype-gen
 // +kubetype-gen:groupVersion=config.istio.io/v1alpha2
+// +kubetype-gen:kubeType=Handler
+// +kubetype-gen:Handler:tag=kubetype-gen:lowerCaseScheme
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
@@ -273,6 +279,7 @@ type HandlerList struct {
 }
 
 //
+// +kubetype-gen:lowerCaseScheme
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // An Instance tells Mixer how to create instances for particular template.
@@ -299,6 +306,8 @@ type HandlerList struct {
 // <!-- go code generation tags
 // +kubetype-gen
 // +kubetype-gen:groupVersion=config.istio.io/v1alpha2
+// +kubetype-gen:kubeType=Instance
+// +kubetype-gen:Instance:tag=kubetype-gen:lowerCaseScheme
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
@@ -386,6 +395,7 @@ type QuotaSpecBindingList struct {
 }
 
 //
+// +kubetype-gen:lowerCaseScheme
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // A Rule is a selector and a set of intentions to be executed when the
@@ -405,6 +415,8 @@ type QuotaSpecBindingList struct {
 // <!-- go code generation tags
 // +kubetype-gen
 // +kubetype-gen:groupVersion=config.istio.io/v1alpha2
+// +kubetype-gen:kubeType=Rule
+// +kubetype-gen:Rule:tag=kubetype-gen:lowerCaseScheme
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->

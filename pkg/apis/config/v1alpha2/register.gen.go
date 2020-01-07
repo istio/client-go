@@ -41,23 +41,23 @@ func Resource(resource string) schema.GroupResource {
 
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(SchemeGroupVersion,
-		&AttributeManifest{},
-		&AttributeManifestList{},
 		&HTTPAPISpec{},
 		&HTTPAPISpecList{},
 		&HTTPAPISpecBinding{},
 		&HTTPAPISpecBindingList{},
-		&Handler{},
-		&HandlerList{},
-		&Instance{},
-		&InstanceList{},
 		&QuotaSpec{},
 		&QuotaSpecList{},
 		&QuotaSpecBinding{},
 		&QuotaSpecBindingList{},
-		&Rule{},
-		&RuleList{},
 	)
+	scheme.AddKnownTypeWithName(SchemeGroupVersion.WithKind("attributemanifest"), &AttributeManifest{})
+	scheme.AddKnownTypeWithName(SchemeGroupVersion.WithKind("attributemanifestList"), &AttributeManifestList{})
+	scheme.AddKnownTypeWithName(SchemeGroupVersion.WithKind("handler"), &Handler{})
+	scheme.AddKnownTypeWithName(SchemeGroupVersion.WithKind("handlerList"), &HandlerList{})
+	scheme.AddKnownTypeWithName(SchemeGroupVersion.WithKind("instance"), &Instance{})
+	scheme.AddKnownTypeWithName(SchemeGroupVersion.WithKind("instanceList"), &InstanceList{})
+	scheme.AddKnownTypeWithName(SchemeGroupVersion.WithKind("rule"), &Rule{})
+	scheme.AddKnownTypeWithName(SchemeGroupVersion.WithKind("ruleList"), &RuleList{})
 	v1.AddToGroupVersion(scheme, SchemeGroupVersion)
 	return nil
 }
