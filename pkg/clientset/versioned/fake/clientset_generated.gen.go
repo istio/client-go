@@ -24,6 +24,8 @@ import (
 	fakeconfigv1alpha2 "istio.io/client-go/pkg/clientset/versioned/typed/config/v1alpha2/fake"
 	networkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3"
 	fakenetworkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3/fake"
+	networkingv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1beta1"
+	fakenetworkingv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1beta1/fake"
 	rbacv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/rbac/v1alpha1"
 	fakerbacv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/rbac/v1alpha1/fake"
 	securityv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1beta1"
@@ -95,6 +97,11 @@ func (c *Clientset) ConfigV1alpha2() configv1alpha2.ConfigV1alpha2Interface {
 // NetworkingV1alpha3 retrieves the NetworkingV1alpha3Client
 func (c *Clientset) NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3Interface {
 	return &fakenetworkingv1alpha3.FakeNetworkingV1alpha3{Fake: &c.Fake}
+}
+
+// NetworkingV1beta1 retrieves the NetworkingV1beta1Client
+func (c *Clientset) NetworkingV1beta1() networkingv1beta1.NetworkingV1beta1Interface {
+	return &fakenetworkingv1beta1.FakeNetworkingV1beta1{Fake: &c.Fake}
 }
 
 // RbacV1alpha1 retrieves the RbacV1alpha1Client
