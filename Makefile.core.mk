@@ -44,6 +44,7 @@ kube_istio_source_packages = $(subst $(space),$(empty), \
 	istio.io/api/authentication/v1alpha1, \
 	istio.io/api/mixer/v1/config/client, \
 	istio.io/api/networking/v1alpha3, \
+	istio.io/api/networking/v1beta1, \
 	istio.io/api/policy/v1beta1, \
 	istio.io/api/rbac/v1alpha1, \
 	istio.io/api/security/v1beta1 \
@@ -59,6 +60,7 @@ kube_api_packages = $(subst $(space),$(empty), \
 	$(kube_api_base_package)/authentication/v1alpha1, \
 	$(kube_api_base_package)/config/v1alpha2, \
 	$(kube_api_base_package)/networking/v1alpha3, \
+	$(kube_api_base_package)/networking/v1beta1, \
 	$(kube_api_base_package)/rbac/v1alpha1, \
 	$(kube_api_base_package)/security/v1beta1 \
 	)
