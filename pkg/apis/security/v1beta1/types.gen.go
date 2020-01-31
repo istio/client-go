@@ -90,6 +90,124 @@ type AuthorizationPolicyList struct {
 	Items       []AuthorizationPolicy `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
+//
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// PeerAuthentication defines how traffic will be tunneled (or not) to the sidecar.
+//
+// Examples:
+//
+// Policy to allow mTLS traffic for all workloads under namespace `foo`:
+// ```yaml
+// apiVersion: security.istio.io/v1beta1
+// kind: PeerAuthentication
+// metadata:
+//   name: default
+//   namespace: foo
+// spec:
+//   mtls:
+//     mode: STRICT
+// ```
+// For mesh level, put the policy in root-namespace according to your Istio installation.
+//
+// Policies to allow both mTLS & plaintext traffic for all workloads under namespace `foo`, but
+// require mTLS for workload `finance`.
+// ```yaml
+// apiVersion: security.istio.io/v1beta1
+// kind: PeerAuthentication
+// metadata:
+//   name: default
+//   namespace: foo
+// spec:
+//   mtls:
+//     mode: PERMISSIVE
+// ---
+// apiVersion: security.istio.io/v1beta1
+// kind: PeerAuthentication
+// metadata:
+//   name: default
+//   namespace: foo
+// spec:
+//   selector:
+//     matchLabels:
+//       app: finance
+//   mtls:
+//     mode: STRICT
+// ```
+// Policy to allow mTLS strict for all workloads, but leave port 8080 to
+// plaintext:
+// ```yaml
+// apiVersion: security.istio.io/v1beta1
+// kind: PeerAuthentication
+// metadata:
+//   name: default
+//   namespace: foo
+// spec:
+//   selector:
+//     matchLabels:
+//       app: finance
+//   mtls:
+//     mode: STRICT
+//   portLevelMtls:
+//     8080:
+//       mode: DISABLE
+// ```
+// Policy to inherite mTLS mode from namespace (or mesh) settings, and overwrite
+// settings for port 8080
+// ```yaml
+// apiVersion: security.istio.io/v1beta1
+// kind: PeerAuthentication
+// metadata:
+//   name: default
+//   namespace: foo
+// spec:
+//   selector:
+//     matchLabels:
+//       app: finance
+//   mtls:
+//     mode: UNSET
+//   portLevelMtls:
+//     8080:
+//       mode: DISABLE
+// ```
+//
+// <!-- crd generation tags
+// +cue-gen:PeerAuthentication:groupName:security.istio.io
+// +cue-gen:PeerAuthentication:version:v1beta1
+// +cue-gen:PeerAuthentication:storageVersion
+// +cue-gen:PeerAuthentication:annotations:helm.sh/resource-policy=keep
+// +cue-gen:PeerAuthentication:labels:app=istio-pilot,chart=istio,istio=security,heritage=Tiller,release=istio
+// +cue-gen:PeerAuthentication:subresource:status
+// +cue-gen:PeerAuthentication:scope:Namespaced
+// +cue-gen:PeerAuthentication:resource:categories=istio-io,security-istio-io
+// -->
+//
+// <!-- go code generation tags
+// +kubetype-gen
+// +kubetype-gen:groupVersion=security.istio.io/v1beta1
+// +genclient
+// +k8s:deepcopy-gen=true
+// -->
+type PeerAuthentication struct {
+	v1.TypeMeta `json:",inline"`
+	// +optional
+	v1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// Spec defines the implementation of this definition.
+	// +optional
+	Spec securityv1beta1.PeerAuthentication `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// PeerAuthenticationList is a collection of PeerAuthentications.
+type PeerAuthenticationList struct {
+	v1.TypeMeta `json:",inline"`
+	// +optional
+	v1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Items       []PeerAuthentication `json:"items" protobuf:"bytes,2,rep,name=items"`
+}
+
 // please upgrade the proto package
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
