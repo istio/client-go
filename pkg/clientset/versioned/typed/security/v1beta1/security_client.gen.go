@@ -25,6 +25,7 @@ import (
 type SecurityV1beta1Interface interface {
 	RESTClient() rest.Interface
 	AuthorizationPoliciesGetter
+	PeerAuthenticationsGetter
 	RequestAuthenticationsGetter
 }
 
@@ -35,6 +36,10 @@ type SecurityV1beta1Client struct {
 
 func (c *SecurityV1beta1Client) AuthorizationPolicies(namespace string) AuthorizationPolicyInterface {
 	return newAuthorizationPolicies(c, namespace)
+}
+
+func (c *SecurityV1beta1Client) PeerAuthentications(namespace string) PeerAuthenticationInterface {
+	return newPeerAuthentications(c, namespace)
 }
 
 func (c *SecurityV1beta1Client) RequestAuthentications(namespace string) RequestAuthenticationInterface {
