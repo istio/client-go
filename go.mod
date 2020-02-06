@@ -18,7 +18,7 @@ require (
 	google.golang.org/appengine v1.6.5 // indirect
 	google.golang.org/genproto v0.0.0-20190916214212-f660b8655731 // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
-	istio.io/api v0.0.0-20200203185440-365fa8c98b69
+	istio.io/api v0.0.0-20200206170618-8af5bcd0f10c
 	k8s.io/apimachinery v0.17.2
 	k8s.io/client-go v0.17.2
 )
