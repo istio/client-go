@@ -118,6 +118,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		// Group=security.istio.io, Version=v1beta1
 	case securityv1beta1.SchemeGroupVersion.WithResource("authorizationpolicies"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Security().V1beta1().AuthorizationPolicies().Informer()}, nil
+	case securityv1beta1.SchemeGroupVersion.WithResource("peerauthentications"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Security().V1beta1().PeerAuthentications().Informer()}, nil
 	case securityv1beta1.SchemeGroupVersion.WithResource("requestauthentications"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Security().V1beta1().RequestAuthentications().Informer()}, nil
 
