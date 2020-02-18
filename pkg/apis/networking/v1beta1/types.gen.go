@@ -30,7 +30,6 @@ import (
 // <!-- crd generation tags
 // +cue-gen:DestinationRule:groupName:networking.istio.io
 // +cue-gen:DestinationRule:version:v1beta1
-// +cue-gen:DestinationRule:storageVersion
 // +cue-gen:DestinationRule:annotations:helm.sh/resource-policy=keep
 // +cue-gen:DestinationRule:labels:app=istio-pilot,chart=istio,heritage=Tiller,release=istio
 // +cue-gen:DestinationRule:subresource:status
@@ -78,7 +77,6 @@ type DestinationRuleList struct {
 // <!-- crd generation tags
 // +cue-gen:Gateway:groupName:networking.istio.io
 // +cue-gen:Gateway:version:v1beta1
-// +cue-gen:Gateway:storageVersion
 // +cue-gen:Gateway:annotations:helm.sh/resource-policy=keep
 // +cue-gen:Gateway:labels:app=istio-pilot,chart=istio,heritage=Tiller,release=istio
 // +cue-gen:Gateway:subresource:status
@@ -121,7 +119,6 @@ type GatewayList struct {
 // <!-- crd generation tags
 // +cue-gen:ServiceEntry:groupName:networking.istio.io
 // +cue-gen:ServiceEntry:version:v1beta1
-// +cue-gen:ServiceEntry:storageVersion
 // +cue-gen:ServiceEntry:annotations:helm.sh/resource-policy=keep
 // +cue-gen:ServiceEntry:labels:app=istio-pilot,chart=istio,heritage=Tiller,release=istio
 // +cue-gen:ServiceEntry:subresource:status
@@ -174,7 +171,6 @@ type ServiceEntryList struct {
 // <!-- crd generation tags
 // +cue-gen:Sidecar:groupName:networking.istio.io
 // +cue-gen:Sidecar:version:v1beta1
-// +cue-gen:Sidecar:storageVersion
 // +cue-gen:Sidecar:annotations:helm.sh/resource-policy=keep
 // +cue-gen:Sidecar:labels:app=istio-pilot,chart=istio,heritage=Tiller,release=istio
 // +cue-gen:Sidecar:subresource:status
@@ -216,7 +212,6 @@ type SidecarList struct {
 // <!-- crd generation tags
 // +cue-gen:VirtualService:groupName:networking.istio.io
 // +cue-gen:VirtualService:version:v1beta1
-// +cue-gen:VirtualService:storageVersion
 // +cue-gen:VirtualService:annotations:helm.sh/resource-policy=keep
 // +cue-gen:VirtualService:labels:app=istio-pilot,chart=istio,heritage=Tiller,release=istio
 // +cue-gen:VirtualService:subresource:status

@@ -24,6 +24,8 @@ import (
 type Interface interface {
 	// AuthorizationPolicies returns a AuthorizationPolicyInformer.
 	AuthorizationPolicies() AuthorizationPolicyInformer
+	// PeerAuthentications returns a PeerAuthenticationInformer.
+	PeerAuthentications() PeerAuthenticationInformer
 	// RequestAuthentications returns a RequestAuthenticationInformer.
 	RequestAuthentications() RequestAuthenticationInformer
 }
@@ -42,6 +44,11 @@ func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakList
 // AuthorizationPolicies returns a AuthorizationPolicyInformer.
 func (v *version) AuthorizationPolicies() AuthorizationPolicyInformer {
 	return &authorizationPolicyInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// PeerAuthentications returns a PeerAuthenticationInformer.
+func (v *version) PeerAuthentications() PeerAuthenticationInformer {
+	return &peerAuthenticationInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // RequestAuthentications returns a RequestAuthenticationInformer.
