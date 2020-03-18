@@ -179,7 +179,7 @@ type AuthorizationPolicyList struct {
 // +cue-gen:PeerAuthentication:labels:app=istio-pilot,chart=istio,istio=security,heritage=Tiller,release=istio
 // +cue-gen:PeerAuthentication:subresource:status
 // +cue-gen:PeerAuthentication:scope:Namespaced
-// +cue-gen:PeerAuthentication:resource:categories=istio-io,security-istio-io
+// +cue-gen:PeerAuthentication:resource:categories=istio-io,security-istio-io,shortNames=pa
 // -->
 //
 // <!-- go code generation tags
@@ -319,7 +319,7 @@ type PeerAuthenticationList struct {
 // +cue-gen:RequestAuthentication:labels:app=istio-pilot,chart=istio,istio=security,heritage=Tiller,release=istio
 // +cue-gen:RequestAuthentication:subresource:status
 // +cue-gen:RequestAuthentication:scope:Namespaced
-// +cue-gen:RequestAuthentication:resource:categories=istio-io,security-istio-io
+// +cue-gen:RequestAuthentication:resource:categories=istio-io,security-istio-io,shortNames=ra
 // -->
 //
 // <!-- go code generation tags
