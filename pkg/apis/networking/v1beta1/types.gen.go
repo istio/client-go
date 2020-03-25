@@ -251,3 +251,49 @@ type VirtualServiceList struct {
 	v1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 	Items       []VirtualService `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
+
+// please upgrade the proto package
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// WorkloadEntry enables specifying the properties of a single non-Kubernetes workload such a VM or a bare metal services that can be referred to by service entries.
+//
+// <!-- crd generation tags
+// +cue-gen:WorkloadEntry:groupName:networking.istio.io
+// +cue-gen:WorkloadEntry:version:v1beta1
+// +cue-gen:WorkloadEntry:storageVersion
+// +cue-gen:WorkloadEntry:annotations:helm.sh/resource-policy=keep
+// +cue-gen:WorkloadEntry:labels:app=istio-pilot,chart=istio,heritage=Tiller,release=istio
+// +cue-gen:WorkloadEntry:subresource:status
+// +cue-gen:WorkloadEntry:scope:Namespaced
+// +cue-gen:WorkloadEntry:resource:categories=istio-io,networking-istio-io,shortNames=we,plural=workloadentries
+// +cue-gen:WorkloadEntry:printerColumn:name=Age,type=date,JSONPath=.metadata.creationTimestamp,description="CreationTimestamp is a timestamp
+// representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations.
+// Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+// Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+// -->
+//
+// <!-- go code generation tags
+// +kubetype-gen
+// +kubetype-gen:groupVersion=networking.istio.io/v1beta1
+// +genclient
+// +k8s:deepcopy-gen=true
+// -->
+type WorkloadEntry struct {
+	v1.TypeMeta `json:",inline"`
+	// +optional
+	v1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// Spec defines the implementation of this definition.
+	// +optional
+	Spec networkingv1beta1.WorkloadEntry `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// WorkloadEntryList is a collection of WorkloadEntries.
+type WorkloadEntryList struct {
+	v1.TypeMeta `json:",inline"`
+	// +optional
+	v1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Items       []WorkloadEntry `json:"items" protobuf:"bytes,2,rep,name=items"`
+}

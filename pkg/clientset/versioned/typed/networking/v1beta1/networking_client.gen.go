@@ -29,6 +29,7 @@ type NetworkingV1beta1Interface interface {
 	ServiceEntriesGetter
 	SidecarsGetter
 	VirtualServicesGetter
+	WorkloadEntriesGetter
 }
 
 // NetworkingV1beta1Client is used to interact with features provided by the networking.istio.io group.
@@ -54,6 +55,10 @@ func (c *NetworkingV1beta1Client) Sidecars(namespace string) SidecarInterface {
 
 func (c *NetworkingV1beta1Client) VirtualServices(namespace string) VirtualServiceInterface {
 	return newVirtualServices(c, namespace)
+}
+
+func (c *NetworkingV1beta1Client) WorkloadEntries(namespace string) WorkloadEntryInterface {
+	return newWorkloadEntries(c, namespace)
 }
 
 // NewForConfig creates a new NetworkingV1beta1Client for the given config.
