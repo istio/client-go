@@ -24,6 +24,7 @@ import (
 //
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+// $hide_from_docs
 // RbacConfig implements the ClusterRbacConfig Custom Resource Definition for controlling Istio RBAC behavior.
 // The ClusterRbacConfig Custom Resource is a singleton where only one ClusterRbacConfig should be created
 // globally in the mesh and the namespace should be the same to other Istio components, which usually is `istio-system`.
@@ -98,6 +99,7 @@ type RbacConfigList struct {
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+// $hide_from_docs
 // RbacConfig implements the ClusterRbacConfig Custom Resource Definition for controlling Istio RBAC behavior.
 // The ClusterRbacConfig Custom Resource is a singleton where only one ClusterRbacConfig should be created
 // globally in the mesh and the namespace should be the same to other Istio components, which usually is `istio-system`.
@@ -171,6 +173,7 @@ type ClusterRbacConfigList struct {
 //
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+// $hide_from_docs
 // ServiceRole specification contains a list of access rules (permissions).
 //
 // <!-- crd generation tags
@@ -213,6 +216,7 @@ type ServiceRoleList struct {
 //
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+// $hide_from_docs
 // ServiceRoleBinding assigns a ServiceRole to a list of subjects.
 //
 // <!-- crd generation tags

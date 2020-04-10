@@ -24,6 +24,7 @@ import (
 //
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+// $hide_from_docs
 // Policy defines what authentication methods can be accepted on workload(s),
 // and if authenticated, which method/certificate will set the request principal
 // (i.e request.auth.principal attribute).
@@ -151,6 +152,7 @@ type PolicyList struct {
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+// $hide_from_docs
 // Policy defines what authentication methods can be accepted on workload(s),
 // and if authenticated, which method/certificate will set the request principal
 // (i.e request.auth.principal attribute).
