@@ -92,6 +92,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Networking().V1alpha3().Sidecars().Informer()}, nil
 	case v1alpha3.SchemeGroupVersion.WithResource("virtualservices"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Networking().V1alpha3().VirtualServices().Informer()}, nil
+	case v1alpha3.SchemeGroupVersion.WithResource("workloadentries"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Networking().V1alpha3().WorkloadEntries().Informer()}, nil
 
 		// Group=networking.istio.io, Version=v1beta1
 	case v1beta1.SchemeGroupVersion.WithResource("destinationrules"):
@@ -104,6 +106,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Networking().V1beta1().Sidecars().Informer()}, nil
 	case v1beta1.SchemeGroupVersion.WithResource("virtualservices"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Networking().V1beta1().VirtualServices().Informer()}, nil
+	case v1beta1.SchemeGroupVersion.WithResource("workloadentries"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Networking().V1beta1().WorkloadEntries().Informer()}, nil
 
 		// Group=rbac.istio.io, Version=v1alpha1
 	case rbacv1alpha1.SchemeGroupVersion.WithResource("clusterrbacconfigs"):

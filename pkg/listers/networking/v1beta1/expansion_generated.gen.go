@@ -55,3 +55,11 @@ type VirtualServiceListerExpansion interface{}
 // VirtualServiceNamespaceListerExpansion allows custom methods to be added to
 // VirtualServiceNamespaceLister.
 type VirtualServiceNamespaceListerExpansion interface{}
+
+// WorkloadEntryListerExpansion allows custom methods to be added to
+// WorkloadEntryLister.
+type WorkloadEntryListerExpansion interface{}
+
+// WorkloadEntryNamespaceListerExpansion allows custom methods to be added to
+// WorkloadEntryNamespaceLister.
+type WorkloadEntryNamespaceListerExpansion interface{}

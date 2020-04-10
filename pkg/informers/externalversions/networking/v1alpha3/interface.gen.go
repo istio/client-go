@@ -34,6 +34,8 @@ type Interface interface {
 	Sidecars() SidecarInformer
 	// VirtualServices returns a VirtualServiceInformer.
 	VirtualServices() VirtualServiceInformer
+	// WorkloadEntries returns a WorkloadEntryInformer.
+	WorkloadEntries() WorkloadEntryInformer
 }
 
 type version struct {
@@ -75,4 +77,9 @@ func (v *version) Sidecars() SidecarInformer {
 // VirtualServices returns a VirtualServiceInformer.
 func (v *version) VirtualServices() VirtualServiceInformer {
 	return &virtualServiceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// WorkloadEntries returns a WorkloadEntryInformer.
+func (v *version) WorkloadEntries() WorkloadEntryInformer {
+	return &workloadEntryInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
