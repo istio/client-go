@@ -17,6 +17,8 @@
 package fake
 
 import (
+	"context"
+
 	v1alpha2 "istio.io/client-go/pkg/apis/config/v1alpha2"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
@@ -37,7 +39,7 @@ var httpapispecbindingsResource = schema.GroupVersionResource{Group: "config.ist
 var httpapispecbindingsKind = schema.GroupVersionKind{Group: "config.istio.io", Version: "v1alpha2", Kind: "HTTPAPISpecBinding"}
 
 // Get takes name of the hTTPAPISpecBinding, and returns the corresponding hTTPAPISpecBinding object, and an error if there is any.
-func (c *FakeHTTPAPISpecBindings) Get(name string, options v1.GetOptions) (result *v1alpha2.HTTPAPISpecBinding, err error) {
+func (c *FakeHTTPAPISpecBindings) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha2.HTTPAPISpecBinding, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(httpapispecbindingsResource, c.ns, name), &v1alpha2.HTTPAPISpecBinding{})
 
@@ -48,7 +50,7 @@ func (c *FakeHTTPAPISpecBindings) Get(name string, options v1.GetOptions) (resul
 }
 
 // List takes label and field selectors, and returns the list of HTTPAPISpecBindings that match those selectors.
-func (c *FakeHTTPAPISpecBindings) List(opts v1.ListOptions) (result *v1alpha2.HTTPAPISpecBindingList, err error) {
+func (c *FakeHTTPAPISpecBindings) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha2.HTTPAPISpecBindingList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(httpapispecbindingsResource, httpapispecbindingsKind, c.ns, opts), &v1alpha2.HTTPAPISpecBindingList{})
 
@@ -70,14 +72,14 @@ func (c *FakeHTTPAPISpecBindings) List(opts v1.ListOptions) (result *v1alpha2.HT
 }
 
 // Watch returns a watch.Interface that watches the requested hTTPAPISpecBindings.
-func (c *FakeHTTPAPISpecBindings) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeHTTPAPISpecBindings) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(httpapispecbindingsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a hTTPAPISpecBinding and creates it.  Returns the server's representation of the hTTPAPISpecBinding, and an error, if there is any.
-func (c *FakeHTTPAPISpecBindings) Create(hTTPAPISpecBinding *v1alpha2.HTTPAPISpecBinding) (result *v1alpha2.HTTPAPISpecBinding, err error) {
+func (c *FakeHTTPAPISpecBindings) Create(ctx context.Context, hTTPAPISpecBinding *v1alpha2.HTTPAPISpecBinding, opts v1.CreateOptions) (result *v1alpha2.HTTPAPISpecBinding, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(httpapispecbindingsResource, c.ns, hTTPAPISpecBinding), &v1alpha2.HTTPAPISpecBinding{})
 
@@ -88,7 +90,7 @@ func (c *FakeHTTPAPISpecBindings) Create(hTTPAPISpecBinding *v1alpha2.HTTPAPISpe
 }
 
 // Update takes the representation of a hTTPAPISpecBinding and updates it. Returns the server's representation of the hTTPAPISpecBinding, and an error, if there is any.
-func (c *FakeHTTPAPISpecBindings) Update(hTTPAPISpecBinding *v1alpha2.HTTPAPISpecBinding) (result *v1alpha2.HTTPAPISpecBinding, err error) {
+func (c *FakeHTTPAPISpecBindings) Update(ctx context.Context, hTTPAPISpecBinding *v1alpha2.HTTPAPISpecBinding, opts v1.UpdateOptions) (result *v1alpha2.HTTPAPISpecBinding, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(httpapispecbindingsResource, c.ns, hTTPAPISpecBinding), &v1alpha2.HTTPAPISpecBinding{})
 
@@ -99,7 +101,7 @@ func (c *FakeHTTPAPISpecBindings) Update(hTTPAPISpecBinding *v1alpha2.HTTPAPISpe
 }
 
 // Delete takes name of the hTTPAPISpecBinding and deletes it. Returns an error if one occurs.
-func (c *FakeHTTPAPISpecBindings) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeHTTPAPISpecBindings) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(httpapispecbindingsResource, c.ns, name), &v1alpha2.HTTPAPISpecBinding{})
 
@@ -107,15 +109,15 @@ func (c *FakeHTTPAPISpecBindings) Delete(name string, options *v1.DeleteOptions)
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeHTTPAPISpecBindings) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(httpapispecbindingsResource, c.ns, listOptions)
+func (c *FakeHTTPAPISpecBindings) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(httpapispecbindingsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha2.HTTPAPISpecBindingList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched hTTPAPISpecBinding.
-func (c *FakeHTTPAPISpecBindings) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha2.HTTPAPISpecBinding, err error) {
+func (c *FakeHTTPAPISpecBindings) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha2.HTTPAPISpecBinding, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(httpapispecbindingsResource, c.ns, name, pt, data, subresources...), &v1alpha2.HTTPAPISpecBinding{})
 

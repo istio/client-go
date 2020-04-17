@@ -17,6 +17,7 @@
 package v1beta1
 
 import (
+	"context"
 	"time"
 
 	v1beta1 "istio.io/client-go/pkg/apis/networking/v1beta1"
@@ -35,14 +36,14 @@ type SidecarsGetter interface {
 
 // SidecarInterface has methods to work with Sidecar resources.
 type SidecarInterface interface {
-	Create(*v1beta1.Sidecar) (*v1beta1.Sidecar, error)
-	Update(*v1beta1.Sidecar) (*v1beta1.Sidecar, error)
-	Delete(name string, options *v1.DeleteOptions) error
-	DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error
-	Get(name string, options v1.GetOptions) (*v1beta1.Sidecar, error)
-	List(opts v1.ListOptions) (*v1beta1.SidecarList, error)
-	Watch(opts v1.ListOptions) (watch.Interface, error)
-	Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1beta1.Sidecar, err error)
+	Create(ctx context.Context, sidecar *v1beta1.Sidecar, opts v1.CreateOptions) (*v1beta1.Sidecar, error)
+	Update(ctx context.Context, sidecar *v1beta1.Sidecar, opts v1.UpdateOptions) (*v1beta1.Sidecar, error)
+	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1beta1.Sidecar, error)
+	List(ctx context.Context, opts v1.ListOptions) (*v1beta1.SidecarList, error)
+	Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1beta1.Sidecar, err error)
 	SidecarExpansion
 }
 
@@ -61,20 +62,20 @@ func newSidecars(c *NetworkingV1beta1Client, namespace string) *sidecars {
 }
 
 // Get takes name of the sidecar, and returns the corresponding sidecar object, and an error if there is any.
-func (c *sidecars) Get(name string, options v1.GetOptions) (result *v1beta1.Sidecar, err error) {
+func (c *sidecars) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1beta1.Sidecar, err error) {
 	result = &v1beta1.Sidecar{}
 	err = c.client.Get().
 		Namespace(c.ns).
 		Resource("sidecars").
 		Name(name).
 		VersionedParams(&options, scheme.ParameterCodec).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // List takes label and field selectors, and returns the list of Sidecars that match those selectors.
-func (c *sidecars) List(opts v1.ListOptions) (result *v1beta1.SidecarList, err error) {
+func (c *sidecars) List(ctx context.Context, opts v1.ListOptions) (result *v1beta1.SidecarList, err error) {
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -85,13 +86,13 @@ func (c *sidecars) List(opts v1.ListOptions) (result *v1beta1.SidecarList, err e
 		Resource("sidecars").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // Watch returns a watch.Interface that watches the requested sidecars.
-func (c *sidecars) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *sidecars) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -102,71 +103,74 @@ func (c *sidecars) Watch(opts v1.ListOptions) (watch.Interface, error) {
 		Resource("sidecars").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
-		Watch()
+		Watch(ctx)
 }
 
 // Create takes the representation of a sidecar and creates it.  Returns the server's representation of the sidecar, and an error, if there is any.
-func (c *sidecars) Create(sidecar *v1beta1.Sidecar) (result *v1beta1.Sidecar, err error) {
+func (c *sidecars) Create(ctx context.Context, sidecar *v1beta1.Sidecar, opts v1.CreateOptions) (result *v1beta1.Sidecar, err error) {
 	result = &v1beta1.Sidecar{}
 	err = c.client.Post().
 		Namespace(c.ns).
 		Resource("sidecars").
+		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(sidecar).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // Update takes the representation of a sidecar and updates it. Returns the server's representation of the sidecar, and an error, if there is any.
-func (c *sidecars) Update(sidecar *v1beta1.Sidecar) (result *v1beta1.Sidecar, err error) {
+func (c *sidecars) Update(ctx context.Context, sidecar *v1beta1.Sidecar, opts v1.UpdateOptions) (result *v1beta1.Sidecar, err error) {
 	result = &v1beta1.Sidecar{}
 	err = c.client.Put().
 		Namespace(c.ns).
 		Resource("sidecars").
 		Name(sidecar.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(sidecar).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // Delete takes name of the sidecar and deletes it. Returns an error if one occurs.
-func (c *sidecars) Delete(name string, options *v1.DeleteOptions) error {
+func (c *sidecars) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	return c.client.Delete().
 		Namespace(c.ns).
 		Resource("sidecars").
 		Name(name).
-		Body(options).
-		Do().
+		Body(&opts).
+		Do(ctx).
 		Error()
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *sidecars) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
+func (c *sidecars) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
 	var timeout time.Duration
-	if listOptions.TimeoutSeconds != nil {
-		timeout = time.Duration(*listOptions.TimeoutSeconds) * time.Second
+	if listOpts.TimeoutSeconds != nil {
+		timeout = time.Duration(*listOpts.TimeoutSeconds) * time.Second
 	}
 	return c.client.Delete().
 		Namespace(c.ns).
 		Resource("sidecars").
-		VersionedParams(&listOptions, scheme.ParameterCodec).
+		VersionedParams(&listOpts, scheme.ParameterCodec).
 		Timeout(timeout).
-		Body(options).
-		Do().
+		Body(&opts).
+		Do(ctx).
 		Error()
 }
 
 // Patch applies the patch and returns the patched sidecar.
-func (c *sidecars) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1beta1.Sidecar, err error) {
+func (c *sidecars) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1beta1.Sidecar, err error) {
 	result = &v1beta1.Sidecar{}
 	err = c.client.Patch(pt).
 		Namespace(c.ns).
 		Resource("sidecars").
-		SubResource(subresources...).
 		Name(name).
+		SubResource(subresources...).
+		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(data).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }

@@ -17,6 +17,7 @@
 package v1alpha1
 
 import (
+	"context"
 	time "time"
 
 	authenticationv1alpha1 "istio.io/client-go/pkg/apis/authentication/v1alpha1"
@@ -58,13 +59,13 @@ func NewFilteredMeshPolicyInformer(client versioned.Interface, resyncPeriod time
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.AuthenticationV1alpha1().MeshPolicies().List(options)
+				return client.AuthenticationV1alpha1().MeshPolicies().List(context.TODO(), options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.AuthenticationV1alpha1().MeshPolicies().Watch(options)
+				return client.AuthenticationV1alpha1().MeshPolicies().Watch(context.TODO(), options)
 			},
 		},
 		&authenticationv1alpha1.MeshPolicy{},

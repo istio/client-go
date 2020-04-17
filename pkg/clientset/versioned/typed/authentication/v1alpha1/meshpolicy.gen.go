@@ -17,6 +17,7 @@
 package v1alpha1
 
 import (
+	"context"
 	"time"
 
 	v1alpha1 "istio.io/client-go/pkg/apis/authentication/v1alpha1"
@@ -35,14 +36,14 @@ type MeshPoliciesGetter interface {
 
 // MeshPolicyInterface has methods to work with MeshPolicy resources.
 type MeshPolicyInterface interface {
-	Create(*v1alpha1.MeshPolicy) (*v1alpha1.MeshPolicy, error)
-	Update(*v1alpha1.MeshPolicy) (*v1alpha1.MeshPolicy, error)
-	Delete(name string, options *v1.DeleteOptions) error
-	DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error
-	Get(name string, options v1.GetOptions) (*v1alpha1.MeshPolicy, error)
-	List(opts v1.ListOptions) (*v1alpha1.MeshPolicyList, error)
-	Watch(opts v1.ListOptions) (watch.Interface, error)
-	Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.MeshPolicy, err error)
+	Create(ctx context.Context, meshPolicy *v1alpha1.MeshPolicy, opts v1.CreateOptions) (*v1alpha1.MeshPolicy, error)
+	Update(ctx context.Context, meshPolicy *v1alpha1.MeshPolicy, opts v1.UpdateOptions) (*v1alpha1.MeshPolicy, error)
+	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha1.MeshPolicy, error)
+	List(ctx context.Context, opts v1.ListOptions) (*v1alpha1.MeshPolicyList, error)
+	Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.MeshPolicy, err error)
 	MeshPolicyExpansion
 }
 
@@ -59,19 +60,19 @@ func newMeshPolicies(c *AuthenticationV1alpha1Client) *meshPolicies {
 }
 
 // Get takes name of the meshPolicy, and returns the corresponding meshPolicy object, and an error if there is any.
-func (c *meshPolicies) Get(name string, options v1.GetOptions) (result *v1alpha1.MeshPolicy, err error) {
+func (c *meshPolicies) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.MeshPolicy, err error) {
 	result = &v1alpha1.MeshPolicy{}
 	err = c.client.Get().
 		Resource("meshpolicies").
 		Name(name).
 		VersionedParams(&options, scheme.ParameterCodec).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // List takes label and field selectors, and returns the list of MeshPolicies that match those selectors.
-func (c *meshPolicies) List(opts v1.ListOptions) (result *v1alpha1.MeshPolicyList, err error) {
+func (c *meshPolicies) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.MeshPolicyList, err error) {
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -81,13 +82,13 @@ func (c *meshPolicies) List(opts v1.ListOptions) (result *v1alpha1.MeshPolicyLis
 		Resource("meshpolicies").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // Watch returns a watch.Interface that watches the requested meshPolicies.
-func (c *meshPolicies) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *meshPolicies) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -97,66 +98,69 @@ func (c *meshPolicies) Watch(opts v1.ListOptions) (watch.Interface, error) {
 		Resource("meshpolicies").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
-		Watch()
+		Watch(ctx)
 }
 
 // Create takes the representation of a meshPolicy and creates it.  Returns the server's representation of the meshPolicy, and an error, if there is any.
-func (c *meshPolicies) Create(meshPolicy *v1alpha1.MeshPolicy) (result *v1alpha1.MeshPolicy, err error) {
+func (c *meshPolicies) Create(ctx context.Context, meshPolicy *v1alpha1.MeshPolicy, opts v1.CreateOptions) (result *v1alpha1.MeshPolicy, err error) {
 	result = &v1alpha1.MeshPolicy{}
 	err = c.client.Post().
 		Resource("meshpolicies").
+		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(meshPolicy).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // Update takes the representation of a meshPolicy and updates it. Returns the server's representation of the meshPolicy, and an error, if there is any.
-func (c *meshPolicies) Update(meshPolicy *v1alpha1.MeshPolicy) (result *v1alpha1.MeshPolicy, err error) {
+func (c *meshPolicies) Update(ctx context.Context, meshPolicy *v1alpha1.MeshPolicy, opts v1.UpdateOptions) (result *v1alpha1.MeshPolicy, err error) {
 	result = &v1alpha1.MeshPolicy{}
 	err = c.client.Put().
 		Resource("meshpolicies").
 		Name(meshPolicy.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(meshPolicy).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // Delete takes name of the meshPolicy and deletes it. Returns an error if one occurs.
-func (c *meshPolicies) Delete(name string, options *v1.DeleteOptions) error {
+func (c *meshPolicies) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	return c.client.Delete().
 		Resource("meshpolicies").
 		Name(name).
-		Body(options).
-		Do().
+		Body(&opts).
+		Do(ctx).
 		Error()
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *meshPolicies) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
+func (c *meshPolicies) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
 	var timeout time.Duration
-	if listOptions.TimeoutSeconds != nil {
-		timeout = time.Duration(*listOptions.TimeoutSeconds) * time.Second
+	if listOpts.TimeoutSeconds != nil {
+		timeout = time.Duration(*listOpts.TimeoutSeconds) * time.Second
 	}
 	return c.client.Delete().
 		Resource("meshpolicies").
-		VersionedParams(&listOptions, scheme.ParameterCodec).
+		VersionedParams(&listOpts, scheme.ParameterCodec).
 		Timeout(timeout).
-		Body(options).
-		Do().
+		Body(&opts).
+		Do(ctx).
 		Error()
 }
 
 // Patch applies the patch and returns the patched meshPolicy.
-func (c *meshPolicies) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.MeshPolicy, err error) {
+func (c *meshPolicies) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.MeshPolicy, err error) {
 	result = &v1alpha1.MeshPolicy{}
 	err = c.client.Patch(pt).
 		Resource("meshpolicies").
-		SubResource(subresources...).
 		Name(name).
+		SubResource(subresources...).
+		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(data).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
