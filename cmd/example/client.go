@@ -68,36 +68,6 @@ func main() {
 		log.Printf("Index: %d DestinationRule Host: %+v\n", i, dr.Spec.GetHost())
 	}
 
-	// Test Policies
-	pList, err := ic.AuthenticationV1alpha1().Policies(namespace).List(context.TODO(), metav1.ListOptions{})
-	if err != nil {
-		log.Fatalf("Failed to get Policy in %s namespace: %s", namespace, err)
-	}
-
-	for i := range pList.Items {
-		p := pList.Items[i]
-		log.Printf("Index: %d Policy Name: %+v\n", i, p.GetName())
-	}
-
-	// Test MeshPolicies
-	mpList, err := ic.AuthenticationV1alpha1().MeshPolicies().List(context.TODO(), metav1.ListOptions{})
-	if err != nil {
-		log.Fatal("Failed to list MeshPolicies", err)
-	}
-
-	for i := range mpList.Items {
-		mp := mpList.Items[i]
-		log.Printf("Index: %d MeshPolicy Name: %+v\n", i, mp.ObjectMeta.Name)
-
-		// Known broken without the custom marshal/unmarshal code
-		log.Printf("Index %d MeshPolicy Value: %+v\n", i, mp.Spec.Peers)
-
-		_, err := ic.AuthenticationV1alpha1().MeshPolicies().Get(context.TODO(), mp.ObjectMeta.Name, metav1.GetOptions{})
-		if err != nil {
-			log.Fatalf("Failed to get MeshPolicy named %s", mp.ObjectMeta.Name)
-		}
-	}
-
 	// Test Gateway
 	gwList, err := ic.NetworkingV1alpha3().Gateways(namespace).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
