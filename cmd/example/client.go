@@ -18,6 +18,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"os"
 
@@ -46,7 +47,7 @@ func main() {
 	}
 
 	// Test VirtualServices
-	vsList, err := ic.NetworkingV1alpha3().VirtualServices(namespace).List(metav1.ListOptions{})
+	vsList, err := ic.NetworkingV1alpha3().VirtualServices(namespace).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		log.Fatalf("Failed to get VirtualService in %s namespace: %s", namespace, err)
 	}
@@ -57,7 +58,7 @@ func main() {
 	}
 
 	// Test DestinationRules
-	drList, err := ic.NetworkingV1alpha3().DestinationRules(namespace).List(metav1.ListOptions{})
+	drList, err := ic.NetworkingV1alpha3().DestinationRules(namespace).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		log.Fatalf("Failed to get DestinationRule in %s namespace: %s", namespace, err)
 	}
@@ -68,7 +69,7 @@ func main() {
 	}
 
 	// Test Policies
-	pList, err := ic.AuthenticationV1alpha1().Policies(namespace).List(metav1.ListOptions{})
+	pList, err := ic.AuthenticationV1alpha1().Policies(namespace).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		log.Fatalf("Failed to get Policy in %s namespace: %s", namespace, err)
 	}
@@ -79,7 +80,7 @@ func main() {
 	}
 
 	// Test MeshPolicies
-	mpList, err := ic.AuthenticationV1alpha1().MeshPolicies().List(metav1.ListOptions{})
+	mpList, err := ic.AuthenticationV1alpha1().MeshPolicies().List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		log.Fatal("Failed to list MeshPolicies", err)
 	}
@@ -91,14 +92,14 @@ func main() {
 		// Known broken without the custom marshal/unmarshal code
 		log.Printf("Index %d MeshPolicy Value: %+v\n", i, mp.Spec.Peers)
 
-		_, err := ic.AuthenticationV1alpha1().MeshPolicies().Get(mp.ObjectMeta.Name, metav1.GetOptions{})
+		_, err := ic.AuthenticationV1alpha1().MeshPolicies().Get(context.TODO(), mp.ObjectMeta.Name, metav1.GetOptions{})
 		if err != nil {
 			log.Fatalf("Failed to get MeshPolicy named %s", mp.ObjectMeta.Name)
 		}
 	}
 
 	// Test Gateway
-	gwList, err := ic.NetworkingV1alpha3().Gateways(namespace).List(metav1.ListOptions{})
+	gwList, err := ic.NetworkingV1alpha3().Gateways(namespace).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		log.Fatalf("Failed to get Gateway in %s namespace: %s", namespace, err)
 	}
@@ -111,7 +112,7 @@ func main() {
 	}
 
 	// Test ServiceEntry
-	seList, err := ic.NetworkingV1alpha3().ServiceEntries(namespace).List(metav1.ListOptions{})
+	seList, err := ic.NetworkingV1alpha3().ServiceEntries(namespace).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		log.Fatalf("Failed to get ServiceEntry in %s namespace: %s", namespace, err)
 	}

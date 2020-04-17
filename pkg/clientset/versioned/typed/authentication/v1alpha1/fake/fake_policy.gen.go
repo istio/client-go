@@ -17,6 +17,8 @@
 package fake
 
 import (
+	"context"
+
 	v1alpha1 "istio.io/client-go/pkg/apis/authentication/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
@@ -37,7 +39,7 @@ var policiesResource = schema.GroupVersionResource{Group: "authentication.istio.
 var policiesKind = schema.GroupVersionKind{Group: "authentication.istio.io", Version: "v1alpha1", Kind: "Policy"}
 
 // Get takes name of the policy, and returns the corresponding policy object, and an error if there is any.
-func (c *FakePolicies) Get(name string, options v1.GetOptions) (result *v1alpha1.Policy, err error) {
+func (c *FakePolicies) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.Policy, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(policiesResource, c.ns, name), &v1alpha1.Policy{})
 
@@ -48,7 +50,7 @@ func (c *FakePolicies) Get(name string, options v1.GetOptions) (result *v1alpha1
 }
 
 // List takes label and field selectors, and returns the list of Policies that match those selectors.
-func (c *FakePolicies) List(opts v1.ListOptions) (result *v1alpha1.PolicyList, err error) {
+func (c *FakePolicies) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.PolicyList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(policiesResource, policiesKind, c.ns, opts), &v1alpha1.PolicyList{})
 
@@ -70,14 +72,14 @@ func (c *FakePolicies) List(opts v1.ListOptions) (result *v1alpha1.PolicyList, e
 }
 
 // Watch returns a watch.Interface that watches the requested policies.
-func (c *FakePolicies) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakePolicies) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(policiesResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a policy and creates it.  Returns the server's representation of the policy, and an error, if there is any.
-func (c *FakePolicies) Create(policy *v1alpha1.Policy) (result *v1alpha1.Policy, err error) {
+func (c *FakePolicies) Create(ctx context.Context, policy *v1alpha1.Policy, opts v1.CreateOptions) (result *v1alpha1.Policy, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(policiesResource, c.ns, policy), &v1alpha1.Policy{})
 
@@ -88,7 +90,7 @@ func (c *FakePolicies) Create(policy *v1alpha1.Policy) (result *v1alpha1.Policy,
 }
 
 // Update takes the representation of a policy and updates it. Returns the server's representation of the policy, and an error, if there is any.
-func (c *FakePolicies) Update(policy *v1alpha1.Policy) (result *v1alpha1.Policy, err error) {
+func (c *FakePolicies) Update(ctx context.Context, policy *v1alpha1.Policy, opts v1.UpdateOptions) (result *v1alpha1.Policy, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(policiesResource, c.ns, policy), &v1alpha1.Policy{})
 
@@ -99,7 +101,7 @@ func (c *FakePolicies) Update(policy *v1alpha1.Policy) (result *v1alpha1.Policy,
 }
 
 // Delete takes name of the policy and deletes it. Returns an error if one occurs.
-func (c *FakePolicies) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakePolicies) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(policiesResource, c.ns, name), &v1alpha1.Policy{})
 
@@ -107,15 +109,15 @@ func (c *FakePolicies) Delete(name string, options *v1.DeleteOptions) error {
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakePolicies) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(policiesResource, c.ns, listOptions)
+func (c *FakePolicies) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(policiesResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.PolicyList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched policy.
-func (c *FakePolicies) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.Policy, err error) {
+func (c *FakePolicies) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.Policy, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(policiesResource, c.ns, name, pt, data, subresources...), &v1alpha1.Policy{})
 

@@ -17,6 +17,7 @@
 package v1alpha3
 
 import (
+	"context"
 	time "time"
 
 	networkingv1alpha3 "istio.io/client-go/pkg/apis/networking/v1alpha3"
@@ -59,13 +60,13 @@ func NewFilteredEnvoyFilterInformer(client versioned.Interface, namespace string
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.NetworkingV1alpha3().EnvoyFilters(namespace).List(options)
+				return client.NetworkingV1alpha3().EnvoyFilters(namespace).List(context.TODO(), options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.NetworkingV1alpha3().EnvoyFilters(namespace).Watch(options)
+				return client.NetworkingV1alpha3().EnvoyFilters(namespace).Watch(context.TODO(), options)
 			},
 		},
 		&networkingv1alpha3.EnvoyFilter{},

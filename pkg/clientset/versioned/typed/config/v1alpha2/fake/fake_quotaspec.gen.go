@@ -17,6 +17,8 @@
 package fake
 
 import (
+	"context"
+
 	v1alpha2 "istio.io/client-go/pkg/apis/config/v1alpha2"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
@@ -37,7 +39,7 @@ var quotaspecsResource = schema.GroupVersionResource{Group: "config.istio.io", V
 var quotaspecsKind = schema.GroupVersionKind{Group: "config.istio.io", Version: "v1alpha2", Kind: "QuotaSpec"}
 
 // Get takes name of the quotaSpec, and returns the corresponding quotaSpec object, and an error if there is any.
-func (c *FakeQuotaSpecs) Get(name string, options v1.GetOptions) (result *v1alpha2.QuotaSpec, err error) {
+func (c *FakeQuotaSpecs) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha2.QuotaSpec, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(quotaspecsResource, c.ns, name), &v1alpha2.QuotaSpec{})
 
@@ -48,7 +50,7 @@ func (c *FakeQuotaSpecs) Get(name string, options v1.GetOptions) (result *v1alph
 }
 
 // List takes label and field selectors, and returns the list of QuotaSpecs that match those selectors.
-func (c *FakeQuotaSpecs) List(opts v1.ListOptions) (result *v1alpha2.QuotaSpecList, err error) {
+func (c *FakeQuotaSpecs) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha2.QuotaSpecList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(quotaspecsResource, quotaspecsKind, c.ns, opts), &v1alpha2.QuotaSpecList{})
 
@@ -70,14 +72,14 @@ func (c *FakeQuotaSpecs) List(opts v1.ListOptions) (result *v1alpha2.QuotaSpecLi
 }
 
 // Watch returns a watch.Interface that watches the requested quotaSpecs.
-func (c *FakeQuotaSpecs) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeQuotaSpecs) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(quotaspecsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a quotaSpec and creates it.  Returns the server's representation of the quotaSpec, and an error, if there is any.
-func (c *FakeQuotaSpecs) Create(quotaSpec *v1alpha2.QuotaSpec) (result *v1alpha2.QuotaSpec, err error) {
+func (c *FakeQuotaSpecs) Create(ctx context.Context, quotaSpec *v1alpha2.QuotaSpec, opts v1.CreateOptions) (result *v1alpha2.QuotaSpec, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(quotaspecsResource, c.ns, quotaSpec), &v1alpha2.QuotaSpec{})
 
@@ -88,7 +90,7 @@ func (c *FakeQuotaSpecs) Create(quotaSpec *v1alpha2.QuotaSpec) (result *v1alpha2
 }
 
 // Update takes the representation of a quotaSpec and updates it. Returns the server's representation of the quotaSpec, and an error, if there is any.
-func (c *FakeQuotaSpecs) Update(quotaSpec *v1alpha2.QuotaSpec) (result *v1alpha2.QuotaSpec, err error) {
+func (c *FakeQuotaSpecs) Update(ctx context.Context, quotaSpec *v1alpha2.QuotaSpec, opts v1.UpdateOptions) (result *v1alpha2.QuotaSpec, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(quotaspecsResource, c.ns, quotaSpec), &v1alpha2.QuotaSpec{})
 
@@ -99,7 +101,7 @@ func (c *FakeQuotaSpecs) Update(quotaSpec *v1alpha2.QuotaSpec) (result *v1alpha2
 }
 
 // Delete takes name of the quotaSpec and deletes it. Returns an error if one occurs.
-func (c *FakeQuotaSpecs) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeQuotaSpecs) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(quotaspecsResource, c.ns, name), &v1alpha2.QuotaSpec{})
 
@@ -107,15 +109,15 @@ func (c *FakeQuotaSpecs) Delete(name string, options *v1.DeleteOptions) error {
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeQuotaSpecs) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(quotaspecsResource, c.ns, listOptions)
+func (c *FakeQuotaSpecs) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(quotaspecsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha2.QuotaSpecList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched quotaSpec.
-func (c *FakeQuotaSpecs) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha2.QuotaSpec, err error) {
+func (c *FakeQuotaSpecs) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha2.QuotaSpec, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(quotaspecsResource, c.ns, name, pt, data, subresources...), &v1alpha2.QuotaSpec{})
 

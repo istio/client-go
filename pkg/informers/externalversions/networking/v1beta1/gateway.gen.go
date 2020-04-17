@@ -17,6 +17,7 @@
 package v1beta1
 
 import (
+	"context"
 	time "time"
 
 	networkingv1beta1 "istio.io/client-go/pkg/apis/networking/v1beta1"
@@ -59,13 +60,13 @@ func NewFilteredGatewayInformer(client versioned.Interface, namespace string, re
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.NetworkingV1beta1().Gateways(namespace).List(options)
+				return client.NetworkingV1beta1().Gateways(namespace).List(context.TODO(), options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.NetworkingV1beta1().Gateways(namespace).Watch(options)
+				return client.NetworkingV1beta1().Gateways(namespace).Watch(context.TODO(), options)
 			},
 		},
 		&networkingv1beta1.Gateway{},

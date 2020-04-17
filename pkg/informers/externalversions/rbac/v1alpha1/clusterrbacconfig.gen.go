@@ -17,6 +17,7 @@
 package v1alpha1
 
 import (
+	"context"
 	time "time"
 
 	rbacv1alpha1 "istio.io/client-go/pkg/apis/rbac/v1alpha1"
@@ -58,13 +59,13 @@ func NewFilteredClusterRbacConfigInformer(client versioned.Interface, resyncPeri
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.RbacV1alpha1().ClusterRbacConfigs().List(options)
+				return client.RbacV1alpha1().ClusterRbacConfigs().List(context.TODO(), options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.RbacV1alpha1().ClusterRbacConfigs().Watch(options)
+				return client.RbacV1alpha1().ClusterRbacConfigs().Watch(context.TODO(), options)
 			},
 		},
 		&rbacv1alpha1.ClusterRbacConfig{},

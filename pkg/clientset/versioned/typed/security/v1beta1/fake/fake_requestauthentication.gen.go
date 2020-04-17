@@ -17,6 +17,8 @@
 package fake
 
 import (
+	"context"
+
 	v1beta1 "istio.io/client-go/pkg/apis/security/v1beta1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
@@ -37,7 +39,7 @@ var requestauthenticationsResource = schema.GroupVersionResource{Group: "securit
 var requestauthenticationsKind = schema.GroupVersionKind{Group: "security.istio.io", Version: "v1beta1", Kind: "RequestAuthentication"}
 
 // Get takes name of the requestAuthentication, and returns the corresponding requestAuthentication object, and an error if there is any.
-func (c *FakeRequestAuthentications) Get(name string, options v1.GetOptions) (result *v1beta1.RequestAuthentication, err error) {
+func (c *FakeRequestAuthentications) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1beta1.RequestAuthentication, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(requestauthenticationsResource, c.ns, name), &v1beta1.RequestAuthentication{})
 
@@ -48,7 +50,7 @@ func (c *FakeRequestAuthentications) Get(name string, options v1.GetOptions) (re
 }
 
 // List takes label and field selectors, and returns the list of RequestAuthentications that match those selectors.
-func (c *FakeRequestAuthentications) List(opts v1.ListOptions) (result *v1beta1.RequestAuthenticationList, err error) {
+func (c *FakeRequestAuthentications) List(ctx context.Context, opts v1.ListOptions) (result *v1beta1.RequestAuthenticationList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(requestauthenticationsResource, requestauthenticationsKind, c.ns, opts), &v1beta1.RequestAuthenticationList{})
 
@@ -70,14 +72,14 @@ func (c *FakeRequestAuthentications) List(opts v1.ListOptions) (result *v1beta1.
 }
 
 // Watch returns a watch.Interface that watches the requested requestAuthentications.
-func (c *FakeRequestAuthentications) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeRequestAuthentications) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(requestauthenticationsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a requestAuthentication and creates it.  Returns the server's representation of the requestAuthentication, and an error, if there is any.
-func (c *FakeRequestAuthentications) Create(requestAuthentication *v1beta1.RequestAuthentication) (result *v1beta1.RequestAuthentication, err error) {
+func (c *FakeRequestAuthentications) Create(ctx context.Context, requestAuthentication *v1beta1.RequestAuthentication, opts v1.CreateOptions) (result *v1beta1.RequestAuthentication, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(requestauthenticationsResource, c.ns, requestAuthentication), &v1beta1.RequestAuthentication{})
 
@@ -88,7 +90,7 @@ func (c *FakeRequestAuthentications) Create(requestAuthentication *v1beta1.Reque
 }
 
 // Update takes the representation of a requestAuthentication and updates it. Returns the server's representation of the requestAuthentication, and an error, if there is any.
-func (c *FakeRequestAuthentications) Update(requestAuthentication *v1beta1.RequestAuthentication) (result *v1beta1.RequestAuthentication, err error) {
+func (c *FakeRequestAuthentications) Update(ctx context.Context, requestAuthentication *v1beta1.RequestAuthentication, opts v1.UpdateOptions) (result *v1beta1.RequestAuthentication, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(requestauthenticationsResource, c.ns, requestAuthentication), &v1beta1.RequestAuthentication{})
 
@@ -99,7 +101,7 @@ func (c *FakeRequestAuthentications) Update(requestAuthentication *v1beta1.Reque
 }
 
 // Delete takes name of the requestAuthentication and deletes it. Returns an error if one occurs.
-func (c *FakeRequestAuthentications) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeRequestAuthentications) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(requestauthenticationsResource, c.ns, name), &v1beta1.RequestAuthentication{})
 
@@ -107,15 +109,15 @@ func (c *FakeRequestAuthentications) Delete(name string, options *v1.DeleteOptio
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeRequestAuthentications) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(requestauthenticationsResource, c.ns, listOptions)
+func (c *FakeRequestAuthentications) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(requestauthenticationsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1beta1.RequestAuthenticationList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched requestAuthentication.
-func (c *FakeRequestAuthentications) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1beta1.RequestAuthentication, err error) {
+func (c *FakeRequestAuthentications) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1beta1.RequestAuthentication, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(requestauthenticationsResource, c.ns, name, pt, data, subresources...), &v1beta1.RequestAuthentication{})
 

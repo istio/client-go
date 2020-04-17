@@ -17,6 +17,7 @@
 package v1alpha2
 
 import (
+	"context"
 	time "time"
 
 	configv1alpha2 "istio.io/client-go/pkg/apis/config/v1alpha2"
@@ -59,13 +60,13 @@ func NewFilteredAttributeManifestInformer(client versioned.Interface, namespace 
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ConfigV1alpha2().AttributeManifests(namespace).List(options)
+				return client.ConfigV1alpha2().AttributeManifests(namespace).List(context.TODO(), options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ConfigV1alpha2().AttributeManifests(namespace).Watch(options)
+				return client.ConfigV1alpha2().AttributeManifests(namespace).Watch(context.TODO(), options)
 			},
 		},
 		&configv1alpha2.AttributeManifest{},
