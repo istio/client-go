@@ -17,7 +17,6 @@
 package scheme
 
 import (
-	authenticationv1alpha1 "istio.io/client-go/pkg/apis/authentication/v1alpha1"
 	configv1alpha2 "istio.io/client-go/pkg/apis/config/v1alpha2"
 	networkingv1alpha3 "istio.io/client-go/pkg/apis/networking/v1alpha3"
 	networkingv1beta1 "istio.io/client-go/pkg/apis/networking/v1beta1"
@@ -34,7 +33,6 @@ var Scheme = runtime.NewScheme()
 var Codecs = serializer.NewCodecFactory(Scheme)
 var ParameterCodec = runtime.NewParameterCodec(Scheme)
 var localSchemeBuilder = runtime.SchemeBuilder{
-	authenticationv1alpha1.AddToScheme,
 	configv1alpha2.AddToScheme,
 	networkingv1alpha3.AddToScheme,
 	networkingv1beta1.AddToScheme,
