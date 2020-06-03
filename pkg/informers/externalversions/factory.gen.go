@@ -25,7 +25,6 @@ import (
 	config "istio.io/client-go/pkg/informers/externalversions/config"
 	internalinterfaces "istio.io/client-go/pkg/informers/externalversions/internalinterfaces"
 	networking "istio.io/client-go/pkg/informers/externalversions/networking"
-	rbac "istio.io/client-go/pkg/informers/externalversions/rbac"
 	security "istio.io/client-go/pkg/informers/externalversions/security"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
@@ -175,7 +174,6 @@ type SharedInformerFactory interface {
 
 	Config() config.Interface
 	Networking() networking.Interface
-	Rbac() rbac.Interface
 	Security() security.Interface
 }
 
@@ -185,10 +183,6 @@ func (f *sharedInformerFactory) Config() config.Interface {
 
 func (f *sharedInformerFactory) Networking() networking.Interface {
 	return networking.New(f, f.namespace, f.tweakListOptions)
-}
-
-func (f *sharedInformerFactory) Rbac() rbac.Interface {
-	return rbac.New(f, f.namespace, f.tweakListOptions)
 }
 
 func (f *sharedInformerFactory) Security() security.Interface {

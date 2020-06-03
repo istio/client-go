@@ -22,7 +22,6 @@ import (
 	configv1alpha2 "istio.io/client-go/pkg/clientset/versioned/typed/config/v1alpha2"
 	networkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3"
 	networkingv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1beta1"
-	rbacv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/rbac/v1alpha1"
 	securityv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1beta1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
@@ -34,7 +33,6 @@ type Interface interface {
 	ConfigV1alpha2() configv1alpha2.ConfigV1alpha2Interface
 	NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3Interface
 	NetworkingV1beta1() networkingv1beta1.NetworkingV1beta1Interface
-	RbacV1alpha1() rbacv1alpha1.RbacV1alpha1Interface
 	SecurityV1beta1() securityv1beta1.SecurityV1beta1Interface
 }
 
@@ -45,7 +43,6 @@ type Clientset struct {
 	configV1alpha2     *configv1alpha2.ConfigV1alpha2Client
 	networkingV1alpha3 *networkingv1alpha3.NetworkingV1alpha3Client
 	networkingV1beta1  *networkingv1beta1.NetworkingV1beta1Client
-	rbacV1alpha1       *rbacv1alpha1.RbacV1alpha1Client
 	securityV1beta1    *securityv1beta1.SecurityV1beta1Client
 }
 
@@ -62,11 +59,6 @@ func (c *Clientset) NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3In
 // NetworkingV1beta1 retrieves the NetworkingV1beta1Client
 func (c *Clientset) NetworkingV1beta1() networkingv1beta1.NetworkingV1beta1Interface {
 	return c.networkingV1beta1
-}
-
-// RbacV1alpha1 retrieves the RbacV1alpha1Client
-func (c *Clientset) RbacV1alpha1() rbacv1alpha1.RbacV1alpha1Interface {
-	return c.rbacV1alpha1
 }
 
 // SecurityV1beta1 retrieves the SecurityV1beta1Client
@@ -107,10 +99,6 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
-	cs.rbacV1alpha1, err = rbacv1alpha1.NewForConfig(&configShallowCopy)
-	if err != nil {
-		return nil, err
-	}
 	cs.securityV1beta1, err = securityv1beta1.NewForConfig(&configShallowCopy)
 	if err != nil {
 		return nil, err
@@ -130,7 +118,6 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 	cs.configV1alpha2 = configv1alpha2.NewForConfigOrDie(c)
 	cs.networkingV1alpha3 = networkingv1alpha3.NewForConfigOrDie(c)
 	cs.networkingV1beta1 = networkingv1beta1.NewForConfigOrDie(c)
-	cs.rbacV1alpha1 = rbacv1alpha1.NewForConfigOrDie(c)
 	cs.securityV1beta1 = securityv1beta1.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
@@ -143,7 +130,6 @@ func New(c rest.Interface) *Clientset {
 	cs.configV1alpha2 = configv1alpha2.New(c)
 	cs.networkingV1alpha3 = networkingv1alpha3.New(c)
 	cs.networkingV1beta1 = networkingv1beta1.New(c)
-	cs.rbacV1alpha1 = rbacv1alpha1.New(c)
 	cs.securityV1beta1 = securityv1beta1.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
