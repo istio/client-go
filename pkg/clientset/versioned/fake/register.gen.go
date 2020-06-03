@@ -20,7 +20,6 @@ import (
 	configv1alpha2 "istio.io/client-go/pkg/apis/config/v1alpha2"
 	networkingv1alpha3 "istio.io/client-go/pkg/apis/networking/v1alpha3"
 	networkingv1beta1 "istio.io/client-go/pkg/apis/networking/v1beta1"
-	rbacv1alpha1 "istio.io/client-go/pkg/apis/rbac/v1alpha1"
 	securityv1beta1 "istio.io/client-go/pkg/apis/security/v1beta1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
@@ -36,7 +35,6 @@ var localSchemeBuilder = runtime.SchemeBuilder{
 	configv1alpha2.AddToScheme,
 	networkingv1alpha3.AddToScheme,
 	networkingv1beta1.AddToScheme,
-	rbacv1alpha1.AddToScheme,
 	securityv1beta1.AddToScheme,
 }
 

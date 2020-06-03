@@ -22,7 +22,6 @@ import (
 	v1alpha2 "istio.io/client-go/pkg/apis/config/v1alpha2"
 	v1alpha3 "istio.io/client-go/pkg/apis/networking/v1alpha3"
 	v1beta1 "istio.io/client-go/pkg/apis/networking/v1beta1"
-	v1alpha1 "istio.io/client-go/pkg/apis/rbac/v1alpha1"
 	securityv1beta1 "istio.io/client-go/pkg/apis/security/v1beta1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
@@ -101,16 +100,6 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Networking().V1beta1().VirtualServices().Informer()}, nil
 	case v1beta1.SchemeGroupVersion.WithResource("workloadentries"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Networking().V1beta1().WorkloadEntries().Informer()}, nil
-
-		// Group=rbac.istio.io, Version=v1alpha1
-	case v1alpha1.SchemeGroupVersion.WithResource("clusterrbacconfigs"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Rbac().V1alpha1().ClusterRbacConfigs().Informer()}, nil
-	case v1alpha1.SchemeGroupVersion.WithResource("rbacconfigs"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Rbac().V1alpha1().RbacConfigs().Informer()}, nil
-	case v1alpha1.SchemeGroupVersion.WithResource("serviceroles"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Rbac().V1alpha1().ServiceRoles().Informer()}, nil
-	case v1alpha1.SchemeGroupVersion.WithResource("servicerolebindings"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Rbac().V1alpha1().ServiceRoleBindings().Informer()}, nil
 
 		// Group=security.istio.io, Version=v1beta1
 	case securityv1beta1.SchemeGroupVersion.WithResource("authorizationpolicies"):
