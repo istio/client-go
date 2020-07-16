@@ -100,6 +100,18 @@ func (c *FakeServiceEntries) Update(ctx context.Context, serviceEntry *v1beta1.S
 	return obj.(*v1beta1.ServiceEntry), err
 }
 
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *FakeServiceEntries) UpdateStatus(ctx context.Context, serviceEntry *v1beta1.ServiceEntry, opts v1.UpdateOptions) (*v1beta1.ServiceEntry, error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewUpdateSubresourceAction(serviceentriesResource, "status", c.ns, serviceEntry), &v1beta1.ServiceEntry{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1beta1.ServiceEntry), err
+}
+
 // Delete takes name of the serviceEntry and deletes it. Returns an error if one occurs.
 func (c *FakeServiceEntries) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.

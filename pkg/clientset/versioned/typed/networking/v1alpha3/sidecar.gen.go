@@ -38,6 +38,7 @@ type SidecarsGetter interface {
 type SidecarInterface interface {
 	Create(ctx context.Context, sidecar *v1alpha3.Sidecar, opts v1.CreateOptions) (*v1alpha3.Sidecar, error)
 	Update(ctx context.Context, sidecar *v1alpha3.Sidecar, opts v1.UpdateOptions) (*v1alpha3.Sidecar, error)
+	UpdateStatus(ctx context.Context, sidecar *v1alpha3.Sidecar, opts v1.UpdateOptions) (*v1alpha3.Sidecar, error)
 	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
 	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha3.Sidecar, error)
@@ -126,6 +127,22 @@ func (c *sidecars) Update(ctx context.Context, sidecar *v1alpha3.Sidecar, opts v
 		Namespace(c.ns).
 		Resource("sidecars").
 		Name(sidecar.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(sidecar).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *sidecars) UpdateStatus(ctx context.Context, sidecar *v1alpha3.Sidecar, opts v1.UpdateOptions) (result *v1alpha3.Sidecar, err error) {
+	result = &v1alpha3.Sidecar{}
+	err = c.client.Put().
+		Namespace(c.ns).
+		Resource("sidecars").
+		Name(sidecar.Name).
+		SubResource("status").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(sidecar).
 		Do(ctx).

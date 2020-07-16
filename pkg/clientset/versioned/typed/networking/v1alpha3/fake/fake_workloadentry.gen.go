@@ -100,6 +100,18 @@ func (c *FakeWorkloadEntries) Update(ctx context.Context, workloadEntry *v1alpha
 	return obj.(*v1alpha3.WorkloadEntry), err
 }
 
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *FakeWorkloadEntries) UpdateStatus(ctx context.Context, workloadEntry *v1alpha3.WorkloadEntry, opts v1.UpdateOptions) (*v1alpha3.WorkloadEntry, error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewUpdateSubresourceAction(workloadentriesResource, "status", c.ns, workloadEntry), &v1alpha3.WorkloadEntry{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha3.WorkloadEntry), err
+}
+
 // Delete takes name of the workloadEntry and deletes it. Returns an error if one occurs.
 func (c *FakeWorkloadEntries) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.

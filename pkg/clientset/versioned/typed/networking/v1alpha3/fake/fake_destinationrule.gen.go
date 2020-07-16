@@ -100,6 +100,18 @@ func (c *FakeDestinationRules) Update(ctx context.Context, destinationRule *v1al
 	return obj.(*v1alpha3.DestinationRule), err
 }
 
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *FakeDestinationRules) UpdateStatus(ctx context.Context, destinationRule *v1alpha3.DestinationRule, opts v1.UpdateOptions) (*v1alpha3.DestinationRule, error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewUpdateSubresourceAction(destinationrulesResource, "status", c.ns, destinationRule), &v1alpha3.DestinationRule{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha3.DestinationRule), err
+}
+
 // Delete takes name of the destinationRule and deletes it. Returns an error if one occurs.
 func (c *FakeDestinationRules) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.

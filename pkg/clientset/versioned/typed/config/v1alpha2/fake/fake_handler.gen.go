@@ -100,6 +100,18 @@ func (c *FakeHandlers) Update(ctx context.Context, handler *v1alpha2.Handler, op
 	return obj.(*v1alpha2.Handler), err
 }
 
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *FakeHandlers) UpdateStatus(ctx context.Context, handler *v1alpha2.Handler, opts v1.UpdateOptions) (*v1alpha2.Handler, error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewUpdateSubresourceAction(handlersResource, "status", c.ns, handler), &v1alpha2.Handler{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha2.Handler), err
+}
+
 // Delete takes name of the handler and deletes it. Returns an error if one occurs.
 func (c *FakeHandlers) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.

@@ -38,6 +38,7 @@ type ServiceEntriesGetter interface {
 type ServiceEntryInterface interface {
 	Create(ctx context.Context, serviceEntry *v1alpha3.ServiceEntry, opts v1.CreateOptions) (*v1alpha3.ServiceEntry, error)
 	Update(ctx context.Context, serviceEntry *v1alpha3.ServiceEntry, opts v1.UpdateOptions) (*v1alpha3.ServiceEntry, error)
+	UpdateStatus(ctx context.Context, serviceEntry *v1alpha3.ServiceEntry, opts v1.UpdateOptions) (*v1alpha3.ServiceEntry, error)
 	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
 	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha3.ServiceEntry, error)
@@ -126,6 +127,22 @@ func (c *serviceEntries) Update(ctx context.Context, serviceEntry *v1alpha3.Serv
 		Namespace(c.ns).
 		Resource("serviceentries").
 		Name(serviceEntry.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(serviceEntry).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *serviceEntries) UpdateStatus(ctx context.Context, serviceEntry *v1alpha3.ServiceEntry, opts v1.UpdateOptions) (result *v1alpha3.ServiceEntry, err error) {
+	result = &v1alpha3.ServiceEntry{}
+	err = c.client.Put().
+		Namespace(c.ns).
+		Resource("serviceentries").
+		Name(serviceEntry.Name).
+		SubResource("status").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(serviceEntry).
 		Do(ctx).

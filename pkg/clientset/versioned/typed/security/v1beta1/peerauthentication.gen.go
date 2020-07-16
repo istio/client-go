@@ -38,6 +38,7 @@ type PeerAuthenticationsGetter interface {
 type PeerAuthenticationInterface interface {
 	Create(ctx context.Context, peerAuthentication *v1beta1.PeerAuthentication, opts v1.CreateOptions) (*v1beta1.PeerAuthentication, error)
 	Update(ctx context.Context, peerAuthentication *v1beta1.PeerAuthentication, opts v1.UpdateOptions) (*v1beta1.PeerAuthentication, error)
+	UpdateStatus(ctx context.Context, peerAuthentication *v1beta1.PeerAuthentication, opts v1.UpdateOptions) (*v1beta1.PeerAuthentication, error)
 	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
 	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1beta1.PeerAuthentication, error)
@@ -126,6 +127,22 @@ func (c *peerAuthentications) Update(ctx context.Context, peerAuthentication *v1
 		Namespace(c.ns).
 		Resource("peerauthentications").
 		Name(peerAuthentication.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(peerAuthentication).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *peerAuthentications) UpdateStatus(ctx context.Context, peerAuthentication *v1beta1.PeerAuthentication, opts v1.UpdateOptions) (result *v1beta1.PeerAuthentication, err error) {
+	result = &v1beta1.PeerAuthentication{}
+	err = c.client.Put().
+		Namespace(c.ns).
+		Resource("peerauthentications").
+		Name(peerAuthentication.Name).
+		SubResource("status").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(peerAuthentication).
 		Do(ctx).

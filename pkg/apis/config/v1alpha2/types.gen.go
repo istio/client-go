@@ -17,6 +17,7 @@
 package v1alpha2
 
 import (
+	v1alpha1 "istio.io/api/meta/v1alpha1"
 	client "istio.io/api/mixer/v1/config/client"
 	v1beta1 "istio.io/api/policy/v1beta1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -39,7 +40,6 @@ import (
 // +cue-gen:attributemanifest:subresource:status
 // +cue-gen:attributemanifest:scope:Namespaced
 // +cue-gen:attributemanifest:resource:categories=istio-io,policy-istio-io
-// +cue-gen:attributemanifest:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags
@@ -58,6 +58,8 @@ type AttributeManifest struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec v1beta1.AttributeManifest `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -139,7 +141,6 @@ type AttributeManifestList struct {
 // +cue-gen:HTTPAPISpec:subresource:status
 // +cue-gen:HTTPAPISpec:scope:Namespaced
 // +cue-gen:HTTPAPISpec:resource:categories=istio-io,apim-istio-io
-// +cue-gen:HTTPAPISpec:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags
@@ -156,6 +157,8 @@ type HTTPAPISpec struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec client.HTTPAPISpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -200,7 +203,6 @@ type HTTPAPISpecList struct {
 // +cue-gen:HTTPAPISpecBinding:subresource:status
 // +cue-gen:HTTPAPISpecBinding:scope:Namespaced
 // +cue-gen:HTTPAPISpecBinding:resource:categories=istio-io,apim-istio-io
-// +cue-gen:HTTPAPISpecBinding:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags
@@ -217,6 +219,8 @@ type HTTPAPISpecBinding struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec client.HTTPAPISpecBinding `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -299,6 +303,7 @@ type HTTPAPISpecBindingList struct {
 // +cue-gen:handler:subresource:status
 // +cue-gen:handler:scope:Namespaced
 // +cue-gen:handler:resource:categories=istio-io,policy-istio-io
+// +cue-gen:handler:preserveUnknownFields:params
 // -->
 //
 // <!-- go code generation tags
@@ -317,6 +322,8 @@ type Handler struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec v1beta1.Handler `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -364,6 +371,7 @@ type HandlerList struct {
 // +cue-gen:instance:subresource:status
 // +cue-gen:instance:scope:Namespaced
 // +cue-gen:instance:resource:categories=istio-io,policy-istio-io
+// +cue-gen:instance:preserveUnknownFields:params
 // -->
 //
 // <!-- go code generation tags
@@ -382,6 +390,8 @@ type Instance struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec v1beta1.Instance `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -409,7 +419,6 @@ type InstanceList struct {
 // +cue-gen:QuotaSpec:subresource:status
 // +cue-gen:QuotaSpec:scope:Namespaced
 // +cue-gen:QuotaSpec:resource:categories=istio-io,apim-istio-io
-// +cue-gen:QuotaSpec:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags
@@ -426,6 +435,8 @@ type QuotaSpec struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec client.QuotaSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -454,7 +465,6 @@ type QuotaSpecList struct {
 // +cue-gen:QuotaSpecBinding:subresource:status
 // +cue-gen:QuotaSpecBinding:scope:Namespaced
 // +cue-gen:QuotaSpecBinding:resource:categories=istio-io,apim-istio-io
-// +cue-gen:QuotaSpecBinding:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags
@@ -471,6 +481,8 @@ type QuotaSpecBinding struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec client.QuotaSpecBinding `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -511,7 +523,6 @@ type QuotaSpecBindingList struct {
 // +cue-gen:rule:subresource:status
 // +cue-gen:rule:scope:Namespaced
 // +cue-gen:rule:resource:categories=istio-io,policy-istio-io
-// +cue-gen:rule:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags
@@ -530,6 +541,8 @@ type Rule struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec v1beta1.Rule `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
