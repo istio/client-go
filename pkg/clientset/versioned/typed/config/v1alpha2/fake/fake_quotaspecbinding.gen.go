@@ -100,6 +100,18 @@ func (c *FakeQuotaSpecBindings) Update(ctx context.Context, quotaSpecBinding *v1
 	return obj.(*v1alpha2.QuotaSpecBinding), err
 }
 
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *FakeQuotaSpecBindings) UpdateStatus(ctx context.Context, quotaSpecBinding *v1alpha2.QuotaSpecBinding, opts v1.UpdateOptions) (*v1alpha2.QuotaSpecBinding, error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewUpdateSubresourceAction(quotaspecbindingsResource, "status", c.ns, quotaSpecBinding), &v1alpha2.QuotaSpecBinding{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha2.QuotaSpecBinding), err
+}
+
 // Delete takes name of the quotaSpecBinding and deletes it. Returns an error if one occurs.
 func (c *FakeQuotaSpecBindings) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.

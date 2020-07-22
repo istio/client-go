@@ -100,6 +100,18 @@ func (c *FakeHTTPAPISpecBindings) Update(ctx context.Context, hTTPAPISpecBinding
 	return obj.(*v1alpha2.HTTPAPISpecBinding), err
 }
 
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *FakeHTTPAPISpecBindings) UpdateStatus(ctx context.Context, hTTPAPISpecBinding *v1alpha2.HTTPAPISpecBinding, opts v1.UpdateOptions) (*v1alpha2.HTTPAPISpecBinding, error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewUpdateSubresourceAction(httpapispecbindingsResource, "status", c.ns, hTTPAPISpecBinding), &v1alpha2.HTTPAPISpecBinding{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha2.HTTPAPISpecBinding), err
+}
+
 // Delete takes name of the hTTPAPISpecBinding and deletes it. Returns an error if one occurs.
 func (c *FakeHTTPAPISpecBindings) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.

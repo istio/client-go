@@ -100,6 +100,18 @@ func (c *FakeAuthorizationPolicies) Update(ctx context.Context, authorizationPol
 	return obj.(*v1beta1.AuthorizationPolicy), err
 }
 
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *FakeAuthorizationPolicies) UpdateStatus(ctx context.Context, authorizationPolicy *v1beta1.AuthorizationPolicy, opts v1.UpdateOptions) (*v1beta1.AuthorizationPolicy, error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewUpdateSubresourceAction(authorizationpoliciesResource, "status", c.ns, authorizationPolicy), &v1beta1.AuthorizationPolicy{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1beta1.AuthorizationPolicy), err
+}
+
 // Delete takes name of the authorizationPolicy and deletes it. Returns an error if one occurs.
 func (c *FakeAuthorizationPolicies) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.

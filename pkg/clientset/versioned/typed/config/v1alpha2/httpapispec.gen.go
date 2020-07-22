@@ -38,6 +38,7 @@ type HTTPAPISpecsGetter interface {
 type HTTPAPISpecInterface interface {
 	Create(ctx context.Context, hTTPAPISpec *v1alpha2.HTTPAPISpec, opts v1.CreateOptions) (*v1alpha2.HTTPAPISpec, error)
 	Update(ctx context.Context, hTTPAPISpec *v1alpha2.HTTPAPISpec, opts v1.UpdateOptions) (*v1alpha2.HTTPAPISpec, error)
+	UpdateStatus(ctx context.Context, hTTPAPISpec *v1alpha2.HTTPAPISpec, opts v1.UpdateOptions) (*v1alpha2.HTTPAPISpec, error)
 	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
 	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha2.HTTPAPISpec, error)
@@ -126,6 +127,22 @@ func (c *hTTPAPISpecs) Update(ctx context.Context, hTTPAPISpec *v1alpha2.HTTPAPI
 		Namespace(c.ns).
 		Resource("httpapispecs").
 		Name(hTTPAPISpec.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(hTTPAPISpec).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *hTTPAPISpecs) UpdateStatus(ctx context.Context, hTTPAPISpec *v1alpha2.HTTPAPISpec, opts v1.UpdateOptions) (result *v1alpha2.HTTPAPISpec, err error) {
+	result = &v1alpha2.HTTPAPISpec{}
+	err = c.client.Put().
+		Namespace(c.ns).
+		Resource("httpapispecs").
+		Name(hTTPAPISpec.Name).
+		SubResource("status").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(hTTPAPISpec).
 		Do(ctx).

@@ -17,7 +17,7 @@ go get istio.io/client-go@master
 Or if you need to use a specific version of the client code, you can specify a specific version number. For example:
 
 ```sh
-go get istio.io/client-go@release-1.4
+go get istio.io/client-go@release-1.7
 ```
 
 The version number matches with official Istio versions for releases 1.4+.
