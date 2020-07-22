@@ -17,6 +17,7 @@
 package v1beta1
 
 import (
+	v1alpha1 "istio.io/api/meta/v1alpha1"
 	securityv1beta1 "istio.io/api/security/v1beta1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -79,6 +80,8 @@ type AuthorizationPolicy struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec securityv1beta1.AuthorizationPolicy `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -198,6 +201,8 @@ type PeerAuthentication struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec securityv1beta1.PeerAuthentication `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -340,6 +345,8 @@ type RequestAuthentication struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec securityv1beta1.RequestAuthentication `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

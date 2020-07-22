@@ -17,6 +17,7 @@
 package v1alpha2
 
 import (
+	v1alpha1 "istio.io/api/meta/v1alpha1"
 	client "istio.io/api/mixer/v1/config/client"
 	v1beta1 "istio.io/api/policy/v1beta1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -58,6 +59,8 @@ type AttributeManifest struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec v1beta1.AttributeManifest `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -156,6 +159,8 @@ type HTTPAPISpec struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec client.HTTPAPISpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -217,6 +222,8 @@ type HTTPAPISpecBinding struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec client.HTTPAPISpecBinding `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -317,6 +324,8 @@ type Handler struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec v1beta1.Handler `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -382,6 +391,8 @@ type Instance struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec v1beta1.Instance `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -426,6 +437,8 @@ type QuotaSpec struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec client.QuotaSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -471,6 +484,8 @@ type QuotaSpecBinding struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec client.QuotaSpecBinding `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -530,6 +545,8 @@ type Rule struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec v1beta1.Rule `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -17,6 +17,7 @@
 package v1beta1
 
 import (
+	v1alpha1 "istio.io/api/meta/v1alpha1"
 	networkingv1beta1 "istio.io/api/networking/v1beta1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -57,6 +58,8 @@ type DestinationRule struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec networkingv1beta1.DestinationRule `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -100,6 +103,8 @@ type Gateway struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec networkingv1beta1.Gateway `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -152,6 +157,8 @@ type ServiceEntry struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec networkingv1beta1.ServiceEntry `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -196,6 +203,8 @@ type Sidecar struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec networkingv1beta1.Sidecar `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -245,6 +254,8 @@ type VirtualService struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec networkingv1beta1.VirtualService `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -292,6 +303,8 @@ type WorkloadEntry struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec networkingv1beta1.WorkloadEntry `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
