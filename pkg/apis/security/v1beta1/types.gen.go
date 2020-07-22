@@ -63,7 +63,6 @@ import (
 // +cue-gen:AuthorizationPolicy:subresource:status
 // +cue-gen:AuthorizationPolicy:scope:Namespaced
 // +cue-gen:AuthorizationPolicy:resource:categories=istio-io,security-istio-io,plural=authorizationpolicies
-// +cue-gen:AuthorizationPolicy:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags
@@ -184,7 +183,6 @@ type AuthorizationPolicyList struct {
 // +cue-gen:PeerAuthentication:subresource:status
 // +cue-gen:PeerAuthentication:scope:Namespaced
 // +cue-gen:PeerAuthentication:resource:categories=istio-io,security-istio-io,shortNames=pa
-// +cue-gen:PeerAuthentication:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags
@@ -328,7 +326,6 @@ type PeerAuthenticationList struct {
 // +cue-gen:RequestAuthentication:subresource:status
 // +cue-gen:RequestAuthentication:scope:Namespaced
 // +cue-gen:RequestAuthentication:resource:categories=istio-io,security-istio-io,shortNames=ra
-// +cue-gen:RequestAuthentication:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags

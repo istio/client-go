@@ -38,6 +38,7 @@ type VirtualServicesGetter interface {
 type VirtualServiceInterface interface {
 	Create(ctx context.Context, virtualService *v1beta1.VirtualService, opts v1.CreateOptions) (*v1beta1.VirtualService, error)
 	Update(ctx context.Context, virtualService *v1beta1.VirtualService, opts v1.UpdateOptions) (*v1beta1.VirtualService, error)
+	UpdateStatus(ctx context.Context, virtualService *v1beta1.VirtualService, opts v1.UpdateOptions) (*v1beta1.VirtualService, error)
 	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
 	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1beta1.VirtualService, error)
@@ -126,6 +127,22 @@ func (c *virtualServices) Update(ctx context.Context, virtualService *v1beta1.Vi
 		Namespace(c.ns).
 		Resource("virtualservices").
 		Name(virtualService.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(virtualService).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *virtualServices) UpdateStatus(ctx context.Context, virtualService *v1beta1.VirtualService, opts v1.UpdateOptions) (result *v1beta1.VirtualService, err error) {
+	result = &v1beta1.VirtualService{}
+	err = c.client.Put().
+		Namespace(c.ns).
+		Resource("virtualservices").
+		Name(virtualService.Name).
+		SubResource("status").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(virtualService).
 		Do(ctx).

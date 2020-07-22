@@ -38,6 +38,7 @@ type QuotaSpecBindingsGetter interface {
 type QuotaSpecBindingInterface interface {
 	Create(ctx context.Context, quotaSpecBinding *v1alpha2.QuotaSpecBinding, opts v1.CreateOptions) (*v1alpha2.QuotaSpecBinding, error)
 	Update(ctx context.Context, quotaSpecBinding *v1alpha2.QuotaSpecBinding, opts v1.UpdateOptions) (*v1alpha2.QuotaSpecBinding, error)
+	UpdateStatus(ctx context.Context, quotaSpecBinding *v1alpha2.QuotaSpecBinding, opts v1.UpdateOptions) (*v1alpha2.QuotaSpecBinding, error)
 	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
 	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha2.QuotaSpecBinding, error)
@@ -126,6 +127,22 @@ func (c *quotaSpecBindings) Update(ctx context.Context, quotaSpecBinding *v1alph
 		Namespace(c.ns).
 		Resource("quotaspecbindings").
 		Name(quotaSpecBinding.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(quotaSpecBinding).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *quotaSpecBindings) UpdateStatus(ctx context.Context, quotaSpecBinding *v1alpha2.QuotaSpecBinding, opts v1.UpdateOptions) (result *v1alpha2.QuotaSpecBinding, err error) {
+	result = &v1alpha2.QuotaSpecBinding{}
+	err = c.client.Put().
+		Namespace(c.ns).
+		Resource("quotaspecbindings").
+		Name(quotaSpecBinding.Name).
+		SubResource("status").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(quotaSpecBinding).
 		Do(ctx).

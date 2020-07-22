@@ -28,6 +28,7 @@ func (in *AttributeManifest) DeepCopyInto(out *AttributeManifest) {
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
 	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
 	return
 }
 
@@ -88,6 +89,7 @@ func (in *HTTPAPISpec) DeepCopyInto(out *HTTPAPISpec) {
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
 	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
 	return
 }
 
@@ -115,6 +117,7 @@ func (in *HTTPAPISpecBinding) DeepCopyInto(out *HTTPAPISpecBinding) {
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
 	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
 	return
 }
 
@@ -208,6 +211,7 @@ func (in *Handler) DeepCopyInto(out *Handler) {
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
 	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
 	return
 }
 
@@ -268,6 +272,7 @@ func (in *Instance) DeepCopyInto(out *Instance) {
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
 	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
 	return
 }
 
@@ -328,6 +333,7 @@ func (in *QuotaSpec) DeepCopyInto(out *QuotaSpec) {
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
 	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
 	return
 }
 
@@ -355,6 +361,7 @@ func (in *QuotaSpecBinding) DeepCopyInto(out *QuotaSpecBinding) {
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
 	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
 	return
 }
 
@@ -448,6 +455,7 @@ func (in *Rule) DeepCopyInto(out *Rule) {
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
 	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
 	return
 }
 
