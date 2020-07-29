@@ -38,6 +38,7 @@ type AuthorizationPoliciesGetter interface {
 type AuthorizationPolicyInterface interface {
 	Create(ctx context.Context, authorizationPolicy *v1beta1.AuthorizationPolicy, opts v1.CreateOptions) (*v1beta1.AuthorizationPolicy, error)
 	Update(ctx context.Context, authorizationPolicy *v1beta1.AuthorizationPolicy, opts v1.UpdateOptions) (*v1beta1.AuthorizationPolicy, error)
+	UpdateStatus(ctx context.Context, authorizationPolicy *v1beta1.AuthorizationPolicy, opts v1.UpdateOptions) (*v1beta1.AuthorizationPolicy, error)
 	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
 	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1beta1.AuthorizationPolicy, error)
@@ -126,6 +127,22 @@ func (c *authorizationPolicies) Update(ctx context.Context, authorizationPolicy 
 		Namespace(c.ns).
 		Resource("authorizationpolicies").
 		Name(authorizationPolicy.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(authorizationPolicy).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *authorizationPolicies) UpdateStatus(ctx context.Context, authorizationPolicy *v1beta1.AuthorizationPolicy, opts v1.UpdateOptions) (result *v1beta1.AuthorizationPolicy, err error) {
+	result = &v1beta1.AuthorizationPolicy{}
+	err = c.client.Put().
+		Namespace(c.ns).
+		Resource("authorizationpolicies").
+		Name(authorizationPolicy.Name).
+		SubResource("status").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(authorizationPolicy).
 		Do(ctx).

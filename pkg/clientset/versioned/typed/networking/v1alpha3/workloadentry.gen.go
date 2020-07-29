@@ -38,6 +38,7 @@ type WorkloadEntriesGetter interface {
 type WorkloadEntryInterface interface {
 	Create(ctx context.Context, workloadEntry *v1alpha3.WorkloadEntry, opts v1.CreateOptions) (*v1alpha3.WorkloadEntry, error)
 	Update(ctx context.Context, workloadEntry *v1alpha3.WorkloadEntry, opts v1.UpdateOptions) (*v1alpha3.WorkloadEntry, error)
+	UpdateStatus(ctx context.Context, workloadEntry *v1alpha3.WorkloadEntry, opts v1.UpdateOptions) (*v1alpha3.WorkloadEntry, error)
 	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
 	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha3.WorkloadEntry, error)
@@ -126,6 +127,22 @@ func (c *workloadEntries) Update(ctx context.Context, workloadEntry *v1alpha3.Wo
 		Namespace(c.ns).
 		Resource("workloadentries").
 		Name(workloadEntry.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(workloadEntry).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *workloadEntries) UpdateStatus(ctx context.Context, workloadEntry *v1alpha3.WorkloadEntry, opts v1.UpdateOptions) (result *v1alpha3.WorkloadEntry, err error) {
+	result = &v1alpha3.WorkloadEntry{}
+	err = c.client.Put().
+		Namespace(c.ns).
+		Resource("workloadentries").
+		Name(workloadEntry.Name).
+		SubResource("status").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(workloadEntry).
 		Do(ctx).

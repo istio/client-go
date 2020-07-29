@@ -100,6 +100,18 @@ func (c *FakePeerAuthentications) Update(ctx context.Context, peerAuthentication
 	return obj.(*v1beta1.PeerAuthentication), err
 }
 
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *FakePeerAuthentications) UpdateStatus(ctx context.Context, peerAuthentication *v1beta1.PeerAuthentication, opts v1.UpdateOptions) (*v1beta1.PeerAuthentication, error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewUpdateSubresourceAction(peerauthenticationsResource, "status", c.ns, peerAuthentication), &v1beta1.PeerAuthentication{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1beta1.PeerAuthentication), err
+}
+
 // Delete takes name of the peerAuthentication and deletes it. Returns an error if one occurs.
 func (c *FakePeerAuthentications) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.

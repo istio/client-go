@@ -100,6 +100,18 @@ func (c *FakeRequestAuthentications) Update(ctx context.Context, requestAuthenti
 	return obj.(*v1beta1.RequestAuthentication), err
 }
 
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *FakeRequestAuthentications) UpdateStatus(ctx context.Context, requestAuthentication *v1beta1.RequestAuthentication, opts v1.UpdateOptions) (*v1beta1.RequestAuthentication, error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewUpdateSubresourceAction(requestauthenticationsResource, "status", c.ns, requestAuthentication), &v1beta1.RequestAuthentication{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1beta1.RequestAuthentication), err
+}
+
 // Delete takes name of the requestAuthentication and deletes it. Returns an error if one occurs.
 func (c *FakeRequestAuthentications) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.

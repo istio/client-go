@@ -100,6 +100,18 @@ func (c *FakeGateways) Update(ctx context.Context, gateway *v1beta1.Gateway, opt
 	return obj.(*v1beta1.Gateway), err
 }
 
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *FakeGateways) UpdateStatus(ctx context.Context, gateway *v1beta1.Gateway, opts v1.UpdateOptions) (*v1beta1.Gateway, error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewUpdateSubresourceAction(gatewaysResource, "status", c.ns, gateway), &v1beta1.Gateway{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1beta1.Gateway), err
+}
+
 // Delete takes name of the gateway and deletes it. Returns an error if one occurs.
 func (c *FakeGateways) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
