@@ -22,7 +22,6 @@ import (
 	time "time"
 
 	versioned "istio.io/client-go/pkg/clientset/versioned"
-	config "istio.io/client-go/pkg/informers/externalversions/config"
 	internalinterfaces "istio.io/client-go/pkg/informers/externalversions/internalinterfaces"
 	networking "istio.io/client-go/pkg/informers/externalversions/networking"
 	security "istio.io/client-go/pkg/informers/externalversions/security"
@@ -172,13 +171,8 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
-	Config() config.Interface
 	Networking() networking.Interface
 	Security() security.Interface
-}
-
-func (f *sharedInformerFactory) Config() config.Interface {
-	return config.New(f, f.namespace, f.tweakListOptions)
 }
 
 func (f *sharedInformerFactory) Networking() networking.Interface {

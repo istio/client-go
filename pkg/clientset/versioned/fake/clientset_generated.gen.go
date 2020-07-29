@@ -18,8 +18,6 @@ package fake
 
 import (
 	clientset "istio.io/client-go/pkg/clientset/versioned"
-	configv1alpha2 "istio.io/client-go/pkg/clientset/versioned/typed/config/v1alpha2"
-	fakeconfigv1alpha2 "istio.io/client-go/pkg/clientset/versioned/typed/config/v1alpha2/fake"
 	networkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3"
 	fakenetworkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3/fake"
 	networkingv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1beta1"
@@ -79,11 +77,6 @@ func (c *Clientset) Tracker() testing.ObjectTracker {
 }
 
 var _ clientset.Interface = &Clientset{}
-
-// ConfigV1alpha2 retrieves the ConfigV1alpha2Client
-func (c *Clientset) ConfigV1alpha2() configv1alpha2.ConfigV1alpha2Interface {
-	return &fakeconfigv1alpha2.FakeConfigV1alpha2{Fake: &c.Fake}
-}
 
 // NetworkingV1alpha3 retrieves the NetworkingV1alpha3Client
 func (c *Clientset) NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3Interface {

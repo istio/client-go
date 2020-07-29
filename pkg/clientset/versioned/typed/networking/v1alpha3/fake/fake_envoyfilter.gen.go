@@ -100,6 +100,18 @@ func (c *FakeEnvoyFilters) Update(ctx context.Context, envoyFilter *v1alpha3.Env
 	return obj.(*v1alpha3.EnvoyFilter), err
 }
 
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *FakeEnvoyFilters) UpdateStatus(ctx context.Context, envoyFilter *v1alpha3.EnvoyFilter, opts v1.UpdateOptions) (*v1alpha3.EnvoyFilter, error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewUpdateSubresourceAction(envoyfiltersResource, "status", c.ns, envoyFilter), &v1alpha3.EnvoyFilter{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha3.EnvoyFilter), err
+}
+
 // Delete takes name of the envoyFilter and deletes it. Returns an error if one occurs.
 func (c *FakeEnvoyFilters) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.

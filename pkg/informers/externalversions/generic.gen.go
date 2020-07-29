@@ -19,7 +19,6 @@ package externalversions
 import (
 	"fmt"
 
-	v1alpha2 "istio.io/client-go/pkg/apis/config/v1alpha2"
 	v1alpha3 "istio.io/client-go/pkg/apis/networking/v1alpha3"
 	v1beta1 "istio.io/client-go/pkg/apis/networking/v1beta1"
 	securityv1beta1 "istio.io/client-go/pkg/apis/security/v1beta1"
@@ -53,25 +52,7 @@ func (f *genericInformer) Lister() cache.GenericLister {
 // TODO extend this to unknown resources with a client pool
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
-	// Group=config.istio.io, Version=v1alpha2
-	case v1alpha2.SchemeGroupVersion.WithResource("attributemanifests"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Config().V1alpha2().AttributeManifests().Informer()}, nil
-	case v1alpha2.SchemeGroupVersion.WithResource("httpapispecs"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Config().V1alpha2().HTTPAPISpecs().Informer()}, nil
-	case v1alpha2.SchemeGroupVersion.WithResource("httpapispecbindings"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Config().V1alpha2().HTTPAPISpecBindings().Informer()}, nil
-	case v1alpha2.SchemeGroupVersion.WithResource("handlers"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Config().V1alpha2().Handlers().Informer()}, nil
-	case v1alpha2.SchemeGroupVersion.WithResource("instances"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Config().V1alpha2().Instances().Informer()}, nil
-	case v1alpha2.SchemeGroupVersion.WithResource("quotaspecs"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Config().V1alpha2().QuotaSpecs().Informer()}, nil
-	case v1alpha2.SchemeGroupVersion.WithResource("quotaspecbindings"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Config().V1alpha2().QuotaSpecBindings().Informer()}, nil
-	case v1alpha2.SchemeGroupVersion.WithResource("rules"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Config().V1alpha2().Rules().Informer()}, nil
-
-		// Group=networking.istio.io, Version=v1alpha3
+	// Group=networking.istio.io, Version=v1alpha3
 	case v1alpha3.SchemeGroupVersion.WithResource("destinationrules"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Networking().V1alpha3().DestinationRules().Informer()}, nil
 	case v1alpha3.SchemeGroupVersion.WithResource("envoyfilters"):

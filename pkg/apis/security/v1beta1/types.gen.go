@@ -17,6 +17,7 @@
 package v1beta1
 
 import (
+	v1alpha1 "istio.io/api/meta/v1alpha1"
 	securityv1beta1 "istio.io/api/security/v1beta1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
@@ -62,7 +63,6 @@ import (
 // +cue-gen:AuthorizationPolicy:subresource:status
 // +cue-gen:AuthorizationPolicy:scope:Namespaced
 // +cue-gen:AuthorizationPolicy:resource:categories=istio-io,security-istio-io,plural=authorizationpolicies
-// +cue-gen:AuthorizationPolicy:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags
@@ -79,6 +79,8 @@ type AuthorizationPolicy struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec securityv1beta1.AuthorizationPolicy `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -181,7 +183,6 @@ type AuthorizationPolicyList struct {
 // +cue-gen:PeerAuthentication:subresource:status
 // +cue-gen:PeerAuthentication:scope:Namespaced
 // +cue-gen:PeerAuthentication:resource:categories=istio-io,security-istio-io,shortNames=pa
-// +cue-gen:PeerAuthentication:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags
@@ -198,6 +199,8 @@ type PeerAuthentication struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec securityv1beta1.PeerAuthentication `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -323,7 +326,6 @@ type PeerAuthenticationList struct {
 // +cue-gen:RequestAuthentication:subresource:status
 // +cue-gen:RequestAuthentication:scope:Namespaced
 // +cue-gen:RequestAuthentication:resource:categories=istio-io,security-istio-io,shortNames=ra
-// +cue-gen:RequestAuthentication:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags
@@ -340,6 +342,8 @@ type RequestAuthentication struct {
 	// Spec defines the implementation of this definition.
 	// +optional
 	Spec securityv1beta1.RequestAuthentication `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status v1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

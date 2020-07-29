@@ -38,6 +38,7 @@ type GatewaysGetter interface {
 type GatewayInterface interface {
 	Create(ctx context.Context, gateway *v1alpha3.Gateway, opts v1.CreateOptions) (*v1alpha3.Gateway, error)
 	Update(ctx context.Context, gateway *v1alpha3.Gateway, opts v1.UpdateOptions) (*v1alpha3.Gateway, error)
+	UpdateStatus(ctx context.Context, gateway *v1alpha3.Gateway, opts v1.UpdateOptions) (*v1alpha3.Gateway, error)
 	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
 	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha3.Gateway, error)
@@ -126,6 +127,22 @@ func (c *gateways) Update(ctx context.Context, gateway *v1alpha3.Gateway, opts v
 		Namespace(c.ns).
 		Resource("gateways").
 		Name(gateway.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(gateway).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *gateways) UpdateStatus(ctx context.Context, gateway *v1alpha3.Gateway, opts v1.UpdateOptions) (result *v1alpha3.Gateway, err error) {
+	result = &v1alpha3.Gateway{}
+	err = c.client.Put().
+		Namespace(c.ns).
+		Resource("gateways").
+		Name(gateway.Name).
+		SubResource("status").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(gateway).
 		Do(ctx).
