@@ -19,7 +19,6 @@ package versioned
 import (
 	"fmt"
 
-	configv1alpha2 "istio.io/client-go/pkg/clientset/versioned/typed/config/v1alpha2"
 	networkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3"
 	networkingv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1beta1"
 	securityv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1beta1"
@@ -30,7 +29,6 @@ import (
 
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
-	ConfigV1alpha2() configv1alpha2.ConfigV1alpha2Interface
 	NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3Interface
 	NetworkingV1beta1() networkingv1beta1.NetworkingV1beta1Interface
 	SecurityV1beta1() securityv1beta1.SecurityV1beta1Interface
@@ -40,15 +38,9 @@ type Interface interface {
 // version included in a Clientset.
 type Clientset struct {
 	*discovery.DiscoveryClient
-	configV1alpha2     *configv1alpha2.ConfigV1alpha2Client
 	networkingV1alpha3 *networkingv1alpha3.NetworkingV1alpha3Client
 	networkingV1beta1  *networkingv1beta1.NetworkingV1beta1Client
 	securityV1beta1    *securityv1beta1.SecurityV1beta1Client
-}
-
-// ConfigV1alpha2 retrieves the ConfigV1alpha2Client
-func (c *Clientset) ConfigV1alpha2() configv1alpha2.ConfigV1alpha2Interface {
-	return c.configV1alpha2
 }
 
 // NetworkingV1alpha3 retrieves the NetworkingV1alpha3Client
@@ -87,10 +79,6 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	}
 	var cs Clientset
 	var err error
-	cs.configV1alpha2, err = configv1alpha2.NewForConfig(&configShallowCopy)
-	if err != nil {
-		return nil, err
-	}
 	cs.networkingV1alpha3, err = networkingv1alpha3.NewForConfig(&configShallowCopy)
 	if err != nil {
 		return nil, err
@@ -115,7 +103,6 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 // panics if there is an error in the config.
 func NewForConfigOrDie(c *rest.Config) *Clientset {
 	var cs Clientset
-	cs.configV1alpha2 = configv1alpha2.NewForConfigOrDie(c)
 	cs.networkingV1alpha3 = networkingv1alpha3.NewForConfigOrDie(c)
 	cs.networkingV1beta1 = networkingv1beta1.NewForConfigOrDie(c)
 	cs.securityV1beta1 = securityv1beta1.NewForConfigOrDie(c)
@@ -127,7 +114,6 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 // New creates a new Clientset for the given RESTClient.
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
-	cs.configV1alpha2 = configv1alpha2.New(c)
 	cs.networkingV1alpha3 = networkingv1alpha3.New(c)
 	cs.networkingV1beta1 = networkingv1beta1.New(c)
 	cs.securityV1beta1 = securityv1beta1.New(c)

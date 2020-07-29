@@ -100,6 +100,18 @@ func (c *FakeSidecars) Update(ctx context.Context, sidecar *v1alpha3.Sidecar, op
 	return obj.(*v1alpha3.Sidecar), err
 }
 
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *FakeSidecars) UpdateStatus(ctx context.Context, sidecar *v1alpha3.Sidecar, opts v1.UpdateOptions) (*v1alpha3.Sidecar, error) {
+	obj, err := c.Fake.
+		Invokes(testing.NewUpdateSubresourceAction(sidecarsResource, "status", c.ns, sidecar), &v1alpha3.Sidecar{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha3.Sidecar), err
+}
+
 // Delete takes name of the sidecar and deletes it. Returns an error if one occurs.
 func (c *FakeSidecars) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
