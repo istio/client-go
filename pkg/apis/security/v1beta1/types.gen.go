@@ -217,7 +217,7 @@ type PeerAuthenticationList struct {
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // RequestAuthentication defines what request authentication methods are supported by a workload.
-// If will reject a request if the request contains invalid authentication information, based on the
+// It will reject a request if the request contains invalid authentication information, based on the
 // configured authentication rules. A request that does not contain any authentication credentials
 // will be accepted but will not have any authenticated identity. To restrict access to authenticated
 // requests only, this should be accompanied by an authorization rule.
