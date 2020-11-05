@@ -63,6 +63,7 @@ import (
 // +cue-gen:AuthorizationPolicy:subresource:status
 // +cue-gen:AuthorizationPolicy:scope:Namespaced
 // +cue-gen:AuthorizationPolicy:resource:categories=istio-io,security-istio-io,plural=authorizationpolicies
+// +cue-gen:AuthorizationPolicy:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags
@@ -183,6 +184,12 @@ type AuthorizationPolicyList struct {
 // +cue-gen:PeerAuthentication:subresource:status
 // +cue-gen:PeerAuthentication:scope:Namespaced
 // +cue-gen:PeerAuthentication:resource:categories=istio-io,security-istio-io,shortNames=pa
+// +cue-gen:PeerAuthentication:preserveUnknownFields:false
+// +cue-gen:PeerAuthentication:printerColumn:name=Mode,type=string,JSONPath=.spec.mtls.mode,description="Defines the mTLS mode used for peer authentication."
+// +cue-gen:PeerAuthentication:printerColumn:name=Age,type=date,JSONPath=.metadata.creationTimestamp,description="CreationTimestamp is a timestamp
+// representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations.
+// Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+// Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
 // -->
 //
 // <!-- go code generation tags
@@ -314,7 +321,7 @@ type PeerAuthenticationList struct {
 //        requestPrincipals: ["*"]
 //  - to:
 //    - operation:
-//        paths: ["/healthz]
+//        paths: ["/healthz"]
 // ```
 //
 // <!-- crd generation tags
@@ -326,6 +333,7 @@ type PeerAuthenticationList struct {
 // +cue-gen:RequestAuthentication:subresource:status
 // +cue-gen:RequestAuthentication:scope:Namespaced
 // +cue-gen:RequestAuthentication:resource:categories=istio-io,security-istio-io,shortNames=ra
+// +cue-gen:RequestAuthentication:preserveUnknownFields:false
 // -->
 //
 // <!-- go code generation tags
