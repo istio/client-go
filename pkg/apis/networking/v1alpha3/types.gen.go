@@ -88,6 +88,7 @@ type DestinationRuleList struct {
 // +cue-gen:EnvoyFilter:subresource:status
 // +cue-gen:EnvoyFilter:scope:Namespaced
 // +cue-gen:EnvoyFilter:resource:categories=istio-io,networking-istio-io
+// +cue-gen:EnvoyFilter:preserveUnknownFields:true
 // -->
 //
 // <!-- go code generation tags
