@@ -21,3 +21,17 @@ out/
 
 # Created by `make all`
 example
+
+# Eclipse artifacts
+.project
+.pydevproject
+
+# Vagrant
+tools/vagrant/.vagrant/
+
+# Intellij
+*.iml
+.idea/
+
+# Visual Studio Code
+.vscode/
