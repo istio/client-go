@@ -156,7 +156,7 @@ type AuthorizationPolicyList struct {
 //     8080:
 //       mode: DISABLE
 // ```
-// Policy to inherite mTLS mode from namespace (or mesh) settings, and overwrite
+// Policy to inherit mTLS mode from namespace (or mesh) settings, and overwrite
 // settings for port 8080
 // ```yaml
 // apiVersion: security.istio.io/v1beta1
@@ -288,19 +288,19 @@ type PeerAuthenticationList struct {
 //   selector:
 //     matchLabels:
 //       app: httpbin
-//  rules:
-//  - from:
-//    - source:
-//        requestPrincipals: ["issuer-foo/*"]
-//    to:
-//    - operation:
-//        hosts: ["example.com"]
-//  - from:
-//    - source:
-//        requestPrincipals: ["issuer-bar/*"]
-//    to:
-//    - operation:
-//        hosts: ["another-host.com"]
+//   rules:
+//   - from:
+//     - source:
+//         requestPrincipals: ["issuer-foo/*"]
+//     to:
+//     - operation:
+//         hosts: ["example.com"]
+//   - from:
+//     - source:
+//         requestPrincipals: ["issuer-bar/*"]
+//     to:
+//     - operation:
+//         hosts: ["another-host.com"]
 // ```
 //
 // - You can fine tune the authorization policy to set different requirement per path. For example,
@@ -317,13 +317,13 @@ type PeerAuthenticationList struct {
 //   selector:
 //     matchLabels:
 //       app: httpbin
-//  rules:
-//  - from:
-//    - source:
-//        requestPrincipals: ["*"]
-//  - to:
-//    - operation:
-//        paths: ["/healthz"]
+//   rules:
+//   - from:
+//     - source:
+//         requestPrincipals: ["*"]
+//   - to:
+//     - operation:
+//         paths: ["/healthz"]
 // ```
 //
 // <!-- crd generation tags
