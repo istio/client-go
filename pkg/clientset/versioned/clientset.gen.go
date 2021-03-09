@@ -22,6 +22,7 @@ import (
 	networkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3"
 	networkingv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1beta1"
 	securityv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1beta1"
+	telemetryv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/telemetry/v1alpha1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -32,6 +33,7 @@ type Interface interface {
 	NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3Interface
 	NetworkingV1beta1() networkingv1beta1.NetworkingV1beta1Interface
 	SecurityV1beta1() securityv1beta1.SecurityV1beta1Interface
+	TelemetryV1alpha1() telemetryv1alpha1.TelemetryV1alpha1Interface
 }
 
 // Clientset contains the clients for groups. Each group has exactly one
@@ -41,6 +43,7 @@ type Clientset struct {
 	networkingV1alpha3 *networkingv1alpha3.NetworkingV1alpha3Client
 	networkingV1beta1  *networkingv1beta1.NetworkingV1beta1Client
 	securityV1beta1    *securityv1beta1.SecurityV1beta1Client
+	telemetryV1alpha1  *telemetryv1alpha1.TelemetryV1alpha1Client
 }
 
 // NetworkingV1alpha3 retrieves the NetworkingV1alpha3Client
@@ -56,6 +59,11 @@ func (c *Clientset) NetworkingV1beta1() networkingv1beta1.NetworkingV1beta1Inter
 // SecurityV1beta1 retrieves the SecurityV1beta1Client
 func (c *Clientset) SecurityV1beta1() securityv1beta1.SecurityV1beta1Interface {
 	return c.securityV1beta1
+}
+
+// TelemetryV1alpha1 retrieves the TelemetryV1alpha1Client
+func (c *Clientset) TelemetryV1alpha1() telemetryv1alpha1.TelemetryV1alpha1Interface {
+	return c.telemetryV1alpha1
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -91,6 +99,10 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
+	cs.telemetryV1alpha1, err = telemetryv1alpha1.NewForConfig(&configShallowCopy)
+	if err != nil {
+		return nil, err
+	}
 
 	cs.DiscoveryClient, err = discovery.NewDiscoveryClientForConfig(&configShallowCopy)
 	if err != nil {
@@ -106,6 +118,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 	cs.networkingV1alpha3 = networkingv1alpha3.NewForConfigOrDie(c)
 	cs.networkingV1beta1 = networkingv1beta1.NewForConfigOrDie(c)
 	cs.securityV1beta1 = securityv1beta1.NewForConfigOrDie(c)
+	cs.telemetryV1alpha1 = telemetryv1alpha1.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
 	return &cs
@@ -117,6 +130,7 @@ func New(c rest.Interface) *Clientset {
 	cs.networkingV1alpha3 = networkingv1alpha3.New(c)
 	cs.networkingV1beta1 = networkingv1beta1.New(c)
 	cs.securityV1beta1 = securityv1beta1.New(c)
+	cs.telemetryV1alpha1 = telemetryv1alpha1.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs
