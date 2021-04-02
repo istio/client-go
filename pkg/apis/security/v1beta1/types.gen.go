@@ -27,21 +27,20 @@ import (
 
 // AuthorizationPolicy enables access control on workloads.
 //
-// For example, the following authorization policy denies all requests to workloads
+// For example, the following authorization policy allows nothing and effectively denies all requests to workloads
 // in namespace foo.
 //
 // ```yaml
 // apiVersion: security.istio.io/v1beta1
 // kind: AuthorizationPolicy
 // metadata:
-//  name: deny-all
+//  name: allow-nothing
 //  namespace: foo
 // spec:
 //   {}
 // ```
 //
-// The following authorization policy allows all requests to workloads in namespace
-// foo.
+// The following authorization policy allows all requests to workloads in namespace foo.
 //
 // ```yaml
 // apiVersion: security.istio.io/v1beta1
