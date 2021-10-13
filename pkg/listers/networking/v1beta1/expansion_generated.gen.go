@@ -32,6 +32,14 @@ type GatewayListerExpansion interface{}
 // GatewayNamespaceLister.
 type GatewayNamespaceListerExpansion interface{}
 
+// ProxyConfigListerExpansion allows custom methods to be added to
+// ProxyConfigLister.
+type ProxyConfigListerExpansion interface{}
+
+// ProxyConfigNamespaceListerExpansion allows custom methods to be added to
+// ProxyConfigNamespaceLister.
+type ProxyConfigNamespaceListerExpansion interface{}
+
 // ServiceEntryListerExpansion allows custom methods to be added to
 // ServiceEntryLister.
 type ServiceEntryListerExpansion interface{}
