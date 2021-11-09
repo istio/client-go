@@ -26,7 +26,6 @@ type NetworkingV1beta1Interface interface {
 	RESTClient() rest.Interface
 	DestinationRulesGetter
 	GatewaysGetter
-	ProxyConfigsGetter
 	ServiceEntriesGetter
 	SidecarsGetter
 	VirtualServicesGetter
@@ -44,10 +43,6 @@ func (c *NetworkingV1beta1Client) DestinationRules(namespace string) Destination
 
 func (c *NetworkingV1beta1Client) Gateways(namespace string) GatewayInterface {
 	return newGateways(c, namespace)
-}
-
-func (c *NetworkingV1beta1Client) ProxyConfigs(namespace string) ProxyConfigInterface {
-	return newProxyConfigs(c, namespace)
 }
 
 func (c *NetworkingV1beta1Client) ServiceEntries(namespace string) ServiceEntryInterface {

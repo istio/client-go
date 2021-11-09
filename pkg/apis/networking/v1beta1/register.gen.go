@@ -45,8 +45,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&DestinationRuleList{},
 		&Gateway{},
 		&GatewayList{},
-		&ProxyConfig{},
-		&ProxyConfigList{},
 		&ServiceEntry{},
 		&ServiceEntryList{},
 		&Sidecar{},
