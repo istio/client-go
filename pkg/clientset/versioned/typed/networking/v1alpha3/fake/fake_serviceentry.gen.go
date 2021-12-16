@@ -18,8 +18,11 @@ package fake
 
 import (
 	"context"
+	json "encoding/json"
+	"fmt"
 
 	v1alpha3 "istio.io/client-go/pkg/apis/networking/v1alpha3"
+	networkingv1alpha3 "istio.io/client-go/pkg/applyconfiguration/networking/v1alpha3"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -132,6 +135,51 @@ func (c *FakeServiceEntries) DeleteCollection(ctx context.Context, opts v1.Delet
 func (c *FakeServiceEntries) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha3.ServiceEntry, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(serviceentriesResource, c.ns, name, pt, data, subresources...), &v1alpha3.ServiceEntry{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha3.ServiceEntry), err
+}
+
+// Apply takes the given apply declarative configuration, applies it and returns the applied serviceEntry.
+func (c *FakeServiceEntries) Apply(ctx context.Context, serviceEntry *networkingv1alpha3.ServiceEntryApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha3.ServiceEntry, err error) {
+	if serviceEntry == nil {
+		return nil, fmt.Errorf("serviceEntry provided to Apply must not be nil")
+	}
+	data, err := json.Marshal(serviceEntry)
+	if err != nil {
+		return nil, err
+	}
+	name := serviceEntry.Name
+	if name == nil {
+		return nil, fmt.Errorf("serviceEntry.Name must be provided to Apply")
+	}
+	obj, err := c.Fake.
+		Invokes(testing.NewPatchSubresourceAction(serviceentriesResource, c.ns, *name, types.ApplyPatchType, data), &v1alpha3.ServiceEntry{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha3.ServiceEntry), err
+}
+
+// ApplyStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating ApplyStatus().
+func (c *FakeServiceEntries) ApplyStatus(ctx context.Context, serviceEntry *networkingv1alpha3.ServiceEntryApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha3.ServiceEntry, err error) {
+	if serviceEntry == nil {
+		return nil, fmt.Errorf("serviceEntry provided to Apply must not be nil")
+	}
+	data, err := json.Marshal(serviceEntry)
+	if err != nil {
+		return nil, err
+	}
+	name := serviceEntry.Name
+	if name == nil {
+		return nil, fmt.Errorf("serviceEntry.Name must be provided to Apply")
+	}
+	obj, err := c.Fake.
+		Invokes(testing.NewPatchSubresourceAction(serviceentriesResource, c.ns, *name, types.ApplyPatchType, data, "status"), &v1alpha3.ServiceEntry{})
 
 	if obj == nil {
 		return nil, err

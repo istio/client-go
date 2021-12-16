@@ -18,8 +18,11 @@ package fake
 
 import (
 	"context"
+	json "encoding/json"
+	"fmt"
 
 	v1alpha3 "istio.io/client-go/pkg/apis/networking/v1alpha3"
+	networkingv1alpha3 "istio.io/client-go/pkg/applyconfiguration/networking/v1alpha3"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -132,6 +135,51 @@ func (c *FakeEnvoyFilters) DeleteCollection(ctx context.Context, opts v1.DeleteO
 func (c *FakeEnvoyFilters) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha3.EnvoyFilter, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(envoyfiltersResource, c.ns, name, pt, data, subresources...), &v1alpha3.EnvoyFilter{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha3.EnvoyFilter), err
+}
+
+// Apply takes the given apply declarative configuration, applies it and returns the applied envoyFilter.
+func (c *FakeEnvoyFilters) Apply(ctx context.Context, envoyFilter *networkingv1alpha3.EnvoyFilterApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha3.EnvoyFilter, err error) {
+	if envoyFilter == nil {
+		return nil, fmt.Errorf("envoyFilter provided to Apply must not be nil")
+	}
+	data, err := json.Marshal(envoyFilter)
+	if err != nil {
+		return nil, err
+	}
+	name := envoyFilter.Name
+	if name == nil {
+		return nil, fmt.Errorf("envoyFilter.Name must be provided to Apply")
+	}
+	obj, err := c.Fake.
+		Invokes(testing.NewPatchSubresourceAction(envoyfiltersResource, c.ns, *name, types.ApplyPatchType, data), &v1alpha3.EnvoyFilter{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha3.EnvoyFilter), err
+}
+
+// ApplyStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating ApplyStatus().
+func (c *FakeEnvoyFilters) ApplyStatus(ctx context.Context, envoyFilter *networkingv1alpha3.EnvoyFilterApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha3.EnvoyFilter, err error) {
+	if envoyFilter == nil {
+		return nil, fmt.Errorf("envoyFilter provided to Apply must not be nil")
+	}
+	data, err := json.Marshal(envoyFilter)
+	if err != nil {
+		return nil, err
+	}
+	name := envoyFilter.Name
+	if name == nil {
+		return nil, fmt.Errorf("envoyFilter.Name must be provided to Apply")
+	}
+	obj, err := c.Fake.
+		Invokes(testing.NewPatchSubresourceAction(envoyfiltersResource, c.ns, *name, types.ApplyPatchType, data, "status"), &v1alpha3.EnvoyFilter{})
 
 	if obj == nil {
 		return nil, err

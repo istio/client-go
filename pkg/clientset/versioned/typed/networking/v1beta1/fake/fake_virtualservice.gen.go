@@ -18,8 +18,11 @@ package fake
 
 import (
 	"context"
+	json "encoding/json"
+	"fmt"
 
 	v1beta1 "istio.io/client-go/pkg/apis/networking/v1beta1"
+	networkingv1beta1 "istio.io/client-go/pkg/applyconfiguration/networking/v1beta1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -132,6 +135,51 @@ func (c *FakeVirtualServices) DeleteCollection(ctx context.Context, opts v1.Dele
 func (c *FakeVirtualServices) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1beta1.VirtualService, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(virtualservicesResource, c.ns, name, pt, data, subresources...), &v1beta1.VirtualService{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1beta1.VirtualService), err
+}
+
+// Apply takes the given apply declarative configuration, applies it and returns the applied virtualService.
+func (c *FakeVirtualServices) Apply(ctx context.Context, virtualService *networkingv1beta1.VirtualServiceApplyConfiguration, opts v1.ApplyOptions) (result *v1beta1.VirtualService, err error) {
+	if virtualService == nil {
+		return nil, fmt.Errorf("virtualService provided to Apply must not be nil")
+	}
+	data, err := json.Marshal(virtualService)
+	if err != nil {
+		return nil, err
+	}
+	name := virtualService.Name
+	if name == nil {
+		return nil, fmt.Errorf("virtualService.Name must be provided to Apply")
+	}
+	obj, err := c.Fake.
+		Invokes(testing.NewPatchSubresourceAction(virtualservicesResource, c.ns, *name, types.ApplyPatchType, data), &v1beta1.VirtualService{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1beta1.VirtualService), err
+}
+
+// ApplyStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating ApplyStatus().
+func (c *FakeVirtualServices) ApplyStatus(ctx context.Context, virtualService *networkingv1beta1.VirtualServiceApplyConfiguration, opts v1.ApplyOptions) (result *v1beta1.VirtualService, err error) {
+	if virtualService == nil {
+		return nil, fmt.Errorf("virtualService provided to Apply must not be nil")
+	}
+	data, err := json.Marshal(virtualService)
+	if err != nil {
+		return nil, err
+	}
+	name := virtualService.Name
+	if name == nil {
+		return nil, fmt.Errorf("virtualService.Name must be provided to Apply")
+	}
+	obj, err := c.Fake.
+		Invokes(testing.NewPatchSubresourceAction(virtualservicesResource, c.ns, *name, types.ApplyPatchType, data, "status"), &v1beta1.VirtualService{})
 
 	if obj == nil {
 		return nil, err

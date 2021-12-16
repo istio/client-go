@@ -18,9 +18,12 @@ package v1alpha1
 
 import (
 	"context"
+	json "encoding/json"
+	"fmt"
 	"time"
 
 	v1alpha1 "istio.io/client-go/pkg/apis/telemetry/v1alpha1"
+	telemetryv1alpha1 "istio.io/client-go/pkg/applyconfiguration/telemetry/v1alpha1"
 	scheme "istio.io/client-go/pkg/clientset/versioned/scheme"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
@@ -45,6 +48,8 @@ type TelemetryInterface interface {
 	List(ctx context.Context, opts v1.ListOptions) (*v1alpha1.TelemetryList, error)
 	Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
 	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.Telemetry, err error)
+	Apply(ctx context.Context, telemetry *telemetryv1alpha1.TelemetryApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha1.Telemetry, err error)
+	ApplyStatus(ctx context.Context, telemetry *telemetryv1alpha1.TelemetryApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha1.Telemetry, err error)
 	TelemetryExpansion
 }
 
@@ -186,6 +191,62 @@ func (c *telemetries) Patch(ctx context.Context, name string, pt types.PatchType
 		Name(name).
 		SubResource(subresources...).
 		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(data).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// Apply takes the given apply declarative configuration, applies it and returns the applied telemetry.
+func (c *telemetries) Apply(ctx context.Context, telemetry *telemetryv1alpha1.TelemetryApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha1.Telemetry, err error) {
+	if telemetry == nil {
+		return nil, fmt.Errorf("telemetry provided to Apply must not be nil")
+	}
+	patchOpts := opts.ToPatchOptions()
+	data, err := json.Marshal(telemetry)
+	if err != nil {
+		return nil, err
+	}
+	name := telemetry.Name
+	if name == nil {
+		return nil, fmt.Errorf("telemetry.Name must be provided to Apply")
+	}
+	result = &v1alpha1.Telemetry{}
+	err = c.client.Patch(types.ApplyPatchType).
+		Namespace(c.ns).
+		Resource("telemetries").
+		Name(*name).
+		VersionedParams(&patchOpts, scheme.ParameterCodec).
+		Body(data).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// ApplyStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating ApplyStatus().
+func (c *telemetries) ApplyStatus(ctx context.Context, telemetry *telemetryv1alpha1.TelemetryApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha1.Telemetry, err error) {
+	if telemetry == nil {
+		return nil, fmt.Errorf("telemetry provided to Apply must not be nil")
+	}
+	patchOpts := opts.ToPatchOptions()
+	data, err := json.Marshal(telemetry)
+	if err != nil {
+		return nil, err
+	}
+
+	name := telemetry.Name
+	if name == nil {
+		return nil, fmt.Errorf("telemetry.Name must be provided to Apply")
+	}
+
+	result = &v1alpha1.Telemetry{}
+	err = c.client.Patch(types.ApplyPatchType).
+		Namespace(c.ns).
+		Resource("telemetries").
+		Name(*name).
+		SubResource("status").
+		VersionedParams(&patchOpts, scheme.ParameterCodec).
 		Body(data).
 		Do(ctx).
 		Into(result)
