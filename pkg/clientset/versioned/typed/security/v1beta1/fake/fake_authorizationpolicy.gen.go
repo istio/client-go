@@ -115,7 +115,7 @@ func (c *FakeAuthorizationPolicies) UpdateStatus(ctx context.Context, authorizat
 // Delete takes name of the authorizationPolicy and deletes it. Returns an error if one occurs.
 func (c *FakeAuthorizationPolicies) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteAction(authorizationpoliciesResource, c.ns, name), &v1beta1.AuthorizationPolicy{})
+		Invokes(testing.NewDeleteActionWithOptions(authorizationpoliciesResource, c.ns, name, opts), &v1beta1.AuthorizationPolicy{})
 
 	return err
 }

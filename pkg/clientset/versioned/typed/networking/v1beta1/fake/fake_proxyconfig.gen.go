@@ -115,7 +115,7 @@ func (c *FakeProxyConfigs) UpdateStatus(ctx context.Context, proxyConfig *v1beta
 // Delete takes name of the proxyConfig and deletes it. Returns an error if one occurs.
 func (c *FakeProxyConfigs) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteAction(proxyconfigsResource, c.ns, name), &v1beta1.ProxyConfig{})
+		Invokes(testing.NewDeleteActionWithOptions(proxyconfigsResource, c.ns, name, opts), &v1beta1.ProxyConfig{})
 
 	return err
 }

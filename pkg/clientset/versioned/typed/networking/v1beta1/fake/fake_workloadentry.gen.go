@@ -115,7 +115,7 @@ func (c *FakeWorkloadEntries) UpdateStatus(ctx context.Context, workloadEntry *v
 // Delete takes name of the workloadEntry and deletes it. Returns an error if one occurs.
 func (c *FakeWorkloadEntries) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteAction(workloadentriesResource, c.ns, name), &v1beta1.WorkloadEntry{})
+		Invokes(testing.NewDeleteActionWithOptions(workloadentriesResource, c.ns, name, opts), &v1beta1.WorkloadEntry{})
 
 	return err
 }

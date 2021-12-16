@@ -24,8 +24,10 @@ import (
 )
 
 // ProxyConfigLister helps list ProxyConfigs.
+// All objects returned here must be treated as read-only.
 type ProxyConfigLister interface {
 	// List lists all ProxyConfigs in the indexer.
+	// Objects returned here must be treated as read-only.
 	List(selector labels.Selector) (ret []*v1beta1.ProxyConfig, err error)
 	// ProxyConfigs returns an object that can list and get ProxyConfigs.
 	ProxyConfigs(namespace string) ProxyConfigNamespaceLister
@@ -56,10 +58,13 @@ func (s *proxyConfigLister) ProxyConfigs(namespace string) ProxyConfigNamespaceL
 }
 
 // ProxyConfigNamespaceLister helps list and get ProxyConfigs.
+// All objects returned here must be treated as read-only.
 type ProxyConfigNamespaceLister interface {
 	// List lists all ProxyConfigs in the indexer for a given namespace.
+	// Objects returned here must be treated as read-only.
 	List(selector labels.Selector) (ret []*v1beta1.ProxyConfig, err error)
 	// Get retrieves the ProxyConfig from the indexer for a given namespace and name.
+	// Objects returned here must be treated as read-only.
 	Get(name string) (*v1beta1.ProxyConfig, error)
 	ProxyConfigNamespaceListerExpansion
 }

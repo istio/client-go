@@ -115,7 +115,7 @@ func (c *FakeWorkloadGroups) UpdateStatus(ctx context.Context, workloadGroup *v1
 // Delete takes name of the workloadGroup and deletes it. Returns an error if one occurs.
 func (c *FakeWorkloadGroups) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteAction(workloadgroupsResource, c.ns, name), &v1alpha3.WorkloadGroup{})
+		Invokes(testing.NewDeleteActionWithOptions(workloadgroupsResource, c.ns, name, opts), &v1alpha3.WorkloadGroup{})
 
 	return err
 }
