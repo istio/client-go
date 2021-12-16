@@ -115,7 +115,7 @@ func (c *FakeServiceEntries) UpdateStatus(ctx context.Context, serviceEntry *v1b
 // Delete takes name of the serviceEntry and deletes it. Returns an error if one occurs.
 func (c *FakeServiceEntries) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteAction(serviceentriesResource, c.ns, name), &v1beta1.ServiceEntry{})
+		Invokes(testing.NewDeleteActionWithOptions(serviceentriesResource, c.ns, name, opts), &v1beta1.ServiceEntry{})
 
 	return err
 }

@@ -115,7 +115,7 @@ func (c *FakeEnvoyFilters) UpdateStatus(ctx context.Context, envoyFilter *v1alph
 // Delete takes name of the envoyFilter and deletes it. Returns an error if one occurs.
 func (c *FakeEnvoyFilters) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteAction(envoyfiltersResource, c.ns, name), &v1alpha3.EnvoyFilter{})
+		Invokes(testing.NewDeleteActionWithOptions(envoyfiltersResource, c.ns, name, opts), &v1alpha3.EnvoyFilter{})
 
 	return err
 }

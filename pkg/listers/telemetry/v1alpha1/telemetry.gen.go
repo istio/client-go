@@ -24,8 +24,10 @@ import (
 )
 
 // TelemetryLister helps list Telemetries.
+// All objects returned here must be treated as read-only.
 type TelemetryLister interface {
 	// List lists all Telemetries in the indexer.
+	// Objects returned here must be treated as read-only.
 	List(selector labels.Selector) (ret []*v1alpha1.Telemetry, err error)
 	// Telemetries returns an object that can list and get Telemetries.
 	Telemetries(namespace string) TelemetryNamespaceLister
@@ -56,10 +58,13 @@ func (s *telemetryLister) Telemetries(namespace string) TelemetryNamespaceLister
 }
 
 // TelemetryNamespaceLister helps list and get Telemetries.
+// All objects returned here must be treated as read-only.
 type TelemetryNamespaceLister interface {
 	// List lists all Telemetries in the indexer for a given namespace.
+	// Objects returned here must be treated as read-only.
 	List(selector labels.Selector) (ret []*v1alpha1.Telemetry, err error)
 	// Get retrieves the Telemetry from the indexer for a given namespace and name.
+	// Objects returned here must be treated as read-only.
 	Get(name string) (*v1alpha1.Telemetry, error)
 	TelemetryNamespaceListerExpansion
 }

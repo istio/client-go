@@ -115,7 +115,7 @@ func (c *FakePeerAuthentications) UpdateStatus(ctx context.Context, peerAuthenti
 // Delete takes name of the peerAuthentication and deletes it. Returns an error if one occurs.
 func (c *FakePeerAuthentications) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteAction(peerauthenticationsResource, c.ns, name), &v1beta1.PeerAuthentication{})
+		Invokes(testing.NewDeleteActionWithOptions(peerauthenticationsResource, c.ns, name, opts), &v1beta1.PeerAuthentication{})
 
 	return err
 }

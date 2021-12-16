@@ -115,7 +115,7 @@ func (c *FakeTelemetries) UpdateStatus(ctx context.Context, telemetry *v1alpha1.
 // Delete takes name of the telemetry and deletes it. Returns an error if one occurs.
 func (c *FakeTelemetries) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteAction(telemetriesResource, c.ns, name), &v1alpha1.Telemetry{})
+		Invokes(testing.NewDeleteActionWithOptions(telemetriesResource, c.ns, name, opts), &v1alpha1.Telemetry{})
 
 	return err
 }
