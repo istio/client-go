@@ -18,8 +18,11 @@ package fake
 
 import (
 	"context"
+	json "encoding/json"
+	"fmt"
 
 	v1beta1 "istio.io/client-go/pkg/apis/security/v1beta1"
+	securityv1beta1 "istio.io/client-go/pkg/applyconfiguration/security/v1beta1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -132,6 +135,51 @@ func (c *FakeAuthorizationPolicies) DeleteCollection(ctx context.Context, opts v
 func (c *FakeAuthorizationPolicies) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1beta1.AuthorizationPolicy, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(authorizationpoliciesResource, c.ns, name, pt, data, subresources...), &v1beta1.AuthorizationPolicy{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1beta1.AuthorizationPolicy), err
+}
+
+// Apply takes the given apply declarative configuration, applies it and returns the applied authorizationPolicy.
+func (c *FakeAuthorizationPolicies) Apply(ctx context.Context, authorizationPolicy *securityv1beta1.AuthorizationPolicyApplyConfiguration, opts v1.ApplyOptions) (result *v1beta1.AuthorizationPolicy, err error) {
+	if authorizationPolicy == nil {
+		return nil, fmt.Errorf("authorizationPolicy provided to Apply must not be nil")
+	}
+	data, err := json.Marshal(authorizationPolicy)
+	if err != nil {
+		return nil, err
+	}
+	name := authorizationPolicy.Name
+	if name == nil {
+		return nil, fmt.Errorf("authorizationPolicy.Name must be provided to Apply")
+	}
+	obj, err := c.Fake.
+		Invokes(testing.NewPatchSubresourceAction(authorizationpoliciesResource, c.ns, *name, types.ApplyPatchType, data), &v1beta1.AuthorizationPolicy{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1beta1.AuthorizationPolicy), err
+}
+
+// ApplyStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating ApplyStatus().
+func (c *FakeAuthorizationPolicies) ApplyStatus(ctx context.Context, authorizationPolicy *securityv1beta1.AuthorizationPolicyApplyConfiguration, opts v1.ApplyOptions) (result *v1beta1.AuthorizationPolicy, err error) {
+	if authorizationPolicy == nil {
+		return nil, fmt.Errorf("authorizationPolicy provided to Apply must not be nil")
+	}
+	data, err := json.Marshal(authorizationPolicy)
+	if err != nil {
+		return nil, err
+	}
+	name := authorizationPolicy.Name
+	if name == nil {
+		return nil, fmt.Errorf("authorizationPolicy.Name must be provided to Apply")
+	}
+	obj, err := c.Fake.
+		Invokes(testing.NewPatchSubresourceAction(authorizationpoliciesResource, c.ns, *name, types.ApplyPatchType, data, "status"), &v1beta1.AuthorizationPolicy{})
 
 	if obj == nil {
 		return nil, err

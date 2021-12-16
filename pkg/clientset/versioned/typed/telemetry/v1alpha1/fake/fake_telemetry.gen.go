@@ -18,8 +18,11 @@ package fake
 
 import (
 	"context"
+	json "encoding/json"
+	"fmt"
 
 	v1alpha1 "istio.io/client-go/pkg/apis/telemetry/v1alpha1"
+	telemetryv1alpha1 "istio.io/client-go/pkg/applyconfiguration/telemetry/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -132,6 +135,51 @@ func (c *FakeTelemetries) DeleteCollection(ctx context.Context, opts v1.DeleteOp
 func (c *FakeTelemetries) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.Telemetry, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(telemetriesResource, c.ns, name, pt, data, subresources...), &v1alpha1.Telemetry{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha1.Telemetry), err
+}
+
+// Apply takes the given apply declarative configuration, applies it and returns the applied telemetry.
+func (c *FakeTelemetries) Apply(ctx context.Context, telemetry *telemetryv1alpha1.TelemetryApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha1.Telemetry, err error) {
+	if telemetry == nil {
+		return nil, fmt.Errorf("telemetry provided to Apply must not be nil")
+	}
+	data, err := json.Marshal(telemetry)
+	if err != nil {
+		return nil, err
+	}
+	name := telemetry.Name
+	if name == nil {
+		return nil, fmt.Errorf("telemetry.Name must be provided to Apply")
+	}
+	obj, err := c.Fake.
+		Invokes(testing.NewPatchSubresourceAction(telemetriesResource, c.ns, *name, types.ApplyPatchType, data), &v1alpha1.Telemetry{})
+
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*v1alpha1.Telemetry), err
+}
+
+// ApplyStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating ApplyStatus().
+func (c *FakeTelemetries) ApplyStatus(ctx context.Context, telemetry *telemetryv1alpha1.TelemetryApplyConfiguration, opts v1.ApplyOptions) (result *v1alpha1.Telemetry, err error) {
+	if telemetry == nil {
+		return nil, fmt.Errorf("telemetry provided to Apply must not be nil")
+	}
+	data, err := json.Marshal(telemetry)
+	if err != nil {
+		return nil, err
+	}
+	name := telemetry.Name
+	if name == nil {
+		return nil, fmt.Errorf("telemetry.Name must be provided to Apply")
+	}
+	obj, err := c.Fake.
+		Invokes(testing.NewPatchSubresourceAction(telemetriesResource, c.ns, *name, types.ApplyPatchType, data, "status"), &v1alpha1.Telemetry{})
 
 	if obj == nil {
 		return nil, err
