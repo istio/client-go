@@ -54,6 +54,10 @@ func (c *FakeNetworkingV1beta1) WorkloadEntries(namespace string) v1beta1.Worklo
 	return &FakeWorkloadEntries{c, namespace}
 }
 
+func (c *FakeNetworkingV1beta1) WorkloadGroups(namespace string) v1beta1.WorkloadGroupInterface {
+	return &FakeWorkloadGroups{c, namespace}
+}
+
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
 func (c *FakeNetworkingV1beta1) RESTClient() rest.Interface {
