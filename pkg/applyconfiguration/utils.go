@@ -83,6 +83,8 @@ func ForKind(kind schema.GroupVersionKind) interface{} {
 		return &networkingv1beta1.VirtualServiceApplyConfiguration{}
 	case v1beta1.SchemeGroupVersion.WithKind("WorkloadEntry"):
 		return &networkingv1beta1.WorkloadEntryApplyConfiguration{}
+	case v1beta1.SchemeGroupVersion.WithKind("WorkloadGroup"):
+		return &networkingv1beta1.WorkloadGroupApplyConfiguration{}
 
 		// Group=security.istio.io, Version=v1beta1
 	case securityv1beta1.SchemeGroupVersion.WithKind("AuthorizationPolicy"):

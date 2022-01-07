@@ -417,6 +417,9 @@ type WorkloadEntryList struct {
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
+// <!-- istio code generation tags
+// +istio.io/sync-start
+// -->
 type WorkloadGroup struct {
 	v1.TypeMeta `json:",inline"`
 	// +optional
