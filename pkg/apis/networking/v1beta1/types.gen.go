@@ -392,7 +392,6 @@ type WorkloadEntryList struct {
 // <!-- crd generation tags
 // +cue-gen:WorkloadGroup:groupName:networking.istio.io
 // +cue-gen:WorkloadGroup:version:v1beta1
-// +cue-gen:WorkloadGroup:storageVersion
 // +cue-gen:WorkloadGroup:labels:app=istio-pilot,chart=istio,heritage=Tiller,release=istio
 // +cue-gen:WorkloadGroup:subresource:status
 // +cue-gen:WorkloadGroup:scope:Namespaced
