@@ -123,7 +123,7 @@ type GatewayList struct {
 	Items       []*Gateway `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-// please upgrade the proto package
+//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // `ProxyConfig` exposes proxy level configuration options.
@@ -328,7 +328,7 @@ type VirtualServiceList struct {
 	Items       []*VirtualService `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-// please upgrade the proto package
+//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // WorkloadEntry enables specifying the properties of a single non-Kubernetes workload such a VM or a bare metal services that can be referred to by service entries.
@@ -380,7 +380,7 @@ type WorkloadEntryList struct {
 	Items       []*WorkloadEntry `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-// please upgrade the proto package
+//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // `WorkloadGroup` enables specifying the properties of a single workload for bootstrap and
