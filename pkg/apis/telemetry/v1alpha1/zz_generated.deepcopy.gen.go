@@ -58,9 +58,13 @@ func (in *TelemetryList) DeepCopyInto(out *TelemetryList) {
 	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
-		*out = make([]Telemetry, len(*in))
+		*out = make([]*Telemetry, len(*in))
 		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(Telemetry)
+				(*in).DeepCopyInto(*out)
+			}
 		}
 	}
 	return

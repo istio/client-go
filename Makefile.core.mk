@@ -97,12 +97,12 @@ rename_generated_files=\
 .PHONY: generate-k8s-client
 generate-k8s-client:
 	# generate kube api type wrappers for istio types
-	@$(kubetype_gen) --input-dirs $(kube_istio_source_packages) --output-package $(kube_api_base_package) -h $(kube_go_header_text)
+	@KUBETYPE_GOLANG_PROTOBUF=true $(kubetype_gen) --input-dirs $(kube_istio_source_packages) --output-package $(kube_api_base_package) -h $(kube_go_header_text)
 	@$(move_generated)
 	# generate deepcopy for kube api types
 	@$(deepcopy_gen) --input-dirs $(kube_api_packages) -O zz_generated.deepcopy  -h $(kube_go_header_text)
 	# generate ssa for kube api types
-	$(applyconfiguration_gen) --input-dirs $(kube_api_applyconfiguration_packages) --output-package $(kube_applyconfiguration_package) -h $(kube_go_header_text)
+	@$(applyconfiguration_gen) --input-dirs $(kube_api_applyconfiguration_packages) --output-package $(kube_applyconfiguration_package) -h $(kube_go_header_text)
 	# generate clientsets for kube api types
 	@$(client_gen) --clientset-name $(kube_clientset_name) --input-base "" --input  $(kube_api_packages) --output-package $(kube_clientset_package) -h $(kube_go_header_text) --apply-configuration-package $(kube_applyconfiguration_package)
 	# generate listers for kube api types

@@ -68,5 +68,5 @@ type TelemetryList struct {
 	v1.TypeMeta `json:",inline"`
 	// +optional
 	v1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
-	Items       []Telemetry `json:"items" protobuf:"bytes,2,rep,name=items"`
+	Items       []*Telemetry `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
