@@ -205,12 +205,12 @@ func (b *WorkloadGroupApplyConfiguration) WithFinalizers(values ...string) *Work
 	return b
 }
 
-// WithClusterName sets the ClusterName field in the declarative configuration to the given value
+// WithZZZ_DeprecatedClusterName sets the ZZZ_DeprecatedClusterName field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
-// If called multiple times, the ClusterName field is set to the value of the last call.
-func (b *WorkloadGroupApplyConfiguration) WithClusterName(value string) *WorkloadGroupApplyConfiguration {
+// If called multiple times, the ZZZ_DeprecatedClusterName field is set to the value of the last call.
+func (b *WorkloadGroupApplyConfiguration) WithZZZ_DeprecatedClusterName(value string) *WorkloadGroupApplyConfiguration {
 	b.ensureObjectMetaApplyConfigurationExists()
-	b.ClusterName = &value
+	b.ZZZ_DeprecatedClusterName = &value
 	return b
 }
 
