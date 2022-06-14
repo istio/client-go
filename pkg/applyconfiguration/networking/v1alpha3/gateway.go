@@ -87,15 +87,6 @@ func (b *GatewayApplyConfiguration) WithNamespace(value string) *GatewayApplyCon
 	return b
 }
 
-// WithSelfLink sets the SelfLink field in the declarative configuration to the given value
-// and returns the receiver, so that objects can be built by chaining "With" function invocations.
-// If called multiple times, the SelfLink field is set to the value of the last call.
-func (b *GatewayApplyConfiguration) WithSelfLink(value string) *GatewayApplyConfiguration {
-	b.ensureObjectMetaApplyConfigurationExists()
-	b.SelfLink = &value
-	return b
-}
-
 // WithUID sets the UID field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the UID field is set to the value of the last call.
@@ -202,15 +193,6 @@ func (b *GatewayApplyConfiguration) WithFinalizers(values ...string) *GatewayApp
 	for i := range values {
 		b.Finalizers = append(b.Finalizers, values[i])
 	}
-	return b
-}
-
-// WithZZZ_DeprecatedClusterName sets the ZZZ_DeprecatedClusterName field in the declarative configuration to the given value
-// and returns the receiver, so that objects can be built by chaining "With" function invocations.
-// If called multiple times, the ZZZ_DeprecatedClusterName field is set to the value of the last call.
-func (b *GatewayApplyConfiguration) WithZZZ_DeprecatedClusterName(value string) *GatewayApplyConfiguration {
-	b.ensureObjectMetaApplyConfigurationExists()
-	b.ZZZ_DeprecatedClusterName = &value
 	return b
 }
 
