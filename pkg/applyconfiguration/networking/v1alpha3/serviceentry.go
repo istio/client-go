@@ -87,15 +87,6 @@ func (b *ServiceEntryApplyConfiguration) WithNamespace(value string) *ServiceEnt
 	return b
 }
 
-// WithSelfLink sets the SelfLink field in the declarative configuration to the given value
-// and returns the receiver, so that objects can be built by chaining "With" function invocations.
-// If called multiple times, the SelfLink field is set to the value of the last call.
-func (b *ServiceEntryApplyConfiguration) WithSelfLink(value string) *ServiceEntryApplyConfiguration {
-	b.ensureObjectMetaApplyConfigurationExists()
-	b.SelfLink = &value
-	return b
-}
-
 // WithUID sets the UID field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the UID field is set to the value of the last call.
@@ -202,15 +193,6 @@ func (b *ServiceEntryApplyConfiguration) WithFinalizers(values ...string) *Servi
 	for i := range values {
 		b.Finalizers = append(b.Finalizers, values[i])
 	}
-	return b
-}
-
-// WithZZZ_DeprecatedClusterName sets the ZZZ_DeprecatedClusterName field in the declarative configuration to the given value
-// and returns the receiver, so that objects can be built by chaining "With" function invocations.
-// If called multiple times, the ZZZ_DeprecatedClusterName field is set to the value of the last call.
-func (b *ServiceEntryApplyConfiguration) WithZZZ_DeprecatedClusterName(value string) *ServiceEntryApplyConfiguration {
-	b.ensureObjectMetaApplyConfigurationExists()
-	b.ZZZ_DeprecatedClusterName = &value
 	return b
 }
 
