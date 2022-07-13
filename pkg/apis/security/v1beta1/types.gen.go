@@ -346,9 +346,9 @@ type PeerAuthenticationList struct {
 //   name: jwt-on-ingress
 //   namespace: istio-system
 // spec:
-//  selector:
-//    matchLabels:
-//      app: istio-ingressgateway
+//   selector:
+//     matchLabels:
+//       app: istio-ingressgateway
 //   jwtRules:
 //   - issuer: "example.com"
 //     jwksUri: https://example.com/.well-known/jwks.json
@@ -359,9 +359,9 @@ type PeerAuthenticationList struct {
 //   name: require-jwt
 //   namespace: istio-system
 // spec:
-//  selector:
-//    matchLabels:
-//      app: istio-ingressgateway
+//   selector:
+//     matchLabels:
+//       app: istio-ingressgateway
 //   rules:
 //   - from:
 //     - source:
