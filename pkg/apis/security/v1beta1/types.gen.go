@@ -45,6 +45,9 @@ import (
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
+// <!-- istio code generation tags
+// +istio.io/sync-start
+// -->
 type AuthorizationPolicy struct {
 	v1.TypeMeta `json:",inline"`
 	// +optional
@@ -470,6 +473,9 @@ type PeerAuthenticationList struct {
 // +kubetype-gen:groupVersion=security.istio.io/v1beta1
 // +genclient
 // +k8s:deepcopy-gen=true
+// -->
+// <!-- istio code generation tags
+// +istio.io/sync-start
 // -->
 type RequestAuthentication struct {
 	v1.TypeMeta `json:",inline"`
