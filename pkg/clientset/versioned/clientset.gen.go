@@ -39,8 +39,7 @@ type Interface interface {
 	TelemetryV1alpha1() telemetryv1alpha1.TelemetryV1alpha1Interface
 }
 
-// Clientset contains the clients for groups. Each group has exactly one
-// version included in a Clientset.
+// Clientset contains the clients for groups.
 type Clientset struct {
 	*discovery.DiscoveryClient
 	extensionsV1alpha1 *extensionsv1alpha1.ExtensionsV1alpha1Client
