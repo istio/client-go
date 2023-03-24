@@ -114,7 +114,7 @@ type AuthorizationPolicyList struct {
 // kind: PeerAuthentication
 // metadata:
 //
-//	name: default
+//	name: finance
 //	namespace: foo
 //
 // spec:
