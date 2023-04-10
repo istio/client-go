@@ -3,9 +3,9 @@ module istio.io/client-go
 go 1.18
 
 require (
-	istio.io/api v0.0.0-20230410062459-60a4392c3fd9
-	k8s.io/apimachinery v0.26.0
-	k8s.io/client-go v0.26.0
+	istio.io/api v0.0.0-20230410162000-d4c0b38fb002
+	k8s.io/apimachinery v0.26.3
+	k8s.io/client-go v0.26.3
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3
 )
 
@@ -43,7 +43,7 @@ require (
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/api v0.26.0 // indirect
+	k8s.io/api v0.26.3 // indirect
 	k8s.io/klog/v2 v2.80.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20221012153701-172d655c2280 // indirect
 	k8s.io/utils v0.0.0-20221107191617-1a15be271d1d // indirect
