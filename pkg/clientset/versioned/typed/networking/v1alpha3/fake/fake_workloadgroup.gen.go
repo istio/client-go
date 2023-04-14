@@ -25,7 +25,6 @@ import (
 	networkingv1alpha3 "istio.io/client-go/pkg/applyconfiguration/networking/v1alpha3"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -37,9 +36,9 @@ type FakeWorkloadGroups struct {
 	ns   string
 }
 
-var workloadgroupsResource = schema.GroupVersionResource{Group: "networking.istio.io", Version: "v1alpha3", Resource: "workloadgroups"}
+var workloadgroupsResource = v1alpha3.SchemeGroupVersion.WithResource("workloadgroups")
 
-var workloadgroupsKind = schema.GroupVersionKind{Group: "networking.istio.io", Version: "v1alpha3", Kind: "WorkloadGroup"}
+var workloadgroupsKind = v1alpha3.SchemeGroupVersion.WithKind("WorkloadGroup")
 
 // Get takes name of the workloadGroup, and returns the corresponding workloadGroup object, and an error if there is any.
 func (c *FakeWorkloadGroups) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha3.WorkloadGroup, err error) {

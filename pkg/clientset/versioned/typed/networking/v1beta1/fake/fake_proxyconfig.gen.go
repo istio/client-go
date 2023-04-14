@@ -25,7 +25,6 @@ import (
 	networkingv1beta1 "istio.io/client-go/pkg/applyconfiguration/networking/v1beta1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -37,9 +36,9 @@ type FakeProxyConfigs struct {
 	ns   string
 }
 
-var proxyconfigsResource = schema.GroupVersionResource{Group: "networking.istio.io", Version: "v1beta1", Resource: "proxyconfigs"}
+var proxyconfigsResource = v1beta1.SchemeGroupVersion.WithResource("proxyconfigs")
 
-var proxyconfigsKind = schema.GroupVersionKind{Group: "networking.istio.io", Version: "v1beta1", Kind: "ProxyConfig"}
+var proxyconfigsKind = v1beta1.SchemeGroupVersion.WithKind("ProxyConfig")
 
 // Get takes name of the proxyConfig, and returns the corresponding proxyConfig object, and an error if there is any.
 func (c *FakeProxyConfigs) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1beta1.ProxyConfig, err error) {

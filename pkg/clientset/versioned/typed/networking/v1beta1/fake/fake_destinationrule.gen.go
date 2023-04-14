@@ -25,7 +25,6 @@ import (
 	networkingv1beta1 "istio.io/client-go/pkg/applyconfiguration/networking/v1beta1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -37,9 +36,9 @@ type FakeDestinationRules struct {
 	ns   string
 }
 
-var destinationrulesResource = schema.GroupVersionResource{Group: "networking.istio.io", Version: "v1beta1", Resource: "destinationrules"}
+var destinationrulesResource = v1beta1.SchemeGroupVersion.WithResource("destinationrules")
 
-var destinationrulesKind = schema.GroupVersionKind{Group: "networking.istio.io", Version: "v1beta1", Kind: "DestinationRule"}
+var destinationrulesKind = v1beta1.SchemeGroupVersion.WithKind("DestinationRule")
 
 // Get takes name of the destinationRule, and returns the corresponding destinationRule object, and an error if there is any.
 func (c *FakeDestinationRules) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1beta1.DestinationRule, err error) {
