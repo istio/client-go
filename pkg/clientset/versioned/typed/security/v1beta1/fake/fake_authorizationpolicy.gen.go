@@ -25,7 +25,6 @@ import (
 	securityv1beta1 "istio.io/client-go/pkg/applyconfiguration/security/v1beta1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -37,9 +36,9 @@ type FakeAuthorizationPolicies struct {
 	ns   string
 }
 
-var authorizationpoliciesResource = schema.GroupVersionResource{Group: "security.istio.io", Version: "v1beta1", Resource: "authorizationpolicies"}
+var authorizationpoliciesResource = v1beta1.SchemeGroupVersion.WithResource("authorizationpolicies")
 
-var authorizationpoliciesKind = schema.GroupVersionKind{Group: "security.istio.io", Version: "v1beta1", Kind: "AuthorizationPolicy"}
+var authorizationpoliciesKind = v1beta1.SchemeGroupVersion.WithKind("AuthorizationPolicy")
 
 // Get takes name of the authorizationPolicy, and returns the corresponding authorizationPolicy object, and an error if there is any.
 func (c *FakeAuthorizationPolicies) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1beta1.AuthorizationPolicy, err error) {

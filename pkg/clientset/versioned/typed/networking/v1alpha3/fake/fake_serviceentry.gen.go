@@ -25,7 +25,6 @@ import (
 	networkingv1alpha3 "istio.io/client-go/pkg/applyconfiguration/networking/v1alpha3"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -37,9 +36,9 @@ type FakeServiceEntries struct {
 	ns   string
 }
 
-var serviceentriesResource = schema.GroupVersionResource{Group: "networking.istio.io", Version: "v1alpha3", Resource: "serviceentries"}
+var serviceentriesResource = v1alpha3.SchemeGroupVersion.WithResource("serviceentries")
 
-var serviceentriesKind = schema.GroupVersionKind{Group: "networking.istio.io", Version: "v1alpha3", Kind: "ServiceEntry"}
+var serviceentriesKind = v1alpha3.SchemeGroupVersion.WithKind("ServiceEntry")
 
 // Get takes name of the serviceEntry, and returns the corresponding serviceEntry object, and an error if there is any.
 func (c *FakeServiceEntries) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha3.ServiceEntry, err error) {
