@@ -25,7 +25,6 @@ import (
 	networkingv1alpha3 "istio.io/client-go/pkg/applyconfiguration/networking/v1alpha3"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	testing "k8s.io/client-go/testing"
@@ -37,9 +36,9 @@ type FakeGateways struct {
 	ns   string
 }
 
-var gatewaysResource = schema.GroupVersionResource{Group: "networking.istio.io", Version: "v1alpha3", Resource: "gateways"}
+var gatewaysResource = v1alpha3.SchemeGroupVersion.WithResource("gateways")
 
-var gatewaysKind = schema.GroupVersionKind{Group: "networking.istio.io", Version: "v1alpha3", Kind: "Gateway"}
+var gatewaysKind = v1alpha3.SchemeGroupVersion.WithKind("Gateway")
 
 // Get takes name of the gateway, and returns the corresponding gateway object, and an error if there is any.
 func (c *FakeGateways) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha3.Gateway, err error) {
