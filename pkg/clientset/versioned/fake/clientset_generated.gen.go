@@ -24,6 +24,8 @@ import (
 	fakenetworkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3/fake"
 	networkingv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1beta1"
 	fakenetworkingv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1beta1/fake"
+	securityv1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1"
+	fakesecurityv1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1/fake"
 	securityv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1beta1"
 	fakesecurityv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1beta1/fake"
 	telemetryv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/telemetry/v1alpha1"
@@ -103,6 +105,11 @@ func (c *Clientset) NetworkingV1beta1() networkingv1beta1.NetworkingV1beta1Inter
 // SecurityV1beta1 retrieves the SecurityV1beta1Client
 func (c *Clientset) SecurityV1beta1() securityv1beta1.SecurityV1beta1Interface {
 	return &fakesecurityv1beta1.FakeSecurityV1beta1{Fake: &c.Fake}
+}
+
+// SecurityV1 retrieves the SecurityV1Client
+func (c *Clientset) SecurityV1() securityv1.SecurityV1Interface {
+	return &fakesecurityv1.FakeSecurityV1{Fake: &c.Fake}
 }
 
 // TelemetryV1alpha1 retrieves the TelemetryV1alpha1Client
