@@ -20,12 +20,14 @@ import (
 	v1alpha1 "istio.io/client-go/pkg/apis/extensions/v1alpha1"
 	v1alpha3 "istio.io/client-go/pkg/apis/networking/v1alpha3"
 	v1beta1 "istio.io/client-go/pkg/apis/networking/v1beta1"
+	securityv1 "istio.io/client-go/pkg/apis/security/v1"
 	securityv1beta1 "istio.io/client-go/pkg/apis/security/v1beta1"
 	telemetryv1alpha1 "istio.io/client-go/pkg/apis/telemetry/v1alpha1"
 	extensionsv1alpha1 "istio.io/client-go/pkg/applyconfiguration/extensions/v1alpha1"
 	metav1 "istio.io/client-go/pkg/applyconfiguration/meta/v1"
 	networkingv1alpha3 "istio.io/client-go/pkg/applyconfiguration/networking/v1alpha3"
 	networkingv1beta1 "istio.io/client-go/pkg/applyconfiguration/networking/v1beta1"
+	applyconfigurationsecurityv1 "istio.io/client-go/pkg/applyconfiguration/security/v1"
 	applyconfigurationsecurityv1beta1 "istio.io/client-go/pkg/applyconfiguration/security/v1beta1"
 	applyconfigurationtelemetryv1alpha1 "istio.io/client-go/pkg/applyconfiguration/telemetry/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -85,6 +87,12 @@ func ForKind(kind schema.GroupVersionKind) interface{} {
 		return &networkingv1beta1.WorkloadEntryApplyConfiguration{}
 	case v1beta1.SchemeGroupVersion.WithKind("WorkloadGroup"):
 		return &networkingv1beta1.WorkloadGroupApplyConfiguration{}
+
+		// Group=security.istio.io, Version=v1
+	case securityv1.SchemeGroupVersion.WithKind("AuthorizationPolicy"):
+		return &applyconfigurationsecurityv1.AuthorizationPolicyApplyConfiguration{}
+	case securityv1.SchemeGroupVersion.WithKind("RequestAuthentication"):
+		return &applyconfigurationsecurityv1.RequestAuthenticationApplyConfiguration{}
 
 		// Group=security.istio.io, Version=v1beta1
 	case securityv1beta1.SchemeGroupVersion.WithKind("AuthorizationPolicy"):
