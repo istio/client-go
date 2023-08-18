@@ -5,8 +5,8 @@ go 1.18
 require (
 	istio.io/api v1.19.0-alpha.1.0.20230817180003-b359dbbc6953
 	k8s.io/apimachinery v0.28.0
-	k8s.io/client-go v0.27.0
-	sigs.k8s.io/structured-merge-diff/v4 v4.2.3
+	k8s.io/client-go v0.28.0
+	sigs.k8s.io/structured-merge-diff/v4 v4.3.0
 )
 
 require (
@@ -19,7 +19,6 @@ require (
 	github.com/go-openapi/swag v0.22.3 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
-	github.com/google/gnostic v0.5.7-v3refs // indirect
 	github.com/google/gnostic-models v0.6.8 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
@@ -34,7 +33,7 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	golang.org/x/net v0.13.0 // indirect
-	golang.org/x/oauth2 v0.0.0-20220223155221-ee480838109b // indirect
+	golang.org/x/oauth2 v0.8.0 // indirect
 	golang.org/x/sys v0.10.0 // indirect
 	golang.org/x/term v0.10.0 // indirect
 	golang.org/x/text v0.11.0 // indirect
