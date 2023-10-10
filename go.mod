@@ -4,8 +4,8 @@ go 1.18
 
 require (
 	istio.io/api v1.19.0-alpha.1.0.20231010215145-d1a993825351
-	k8s.io/apimachinery v0.28.0
-	k8s.io/client-go v0.28.0
+	k8s.io/apimachinery v0.28.2
+	k8s.io/client-go v0.28.2
 	sigs.k8s.io/structured-merge-diff/v4 v4.3.0
 )
 
@@ -32,20 +32,20 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	golang.org/x/net v0.13.0 // indirect
-	golang.org/x/oauth2 v0.8.0 // indirect
-	golang.org/x/sys v0.10.0 // indirect
-	golang.org/x/term v0.10.0 // indirect
-	golang.org/x/text v0.11.0 // indirect
+	golang.org/x/net v0.17.0 // indirect
+	golang.org/x/oauth2 v0.10.0 // indirect
+	golang.org/x/sys v0.13.0 // indirect
+	golang.org/x/term v0.13.0 // indirect
+	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/genproto v0.0.0-20230815205213-6bfd019c3878 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20230803162519-f966b187b2e5 // indirect
+	google.golang.org/genproto v0.0.0-20231002182017-d307bd883b97 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20230920204549-e6e6cdab5c13 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/api v0.28.0 // indirect
+	k8s.io/api v0.28.2 // indirect
 	k8s.io/klog/v2 v2.100.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20230717233707-2695361300d9 // indirect
 	k8s.io/utils v0.0.0-20230406110748-d93618cff8a2 // indirect
