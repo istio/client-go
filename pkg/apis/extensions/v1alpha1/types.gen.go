@@ -35,6 +35,7 @@ import (
 // +cue-gen:WasmPlugin:annotations:helm.sh/resource-policy=keep
 // +cue-gen:WasmPlugin:labels:app=istio-pilot,chart=istio,heritage=Tiller,release=istio
 // +cue-gen:WasmPlugin:subresource:status
+// +cue-gen:WasmPlugin:spec:required
 // +cue-gen:WasmPlugin:scope:Namespaced
 // +cue-gen:WasmPlugin:resource:categories=istio-io,extensions-istio-io
 // +cue-gen:WasmPlugin:preserveUnknownFields:pluginConfig
