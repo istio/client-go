@@ -94,7 +94,7 @@ type AuthorizationPolicyList struct {
 // ```
 // For mesh level, put the policy in root-namespace according to your Istio installation.
 //
-// Policies to allow both mTLS & plaintext traffic for all workloads under namespace `foo`, but
+// Policies to allow both mTLS and plaintext traffic for all workloads under namespace `foo`, but
 // require mTLS for workload `finance`.
 // ```yaml
 // apiVersion: security.istio.io/v1beta1
@@ -126,8 +126,9 @@ type AuthorizationPolicyList struct {
 //	  mode: STRICT
 //
 // ```
-// Policy to allow mTLS strict for all workloads, but leave port 8080 to
-// plaintext:
+// Policy that enables strict mTLS for all workloads, but leaves the port `8080` to
+// plaintext. Note the port value in the `portLevelMtls` field refers to the port
+// of the workload, not the port of the Kubernetes service.
 // ```yaml
 // apiVersion: security.istio.io/v1beta1
 // kind: PeerAuthentication
@@ -148,8 +149,8 @@ type AuthorizationPolicyList struct {
 //	    mode: DISABLE
 //
 // ```
-// Policy to inherit mTLS mode from namespace (or mesh) settings, and overwrite
-// settings for port 8080
+// Policy that inherits mTLS mode from namespace (or mesh) settings, and disables
+// mTLS for workload port `8080`.
 // ```yaml
 // apiVersion: security.istio.io/v1beta1
 // kind: PeerAuthentication
