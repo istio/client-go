@@ -200,6 +200,9 @@ type AuthorizationPolicyList struct {
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
+// <!-- istio code generation tags
+// +istio.io/sync-start
+// -->
 type PeerAuthentication struct {
 	v1.TypeMeta `json:",inline"`
 	// +optional

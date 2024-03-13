@@ -91,6 +91,8 @@ func ForKind(kind schema.GroupVersionKind) interface{} {
 		// Group=security.istio.io, Version=v1
 	case securityv1.SchemeGroupVersion.WithKind("AuthorizationPolicy"):
 		return &applyconfigurationsecurityv1.AuthorizationPolicyApplyConfiguration{}
+	case securityv1.SchemeGroupVersion.WithKind("PeerAuthentication"):
+		return &applyconfigurationsecurityv1.PeerAuthenticationApplyConfiguration{}
 	case securityv1.SchemeGroupVersion.WithKind("RequestAuthentication"):
 		return &applyconfigurationsecurityv1.RequestAuthenticationApplyConfiguration{}
 
