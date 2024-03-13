@@ -30,6 +30,10 @@ func (c *FakeSecurityV1) AuthorizationPolicies(namespace string) v1.Authorizatio
 	return &FakeAuthorizationPolicies{c, namespace}
 }
 
+func (c *FakeSecurityV1) PeerAuthentications(namespace string) v1.PeerAuthenticationInterface {
+	return &FakePeerAuthentications{c, namespace}
+}
+
 func (c *FakeSecurityV1) RequestAuthentications(namespace string) v1.RequestAuthenticationInterface {
 	return &FakeRequestAuthentications{c, namespace}
 }

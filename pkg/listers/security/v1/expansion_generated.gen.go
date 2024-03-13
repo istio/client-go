@@ -24,6 +24,14 @@ type AuthorizationPolicyListerExpansion interface{}
 // AuthorizationPolicyNamespaceLister.
 type AuthorizationPolicyNamespaceListerExpansion interface{}
 
+// PeerAuthenticationListerExpansion allows custom methods to be added to
+// PeerAuthenticationLister.
+type PeerAuthenticationListerExpansion interface{}
+
+// PeerAuthenticationNamespaceListerExpansion allows custom methods to be added to
+// PeerAuthenticationNamespaceLister.
+type PeerAuthenticationNamespaceListerExpansion interface{}
+
 // RequestAuthenticationListerExpansion allows custom methods to be added to
 // RequestAuthenticationLister.
 type RequestAuthenticationListerExpansion interface{}

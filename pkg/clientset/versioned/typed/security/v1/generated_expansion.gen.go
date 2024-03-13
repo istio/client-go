@@ -18,4 +18,6 @@ package v1
 
 type AuthorizationPolicyExpansion interface{}
 
+type PeerAuthenticationExpansion interface{}
+
 type RequestAuthenticationExpansion interface{}
