@@ -77,6 +77,9 @@ type AuthorizationPolicyList struct {
 //
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+// {{< warning >}}
+// Development of PeerAuthentication is currently frozen and likely to be replaced in Ambient.
+// {{< /warning >}}
 // PeerAuthentication defines how traffic will be tunneled (or not) to the sidecar.
 //
 // Examples:
