@@ -134,7 +134,7 @@ type AuthorizationPolicyList struct {
 //	  mode: STRICT
 //
 // ```
-// Policy that enables strict mTLS for all workloads, but leaves the port `8080` to
+// Policy that enables strict mTLS for all `finance` workloads, but leaves the port `8080` to
 // plaintext. Note the port value in the `portLevelMtls` field refers to the port
 // of the workload, not the port of the Kubernetes service.
 // ```yaml
