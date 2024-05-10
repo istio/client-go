@@ -18,17 +18,21 @@ package applyconfiguration
 
 import (
 	v1alpha1 "istio.io/client-go/pkg/apis/extensions/v1alpha1"
+	networkingv1 "istio.io/client-go/pkg/apis/networking/v1"
 	v1alpha3 "istio.io/client-go/pkg/apis/networking/v1alpha3"
 	v1beta1 "istio.io/client-go/pkg/apis/networking/v1beta1"
 	securityv1 "istio.io/client-go/pkg/apis/security/v1"
 	securityv1beta1 "istio.io/client-go/pkg/apis/security/v1beta1"
+	telemetryv1 "istio.io/client-go/pkg/apis/telemetry/v1"
 	telemetryv1alpha1 "istio.io/client-go/pkg/apis/telemetry/v1alpha1"
 	extensionsv1alpha1 "istio.io/client-go/pkg/applyconfiguration/extensions/v1alpha1"
 	metav1 "istio.io/client-go/pkg/applyconfiguration/meta/v1"
+	applyconfigurationnetworkingv1 "istio.io/client-go/pkg/applyconfiguration/networking/v1"
 	networkingv1alpha3 "istio.io/client-go/pkg/applyconfiguration/networking/v1alpha3"
 	networkingv1beta1 "istio.io/client-go/pkg/applyconfiguration/networking/v1beta1"
 	applyconfigurationsecurityv1 "istio.io/client-go/pkg/applyconfiguration/security/v1"
 	applyconfigurationsecurityv1beta1 "istio.io/client-go/pkg/applyconfiguration/security/v1beta1"
+	applyconfigurationtelemetryv1 "istio.io/client-go/pkg/applyconfiguration/telemetry/v1"
 	applyconfigurationtelemetryv1alpha1 "istio.io/client-go/pkg/applyconfiguration/telemetry/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -51,6 +55,22 @@ func ForKind(kind schema.GroupVersionKind) interface{} {
 		return &metav1.OwnerReferenceApplyConfiguration{}
 	case v1.SchemeGroupVersion.WithKind("TypeMeta"):
 		return &metav1.TypeMetaApplyConfiguration{}
+
+		// Group=networking.istio.io, Version=v1
+	case networkingv1.SchemeGroupVersion.WithKind("DestinationRule"):
+		return &applyconfigurationnetworkingv1.DestinationRuleApplyConfiguration{}
+	case networkingv1.SchemeGroupVersion.WithKind("Gateway"):
+		return &applyconfigurationnetworkingv1.GatewayApplyConfiguration{}
+	case networkingv1.SchemeGroupVersion.WithKind("ServiceEntry"):
+		return &applyconfigurationnetworkingv1.ServiceEntryApplyConfiguration{}
+	case networkingv1.SchemeGroupVersion.WithKind("Sidecar"):
+		return &applyconfigurationnetworkingv1.SidecarApplyConfiguration{}
+	case networkingv1.SchemeGroupVersion.WithKind("VirtualService"):
+		return &applyconfigurationnetworkingv1.VirtualServiceApplyConfiguration{}
+	case networkingv1.SchemeGroupVersion.WithKind("WorkloadEntry"):
+		return &applyconfigurationnetworkingv1.WorkloadEntryApplyConfiguration{}
+	case networkingv1.SchemeGroupVersion.WithKind("WorkloadGroup"):
+		return &applyconfigurationnetworkingv1.WorkloadGroupApplyConfiguration{}
 
 		// Group=networking.istio.io, Version=v1alpha3
 	case v1alpha3.SchemeGroupVersion.WithKind("DestinationRule"):
@@ -103,6 +123,10 @@ func ForKind(kind schema.GroupVersionKind) interface{} {
 		return &applyconfigurationsecurityv1beta1.PeerAuthenticationApplyConfiguration{}
 	case securityv1beta1.SchemeGroupVersion.WithKind("RequestAuthentication"):
 		return &applyconfigurationsecurityv1beta1.RequestAuthenticationApplyConfiguration{}
+
+		// Group=telemetry.istio.io, Version=v1
+	case telemetryv1.SchemeGroupVersion.WithKind("Telemetry"):
+		return &applyconfigurationtelemetryv1.TelemetryApplyConfiguration{}
 
 		// Group=telemetry.istio.io, Version=v1alpha1
 	case telemetryv1alpha1.SchemeGroupVersion.WithKind("Telemetry"):

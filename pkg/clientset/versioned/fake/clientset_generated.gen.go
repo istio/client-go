@@ -20,6 +20,8 @@ import (
 	clientset "istio.io/client-go/pkg/clientset/versioned"
 	extensionsv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/extensions/v1alpha1"
 	fakeextensionsv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/extensions/v1alpha1/fake"
+	networkingv1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1"
+	fakenetworkingv1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1/fake"
 	networkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3"
 	fakenetworkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3/fake"
 	networkingv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1beta1"
@@ -28,6 +30,8 @@ import (
 	fakesecurityv1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1/fake"
 	securityv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1beta1"
 	fakesecurityv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1beta1/fake"
+	telemetryv1 "istio.io/client-go/pkg/clientset/versioned/typed/telemetry/v1"
+	faketelemetryv1 "istio.io/client-go/pkg/clientset/versioned/typed/telemetry/v1/fake"
 	telemetryv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/telemetry/v1alpha1"
 	faketelemetryv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/telemetry/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -102,6 +106,11 @@ func (c *Clientset) NetworkingV1beta1() networkingv1beta1.NetworkingV1beta1Inter
 	return &fakenetworkingv1beta1.FakeNetworkingV1beta1{Fake: &c.Fake}
 }
 
+// NetworkingV1 retrieves the NetworkingV1Client
+func (c *Clientset) NetworkingV1() networkingv1.NetworkingV1Interface {
+	return &fakenetworkingv1.FakeNetworkingV1{Fake: &c.Fake}
+}
+
 // SecurityV1beta1 retrieves the SecurityV1beta1Client
 func (c *Clientset) SecurityV1beta1() securityv1beta1.SecurityV1beta1Interface {
 	return &fakesecurityv1beta1.FakeSecurityV1beta1{Fake: &c.Fake}
@@ -115,4 +124,9 @@ func (c *Clientset) SecurityV1() securityv1.SecurityV1Interface {
 // TelemetryV1alpha1 retrieves the TelemetryV1alpha1Client
 func (c *Clientset) TelemetryV1alpha1() telemetryv1alpha1.TelemetryV1alpha1Interface {
 	return &faketelemetryv1alpha1.FakeTelemetryV1alpha1{Fake: &c.Fake}
+}
+
+// TelemetryV1 retrieves the TelemetryV1Client
+func (c *Clientset) TelemetryV1() telemetryv1.TelemetryV1Interface {
+	return &faketelemetryv1.FakeTelemetryV1{Fake: &c.Fake}
 }
