@@ -45,9 +45,11 @@ kube_istio_source_packages = $(subst $(space),$(empty), \
 	istio.io/api/extensions/v1alpha1, \
 	istio.io/api/networking/v1alpha3, \
 	istio.io/api/networking/v1beta1, \
+	istio.io/api/networking/v1, \
 	istio.io/api/security/v1beta1, \
 	istio.io/api/security/v1, \
-	istio.io/api/telemetry/v1alpha1 \
+	istio.io/api/telemetry/v1alpha1, \
+	istio.io/api/telemetry/v1 \
 	)
 
 # base output package for generated files
@@ -60,9 +62,11 @@ kube_api_packages = $(subst $(space),$(empty), \
 	$(kube_api_base_package)/extensions/v1alpha1, \
 	$(kube_api_base_package)/networking/v1alpha3, \
 	$(kube_api_base_package)/networking/v1beta1, \
+	$(kube_api_base_package)/networking/v1, \
 	$(kube_api_base_package)/security/v1beta1, \
 	$(kube_api_base_package)/security/v1, \
-	$(kube_api_base_package)/telemetry/v1alpha1 \
+	$(kube_api_base_package)/telemetry/v1alpha1, \
+	$(kube_api_base_package)/telemetry/v1 \
 	)
 # this is needed to properly generate ssa functions
 kube_api_applyconfiguration_packages = $(kube_api_packages),k8s.io/apimachinery/pkg/apis/meta/v1

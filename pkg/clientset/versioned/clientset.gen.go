@@ -21,10 +21,12 @@ import (
 	"net/http"
 
 	extensionsv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/extensions/v1alpha1"
+	networkingv1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1"
 	networkingv1alpha3 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1alpha3"
 	networkingv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/networking/v1beta1"
 	securityv1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1"
 	securityv1beta1 "istio.io/client-go/pkg/clientset/versioned/typed/security/v1beta1"
+	telemetryv1 "istio.io/client-go/pkg/clientset/versioned/typed/telemetry/v1"
 	telemetryv1alpha1 "istio.io/client-go/pkg/clientset/versioned/typed/telemetry/v1alpha1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
@@ -36,9 +38,11 @@ type Interface interface {
 	ExtensionsV1alpha1() extensionsv1alpha1.ExtensionsV1alpha1Interface
 	NetworkingV1alpha3() networkingv1alpha3.NetworkingV1alpha3Interface
 	NetworkingV1beta1() networkingv1beta1.NetworkingV1beta1Interface
+	NetworkingV1() networkingv1.NetworkingV1Interface
 	SecurityV1beta1() securityv1beta1.SecurityV1beta1Interface
 	SecurityV1() securityv1.SecurityV1Interface
 	TelemetryV1alpha1() telemetryv1alpha1.TelemetryV1alpha1Interface
+	TelemetryV1() telemetryv1.TelemetryV1Interface
 }
 
 // Clientset contains the clients for groups.
@@ -47,9 +51,11 @@ type Clientset struct {
 	extensionsV1alpha1 *extensionsv1alpha1.ExtensionsV1alpha1Client
 	networkingV1alpha3 *networkingv1alpha3.NetworkingV1alpha3Client
 	networkingV1beta1  *networkingv1beta1.NetworkingV1beta1Client
+	networkingV1       *networkingv1.NetworkingV1Client
 	securityV1beta1    *securityv1beta1.SecurityV1beta1Client
 	securityV1         *securityv1.SecurityV1Client
 	telemetryV1alpha1  *telemetryv1alpha1.TelemetryV1alpha1Client
+	telemetryV1        *telemetryv1.TelemetryV1Client
 }
 
 // ExtensionsV1alpha1 retrieves the ExtensionsV1alpha1Client
@@ -67,6 +73,11 @@ func (c *Clientset) NetworkingV1beta1() networkingv1beta1.NetworkingV1beta1Inter
 	return c.networkingV1beta1
 }
 
+// NetworkingV1 retrieves the NetworkingV1Client
+func (c *Clientset) NetworkingV1() networkingv1.NetworkingV1Interface {
+	return c.networkingV1
+}
+
 // SecurityV1beta1 retrieves the SecurityV1beta1Client
 func (c *Clientset) SecurityV1beta1() securityv1beta1.SecurityV1beta1Interface {
 	return c.securityV1beta1
@@ -80,6 +91,11 @@ func (c *Clientset) SecurityV1() securityv1.SecurityV1Interface {
 // TelemetryV1alpha1 retrieves the TelemetryV1alpha1Client
 func (c *Clientset) TelemetryV1alpha1() telemetryv1alpha1.TelemetryV1alpha1Interface {
 	return c.telemetryV1alpha1
+}
+
+// TelemetryV1 retrieves the TelemetryV1Client
+func (c *Clientset) TelemetryV1() telemetryv1.TelemetryV1Interface {
+	return c.telemetryV1
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -138,6 +154,10 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 	if err != nil {
 		return nil, err
 	}
+	cs.networkingV1, err = networkingv1.NewForConfigAndClient(&configShallowCopy, httpClient)
+	if err != nil {
+		return nil, err
+	}
 	cs.securityV1beta1, err = securityv1beta1.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
@@ -147,6 +167,10 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 		return nil, err
 	}
 	cs.telemetryV1alpha1, err = telemetryv1alpha1.NewForConfigAndClient(&configShallowCopy, httpClient)
+	if err != nil {
+		return nil, err
+	}
+	cs.telemetryV1, err = telemetryv1.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
 	}
@@ -174,9 +198,11 @@ func New(c rest.Interface) *Clientset {
 	cs.extensionsV1alpha1 = extensionsv1alpha1.New(c)
 	cs.networkingV1alpha3 = networkingv1alpha3.New(c)
 	cs.networkingV1beta1 = networkingv1beta1.New(c)
+	cs.networkingV1 = networkingv1.New(c)
 	cs.securityV1beta1 = securityv1beta1.New(c)
 	cs.securityV1 = securityv1.New(c)
 	cs.telemetryV1alpha1 = telemetryv1alpha1.New(c)
+	cs.telemetryV1 = telemetryv1.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs
