@@ -18,7 +18,7 @@ package v1
 
 import (
 	v1alpha1 "istio.io/api/meta/v1alpha1"
-	securityv1 "istio.io/api/security/v1"
+	v1beta1 "istio.io/api/security/v1beta1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -27,14 +27,31 @@ import (
 
 // AuthorizationPolicy enables access control on workloads.
 //
+// <!-- crd generation tags
+// +cue-gen:AuthorizationPolicy:groupName:security.istio.io
+// +cue-gen:AuthorizationPolicy:versions:v1beta1,v1
+// +cue-gen:AuthorizationPolicy:storageVersion
+// +cue-gen:AuthorizationPolicy:annotations:helm.sh/resource-policy=keep
+// +cue-gen:AuthorizationPolicy:labels:app=istio-pilot,chart=istio,istio=security,heritage=Tiller,release=istio
+// +cue-gen:AuthorizationPolicy:subresource:status
+// +cue-gen:AuthorizationPolicy:scope:Namespaced
+// +cue-gen:AuthorizationPolicy:resource:categories=istio-io,security-istio-io,shortNames=ap,plural=authorizationpolicies
+// +cue-gen:AuthorizationPolicy:preserveUnknownFields:false
+// +cue-gen:AuthorizationPolicy:printerColumn:name=Action,type=string,JSONPath=.spec.action,description="The operation to take."
+// +cue-gen:AuthorizationPolicy:printerColumn:name=Age,type=date,JSONPath=.metadata.creationTimestamp,description="CreationTimestamp is a timestamp
+// representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations.
+// Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+// Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+// -->
+//
 // <!-- go code generation tags
 // +kubetype-gen
-// +kubetype-gen:groupVersion=security.istio.io/v1
+// +kubetype-gen:groupVersion=security.istio.io/v1beta1
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
 // <!-- istio code generation tags
-// +istio.io/sync-from:security/v1beta1/authorization_policy.proto
+// +istio.io/sync-start
 // -->
 type AuthorizationPolicy struct {
 	metav1.TypeMeta `json:",inline"`
@@ -43,7 +60,7 @@ type AuthorizationPolicy struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec securityv1.AuthorizationPolicy `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec v1beta1.AuthorizationPolicy `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
 	Status v1alpha1.IstioStatus `json:"status"`
 }
@@ -70,7 +87,7 @@ type AuthorizationPolicyList struct {
 //
 // Policy to allow mTLS traffic for all workloads under namespace `foo`:
 // ```yaml
-// apiVersion: security.istio.io/v1
+// apiVersion: security.istio.io/v1beta1
 // kind: PeerAuthentication
 // metadata:
 //
@@ -88,7 +105,7 @@ type AuthorizationPolicyList struct {
 // Policies to allow both mTLS and plaintext traffic for all workloads under namespace `foo`, but
 // require mTLS for workload `finance`.
 // ```yaml
-// apiVersion: security.istio.io/v1
+// apiVersion: security.istio.io/v1beta1
 // kind: PeerAuthentication
 // metadata:
 //
@@ -101,7 +118,7 @@ type AuthorizationPolicyList struct {
 //	  mode: PERMISSIVE
 //
 // ---
-// apiVersion: security.istio.io/v1
+// apiVersion: security.istio.io/v1beta1
 // kind: PeerAuthentication
 // metadata:
 //
@@ -121,7 +138,7 @@ type AuthorizationPolicyList struct {
 // plaintext. Note the port value in the `portLevelMtls` field refers to the port
 // of the workload, not the port of the Kubernetes service.
 // ```yaml
-// apiVersion: security.istio.io/v1
+// apiVersion: security.istio.io/v1beta1
 // kind: PeerAuthentication
 // metadata:
 //
@@ -143,7 +160,7 @@ type AuthorizationPolicyList struct {
 // Policy that inherits mTLS mode from namespace (or mesh) settings, and disables
 // mTLS for workload port `8080`.
 // ```yaml
-// apiVersion: security.istio.io/v1
+// apiVersion: security.istio.io/v1beta1
 // kind: PeerAuthentication
 // metadata:
 //
@@ -163,14 +180,31 @@ type AuthorizationPolicyList struct {
 //
 // ```
 //
+// <!-- crd generation tags
+// +cue-gen:PeerAuthentication:groupName:security.istio.io
+// +cue-gen:PeerAuthentication:versions:v1beta1,v1
+// +cue-gen:PeerAuthentication:storageVersion
+// +cue-gen:PeerAuthentication:annotations:helm.sh/resource-policy=keep
+// +cue-gen:PeerAuthentication:labels:app=istio-pilot,chart=istio,istio=security,heritage=Tiller,release=istio
+// +cue-gen:PeerAuthentication:subresource:status
+// +cue-gen:PeerAuthentication:scope:Namespaced
+// +cue-gen:PeerAuthentication:resource:categories=istio-io,security-istio-io,shortNames=pa
+// +cue-gen:PeerAuthentication:preserveUnknownFields:false
+// +cue-gen:PeerAuthentication:printerColumn:name=Mode,type=string,JSONPath=.spec.mtls.mode,description="Defines the mTLS mode used for peer authentication."
+// +cue-gen:PeerAuthentication:printerColumn:name=Age,type=date,JSONPath=.metadata.creationTimestamp,description="CreationTimestamp is a timestamp
+// representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations.
+// Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+// Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+// -->
+//
 // <!-- go code generation tags
 // +kubetype-gen
-// +kubetype-gen:groupVersion=security.istio.io/v1
+// +kubetype-gen:groupVersion=security.istio.io/v1beta1
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
 // <!-- istio code generation tags
-// +istio.io/sync-from:security/v1beta1/peer_authentication.proto
+// +istio.io/sync-start
 // -->
 type PeerAuthentication struct {
 	metav1.TypeMeta `json:",inline"`
@@ -179,7 +213,7 @@ type PeerAuthentication struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec securityv1.PeerAuthentication `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec v1beta1.PeerAuthentication `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
 	Status v1alpha1.IstioStatus `json:"status"`
 }
@@ -436,14 +470,26 @@ type PeerAuthenticationList struct {
 //
 // ```
 //
+// <!-- crd generation tags
+// +cue-gen:RequestAuthentication:groupName:security.istio.io
+// +cue-gen:RequestAuthentication:versions:v1beta1,v1
+// +cue-gen:RequestAuthentication:storageVersion
+// +cue-gen:RequestAuthentication:annotations:helm.sh/resource-policy=keep
+// +cue-gen:RequestAuthentication:labels:app=istio-pilot,chart=istio,istio=security,heritage=Tiller,release=istio
+// +cue-gen:RequestAuthentication:subresource:status
+// +cue-gen:RequestAuthentication:scope:Namespaced
+// +cue-gen:RequestAuthentication:resource:categories=istio-io,security-istio-io,shortNames=ra
+// +cue-gen:RequestAuthentication:preserveUnknownFields:false
+// -->
+//
 // <!-- go code generation tags
 // +kubetype-gen
-// +kubetype-gen:groupVersion=security.istio.io/v1
+// +kubetype-gen:groupVersion=security.istio.io/v1beta1
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
 // <!-- istio code generation tags
-// +istio.io/sync-from:security/v1beta1/request_authentication.proto
+// +istio.io/sync-start
 // -->
 type RequestAuthentication struct {
 	metav1.TypeMeta `json:",inline"`
@@ -452,7 +498,7 @@ type RequestAuthentication struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec securityv1.RequestAuthentication `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec v1beta1.RequestAuthentication `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
 	Status v1alpha1.IstioStatus `json:"status"`
 }
