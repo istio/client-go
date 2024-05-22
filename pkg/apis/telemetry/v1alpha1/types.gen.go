@@ -49,9 +49,6 @@ import (
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
-// <!-- istio code generation tags
-// +istio.io/sync-start
-// -->
 type Telemetry struct {
 	v1.TypeMeta `json:",inline"`
 	// +optional

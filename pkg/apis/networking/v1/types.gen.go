@@ -50,9 +50,6 @@ import (
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
-// <!-- istio code generation tags
-// +istio.io/sync-start
-// -->
 type DestinationRule struct {
 	metav1.TypeMeta `json:",inline"`
 	// +optional
@@ -97,9 +94,6 @@ type DestinationRuleList struct {
 // +kubetype-gen:groupVersion=networking.istio.io/v1alpha3
 // +genclient
 // +k8s:deepcopy-gen=true
-// -->
-// <!-- istio code generation tags
-// +istio.io/sync-start
 // -->
 type Gateway struct {
 	metav1.TypeMeta `json:",inline"`
@@ -155,9 +149,6 @@ type GatewayList struct {
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
-// <!-- istio code generation tags
-// +istio.io/sync-start
-// -->
 type ServiceEntry struct {
 	metav1.TypeMeta `json:",inline"`
 	// +optional
@@ -203,9 +194,6 @@ type ServiceEntryList struct {
 // +kubetype-gen:groupVersion=networking.istio.io/v1alpha3
 // +genclient
 // +k8s:deepcopy-gen=true
-// -->
-// <!-- istio code generation tags
-// +istio.io/sync-start
 // -->
 type Sidecar struct {
 	metav1.TypeMeta `json:",inline"`
@@ -258,9 +246,6 @@ type SidecarList struct {
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
-// <!-- istio code generation tags
-// +istio.io/sync-start
-// -->
 type VirtualService struct {
 	metav1.TypeMeta `json:",inline"`
 	// +optional
@@ -309,9 +294,6 @@ type VirtualServiceList struct {
 // +kubetype-gen:groupVersion=networking.istio.io/v1alpha3
 // +genclient
 // +k8s:deepcopy-gen=true
-// -->
-// <!-- istio code generation tags
-// +istio.io/sync-start
 // -->
 type WorkloadEntry struct {
 	metav1.TypeMeta `json:",inline"`
@@ -363,9 +345,6 @@ type WorkloadEntryList struct {
 // +kubetype-gen:groupVersion=networking.istio.io/v1alpha3
 // +genclient
 // +k8s:deepcopy-gen=true
-// -->
-// <!-- istio code generation tags
-// +istio.io/sync-start
 // -->
 type WorkloadGroup struct {
 	metav1.TypeMeta `json:",inline"`
