@@ -50,9 +50,6 @@ import (
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
-// <!-- istio code generation tags
-// +istio.io/sync-start
-// -->
 type AuthorizationPolicy struct {
 	v1.TypeMeta `json:",inline"`
 	// +optional
@@ -87,7 +84,7 @@ type AuthorizationPolicyList struct {
 //
 // Policy to allow mTLS traffic for all workloads under namespace `foo`:
 // ```yaml
-// apiVersion: security.istio.io/v1beta1
+// apiVersion: security.istio.io/v1
 // kind: PeerAuthentication
 // metadata:
 //
@@ -105,7 +102,7 @@ type AuthorizationPolicyList struct {
 // Policies to allow both mTLS and plaintext traffic for all workloads under namespace `foo`, but
 // require mTLS for workload `finance`.
 // ```yaml
-// apiVersion: security.istio.io/v1beta1
+// apiVersion: security.istio.io/v1
 // kind: PeerAuthentication
 // metadata:
 //
@@ -118,7 +115,7 @@ type AuthorizationPolicyList struct {
 //	  mode: PERMISSIVE
 //
 // ---
-// apiVersion: security.istio.io/v1beta1
+// apiVersion: security.istio.io/v1
 // kind: PeerAuthentication
 // metadata:
 //
@@ -138,7 +135,7 @@ type AuthorizationPolicyList struct {
 // plaintext. Note the port value in the `portLevelMtls` field refers to the port
 // of the workload, not the port of the Kubernetes service.
 // ```yaml
-// apiVersion: security.istio.io/v1beta1
+// apiVersion: security.istio.io/v1
 // kind: PeerAuthentication
 // metadata:
 //
@@ -160,7 +157,7 @@ type AuthorizationPolicyList struct {
 // Policy that inherits mTLS mode from namespace (or mesh) settings, and disables
 // mTLS for workload port `8080`.
 // ```yaml
-// apiVersion: security.istio.io/v1beta1
+// apiVersion: security.istio.io/v1
 // kind: PeerAuthentication
 // metadata:
 //
@@ -202,9 +199,6 @@ type AuthorizationPolicyList struct {
 // +kubetype-gen:groupVersion=security.istio.io/v1beta1
 // +genclient
 // +k8s:deepcopy-gen=true
-// -->
-// <!-- istio code generation tags
-// +istio.io/sync-start
 // -->
 type PeerAuthentication struct {
 	v1.TypeMeta `json:",inline"`
@@ -440,7 +434,7 @@ type PeerAuthenticationList struct {
 //	      requestPrincipals: ["*"]
 //
 // ---
-// apiVersion: networking.istio.io/v1alpha3
+// apiVersion: networking.istio.io/v1
 // kind: VirtualService
 // metadata:
 //
@@ -487,9 +481,6 @@ type PeerAuthenticationList struct {
 // +kubetype-gen:groupVersion=security.istio.io/v1beta1
 // +genclient
 // +k8s:deepcopy-gen=true
-// -->
-// <!-- istio code generation tags
-// +istio.io/sync-start
 // -->
 type RequestAuthentication struct {
 	v1.TypeMeta `json:",inline"`
