@@ -17,23 +17,40 @@
 package v1
 
 import (
-	v1alpha1 "istio.io/api/meta/v1alpha1"
-	telemetryv1 "istio.io/api/telemetry/v1"
+	metav1alpha1 "istio.io/api/meta/v1alpha1"
+	v1alpha1 "istio.io/api/telemetry/v1alpha1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 //
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+// <!-- crd generation tags
+// +cue-gen:Telemetry:groupName:telemetry.istio.io
+// +cue-gen:Telemetry:versions:v1alpha1,v1
+// +cue-gen:Telemetry:storageVersion
+// +cue-gen:Telemetry:annotations:helm.sh/resource-policy=keep
+// +cue-gen:Telemetry:labels:app=istio-pilot,chart=istio,istio=telemetry,heritage=Tiller,release=istio
+// +cue-gen:Telemetry:subresource:status
+// +cue-gen:Telemetry:scope:Namespaced
+// +cue-gen:Telemetry:resource:categories=istio-io,telemetry-istio-io,shortNames=telemetry,plural=telemetries
+// +cue-gen:Telemetry:preserveUnknownFields:false
+// +cue-gen:Telemetry:printerColumn:name=Age,type=date,JSONPath=.metadata.creationTimestamp,description="CreationTimestamp
+// is a timestamp representing the server time when this object was created. It
+// is not guaranteed to be set in happens-before order across separate
+// operations. Clients may not set this value. It is represented in RFC3339 form
+// and is in UTC. Populated by the system. Read-only. Null for lists. More info:
+// https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+// -->
+//
 // <!-- go code generation tags
 // +kubetype-gen
-// +kubetype-gen:groupVersion=telemetry.istio.io/v1
+// +kubetype-gen:groupVersion=telemetry.istio.io/v1alpha1
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
-// -->
 // <!-- istio code generation tags
-// +istio.io/sync-from:telemetry/v1alpha1/telemetry.proto
+// +istio.io/sync-start
 // -->
 type Telemetry struct {
 	metav1.TypeMeta `json:",inline"`
@@ -42,9 +59,9 @@ type Telemetry struct {
 
 	// Spec defines the implementation of this definition.
 	// +optional
-	Spec telemetryv1.Telemetry `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+	Spec v1alpha1.Telemetry `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	Status v1alpha1.IstioStatus `json:"status"`
+	Status metav1alpha1.IstioStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
