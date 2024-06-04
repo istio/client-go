@@ -5,7 +5,7 @@ go 1.22.0
 toolchain go1.22.3
 
 require (
-	istio.io/api v1.22.0-alpha.1.0.20240602151005-f51895ee7a48
+	istio.io/api v1.22.0-alpha.1.0.20240604211607-0dbacc016004
 	k8s.io/apimachinery v0.30.0
 	k8s.io/client-go v0.29.0
 	sigs.k8s.io/structured-merge-diff/v4 v4.4.1
