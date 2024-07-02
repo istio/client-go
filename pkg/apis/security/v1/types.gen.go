@@ -75,14 +75,19 @@ type AuthorizationPolicyList struct {
 //
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// {{< warning >}}
-// Development of PeerAuthentication is currently frozen and likely to be replaced in Ambient.
-// {{< /warning >}}
-// PeerAuthentication defines how traffic will be tunneled (or not) to the sidecar.
+// PeerAuthentication defines mutual TLS (mTLS) requirements for incoming connections.
+//
+// In sidecar mode, PeerAuthentication determines whether or not mTLS is allowed or required
+// for connections to an Envoy proxy sidecar.
+//
+// In ambient mode, security is transparently enabled for a pod by the ztunnel node agent.
+// (Traffic between proxies uses the HBONE protocol, which includes encryption with mTLS.)
+// Because of this, `DISABLE` mode is not supported.
+// `STRICT` mode is useful to ensure that connections that bypass the mesh are not possible.
 //
 // Examples:
 //
-// Policy to allow mTLS traffic for all workloads under namespace `foo`:
+// Policy to require mTLS traffic for all workloads under namespace `foo`:
 // ```yaml
 // apiVersion: security.istio.io/v1
 // kind: PeerAuthentication
