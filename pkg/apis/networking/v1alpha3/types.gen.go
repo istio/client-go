@@ -195,6 +195,7 @@ type GatewayList struct {
 // +kubetype-gen:groupVersion=networking.istio.io/v1alpha3
 // +genclient
 // +k8s:deepcopy-gen=true
+// istiostatus-override: ServiceEntryStatus: istio.io/api/networking/v1alpha3
 // -->
 type ServiceEntry struct {
 	v1.TypeMeta `json:",inline"`
