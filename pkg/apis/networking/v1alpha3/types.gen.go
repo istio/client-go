@@ -206,7 +206,7 @@ type ServiceEntry struct {
 	// +optional
 	Spec networkingv1alpha3.ServiceEntry `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	Status v1alpha1.IstioStatus `json:"status"`
+	Status networkingv1alpha3.ServiceEntryStatus `json:"status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
