@@ -335,6 +335,7 @@ type VirtualServiceList struct {
 // Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
 // +cue-gen:WorkloadEntry:printerColumn:name=Address,type=string,JSONPath=.spec.address,description="Address associated with the network endpoint."
 // +cue-gen:WorkloadEntry:preserveUnknownFields:false
+// +cue-gen:WorkloadEntry:spec:required
 // -->
 //
 // <!-- go code generation tags
@@ -343,6 +344,8 @@ type VirtualServiceList struct {
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
+// +kubebuilder:validation:XValidation:message="Address is required",rule="has(self.address) || has(self.network)"
+// +kubebuilder:validation:XValidation:message="UDS may not include ports",rule="(has(self.address) && self.address.startsWith('unix://')) ? !has(self.ports) : true"
 type WorkloadEntry struct {
 	v1.TypeMeta `json:",inline"`
 	// +optional
