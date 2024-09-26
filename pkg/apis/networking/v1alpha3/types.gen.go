@@ -97,6 +97,7 @@ type DestinationRuleList struct {
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
+// +kubebuilder:validation:XValidation:message="only one of targetRefs or workloadSelector can be set",rule="(has(self.workloadSelector)?1:0)+(has(self.targetRefs)?1:0)<=1"
 type EnvoyFilter struct {
 	v1.TypeMeta `json:",inline"`
 	// +optional
