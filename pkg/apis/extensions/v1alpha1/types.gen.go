@@ -25,7 +25,7 @@ import (
 //
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// WasmPlugins provides a mechanism to extend the functionality provided by
+// WasmPlugin provides a mechanism to extend the functionality provided by
 // the Istio proxy through WebAssembly filters.
 //
 // <!-- crd generation tags
