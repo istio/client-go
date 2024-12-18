@@ -100,9 +100,9 @@ rename_generated_files=\
 	find $(subst istio.io/client-go/, $(empty), $(subst $(comma), $(space), $(kube_api_packages)) $(kube_clientset_package) $(kube_listers_package) $(kube_informers_package)) \
 	-name '*.go' -and -not -name 'doc.go' -and -not -name '*.gen.go' -type f -exec sh -c 'mv "$$1" "$${1%.go}".gen.go' - '{}' \;
 
-# Kubernetes deepcopy gen directly sets values of our types. Our types our protos; it is illegal to do this for protos.
+# Kubernetes deepcopy gen directly sets values of our types. Our types are protos; it is illegal to do this for protos.
 # However, we don't even need this anyways -- each individual field is explicitly copied already.
-# Remove this line.
+# Remove the line doing this illegal operation.
 fixup_generated_files=\
 	find . -name "*.deepcopy.gen.go" -type f | xargs sed -i -e '/\*out = \*in/d'
 
