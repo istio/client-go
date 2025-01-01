@@ -50,7 +50,7 @@ import (
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
-// +kubebuilder:validation:XValidation:message="only one of targetRefs or selector can be set",rule="(has(self.selector)?1:0)+(has(self.targetRef)?1:0)+(has(self.targetRefs)?1:0)<=1"
+// +kubebuilder:validation:XValidation:message="only one of targetRefs or selector can be set",rule="oneof(self.selector, self.targetRef, self.targetRefs)"
 type AuthorizationPolicy struct {
 	v1.TypeMeta `json:",inline"`
 	// +optional
@@ -99,7 +99,7 @@ type AuthorizationPolicyList struct {
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
-// +kubebuilder:validation:XValidation:message="portLevelMtls requires selector",rule="(has(self.selector) && has(self.selector.matchLabels) && self.selector.matchLabels.size() > 0) || !has(self.portLevelMtls)"
+// +kubebuilder:validation:XValidation:message="portLevelMtls requires selector",rule="has(self.portLevelMtls) ? self.index({}, selector, matchLabels).size() > 0 : true"
 type PeerAuthentication struct {
 	v1.TypeMeta `json:",inline"`
 	// +optional
@@ -143,7 +143,7 @@ type PeerAuthenticationList struct {
 // +genclient
 // +k8s:deepcopy-gen=true
 // -->
-// +kubebuilder:validation:XValidation:message="only one of targetRefs or selector can be set",rule="(has(self.selector)?1:0)+(has(self.targetRef)?1:0)+(has(self.targetRefs)?1:0)<=1"
+// +kubebuilder:validation:XValidation:message="only one of targetRefs or selector can be set",rule="oneof(self.selector, self.targetRef, self.targetRefs)"
 type RequestAuthentication struct {
 	v1.TypeMeta `json:",inline"`
 	// +optional
