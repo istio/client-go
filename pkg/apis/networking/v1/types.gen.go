@@ -59,7 +59,7 @@ type DestinationRule struct {
 	// +optional
 	Spec v1alpha3.DestinationRule `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	Status v1alpha1.IstioStatus `json:"status"`
+	Status v1alpha1.IstioStatus `json:"status,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -104,7 +104,7 @@ type Gateway struct {
 	// +optional
 	Spec v1alpha3.Gateway `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	Status v1alpha1.IstioStatus `json:"status"`
+	Status v1alpha1.IstioStatus `json:"status,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -164,7 +164,7 @@ type ServiceEntry struct {
 	// +optional
 	Spec v1alpha3.ServiceEntry `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	Status v1alpha3.ServiceEntryStatus `json:"status"`
+	Status v1alpha3.ServiceEntryStatus `json:"status,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -210,7 +210,7 @@ type Sidecar struct {
 	// +optional
 	Spec v1alpha3.Sidecar `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	Status v1alpha1.IstioStatus `json:"status"`
+	Status v1alpha1.IstioStatus `json:"status,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -261,7 +261,7 @@ type VirtualService struct {
 	// +optional
 	Spec v1alpha3.VirtualService `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	Status v1alpha1.IstioStatus `json:"status"`
+	Status v1alpha1.IstioStatus `json:"status,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -313,7 +313,7 @@ type WorkloadEntry struct {
 	// +optional
 	Spec v1alpha3.WorkloadEntry `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	Status v1alpha1.IstioStatus `json:"status"`
+	Status v1alpha1.IstioStatus `json:"status,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -365,7 +365,7 @@ type WorkloadGroup struct {
 	// +optional
 	Spec v1alpha3.WorkloadGroup `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	Status v1alpha1.IstioStatus `json:"status"`
+	Status v1alpha1.IstioStatus `json:"status,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
