@@ -62,7 +62,7 @@ type WasmPlugin struct {
 	// +optional
 	Spec extensionsv1alpha1.WasmPlugin `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	Status metav1alpha1.IstioStatus `json:"status"`
+	Status metav1alpha1.IstioStatus `json:"status,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
