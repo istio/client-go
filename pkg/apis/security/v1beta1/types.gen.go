@@ -60,7 +60,7 @@ type AuthorizationPolicy struct {
 	// +optional
 	Spec securityv1beta1.AuthorizationPolicy `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	Status v1alpha1.IstioStatus `json:"status"`
+	Status v1alpha1.IstioStatus `json:"status,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -109,7 +109,7 @@ type PeerAuthentication struct {
 	// +optional
 	Spec securityv1beta1.PeerAuthentication `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	Status v1alpha1.IstioStatus `json:"status"`
+	Status v1alpha1.IstioStatus `json:"status,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -153,7 +153,7 @@ type RequestAuthentication struct {
 	// +optional
 	Spec securityv1beta1.RequestAuthentication `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 
-	Status v1alpha1.IstioStatus `json:"status"`
+	Status v1alpha1.IstioStatus `json:"status,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
