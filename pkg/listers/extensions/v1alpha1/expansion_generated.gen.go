@@ -16,6 +16,14 @@
 
 package v1alpha1
 
+// TrafficExtensionListerExpansion allows custom methods to be added to
+// TrafficExtensionLister.
+type TrafficExtensionListerExpansion interface{}
+
+// TrafficExtensionNamespaceListerExpansion allows custom methods to be added to
+// TrafficExtensionNamespaceLister.
+type TrafficExtensionNamespaceListerExpansion interface{}
+
 // WasmPluginListerExpansion allows custom methods to be added to
 // WasmPluginLister.
 type WasmPluginListerExpansion interface{}

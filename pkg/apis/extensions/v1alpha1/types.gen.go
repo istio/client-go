@@ -25,6 +25,54 @@ import (
 //
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+// <!-- crd generation tags
+// +cue-gen:TrafficExtension:groupName:extensions.istio.io
+// +cue-gen:TrafficExtension:versions:v1alpha1
+// +cue-gen:TrafficExtension:storageVersion
+// +cue-gen:TrafficExtension:annotations:helm.sh/resource-policy=keep
+// +cue-gen:TrafficExtension:labels:app=istio-pilot,chart=istio,heritage=Tiller,release=istio
+// +cue-gen:TrafficExtension:subresource:status
+// +cue-gen:TrafficExtension:spec:required
+// +cue-gen:TrafficExtension:scope:Namespaced
+// +cue-gen:TrafficExtension:releaseChannel:extended
+// +cue-gen:TrafficExtension:resource:categories=istio-io,extensions-istio-io
+// +cue-gen:TrafficExtension:preserveUnknownFields:wasm.pluginConfig
+// +cue-gen:TrafficExtension:printerColumn:name=Age,type=date,JSONPath=.metadata.creationTimestamp,description="CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC. Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+// -->
+//
+// <!-- go code generation tags
+// +kubetype-gen
+// +kubetype-gen:groupVersion=extensions.istio.io/v1alpha1
+// +genclient
+// +k8s:deepcopy-gen=true
+// -->
+// +kubebuilder:validation:XValidation:message="only one of targetRefs or selector can be set",rule="(has(self.selector)?1:0)+(has(self.targetRefs)?1:0)<=1"
+// +kubebuilder:validation:XValidation:message="exactly one of wasm or lua must be set",rule="has(self.wasm) != has(self.lua)"
+type TrafficExtension struct {
+	v1.TypeMeta `json:",inline"`
+	// +optional
+	v1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// Spec defines the implementation of this definition.
+	// +optional
+	Spec extensionsv1alpha1.TrafficExtension `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	Status metav1alpha1.IstioStatus `json:"status,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// TrafficExtensionList is a collection of TrafficExtensions.
+type TrafficExtensionList struct {
+	v1.TypeMeta `json:",inline"`
+	// +optional
+	v1.ListMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+	Items       []*TrafficExtension `json:"items" protobuf:"bytes,2,rep,name=items"`
+}
+
+//
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 // WasmPlugin provides a mechanism to extend the functionality provided by
 // the Istio proxy through WebAssembly filters.
 //
