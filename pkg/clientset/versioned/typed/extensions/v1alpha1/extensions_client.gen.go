@@ -26,12 +26,17 @@ import (
 
 type ExtensionsV1alpha1Interface interface {
 	RESTClient() rest.Interface
+	TrafficExtensionsGetter
 	WasmPluginsGetter
 }
 
 // ExtensionsV1alpha1Client is used to interact with features provided by the extensions.istio.io group.
 type ExtensionsV1alpha1Client struct {
 	restClient rest.Interface
+}
+
+func (c *ExtensionsV1alpha1Client) TrafficExtensions(namespace string) TrafficExtensionInterface {
+	return newTrafficExtensions(c, namespace)
 }
 
 func (c *ExtensionsV1alpha1Client) WasmPlugins(namespace string) WasmPluginInterface {

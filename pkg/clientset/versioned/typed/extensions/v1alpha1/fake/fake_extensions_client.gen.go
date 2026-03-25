@@ -26,6 +26,10 @@ type FakeExtensionsV1alpha1 struct {
 	*testing.Fake
 }
 
+func (c *FakeExtensionsV1alpha1) TrafficExtensions(namespace string) v1alpha1.TrafficExtensionInterface {
+	return &FakeTrafficExtensions{c, namespace}
+}
+
 func (c *FakeExtensionsV1alpha1) WasmPlugins(namespace string) v1alpha1.WasmPluginInterface {
 	return &FakeWasmPlugins{c, namespace}
 }

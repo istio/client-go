@@ -43,6 +43,8 @@ import (
 func ForKind(kind schema.GroupVersionKind) interface{} {
 	switch kind {
 	// Group=extensions.istio.io, Version=v1alpha1
+	case v1alpha1.SchemeGroupVersion.WithKind("TrafficExtension"):
+		return &extensionsv1alpha1.TrafficExtensionApplyConfiguration{}
 	case v1alpha1.SchemeGroupVersion.WithKind("WasmPlugin"):
 		return &extensionsv1alpha1.WasmPluginApplyConfiguration{}
 
