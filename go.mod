@@ -3,7 +3,7 @@ module istio.io/client-go
 go 1.25.0
 
 require (
-	istio.io/api v1.30.0-alpha.1.0.20260423165719-9607dc87975d
+	istio.io/api v1.30.0-alpha.1.0.20260428144439-b9ac6420f999
 	k8s.io/apimachinery v0.35.0
 	k8s.io/client-go v0.35.0
 	sigs.k8s.io/structured-merge-diff/v4 v4.7.0
