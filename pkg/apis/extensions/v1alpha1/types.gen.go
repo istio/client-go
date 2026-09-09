@@ -22,7 +22,6 @@ import (
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // <!-- crd generation tags
@@ -70,7 +69,6 @@ type TrafficExtensionList struct {
 	Items       []*TrafficExtension `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // WasmPlugin provides a mechanism to extend the functionality provided by
