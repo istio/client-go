@@ -22,7 +22,6 @@ import (
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // DestinationRule defines policies that apply to traffic intended for a service
@@ -72,7 +71,6 @@ type DestinationRuleList struct {
 	Items       []*DestinationRule `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // EnvoyFilter provides a mechanism to customize the Envoy configuration
@@ -120,7 +118,6 @@ type EnvoyFilterList struct {
 	Items       []*EnvoyFilter `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // Gateway describes a load balancer operating at the edge of the mesh
@@ -165,7 +162,6 @@ type GatewayList struct {
 	Items       []*Gateway `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // ServiceEntry enables adding additional entries into Istio's internal
@@ -225,7 +221,6 @@ type ServiceEntryList struct {
 	Items       []*ServiceEntry `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // `Sidecar` describes the configuration of the sidecar proxy that mediates
@@ -271,7 +266,6 @@ type SidecarList struct {
 	Items       []*Sidecar `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // Configuration affecting traffic routing.
@@ -322,7 +316,6 @@ type VirtualServiceList struct {
 	Items       []*VirtualService `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // WorkloadEntry enables specifying the properties of a single non-Kubernetes workload such a VM or a bare metal services that can be referred to by service entries.
@@ -374,7 +367,6 @@ type WorkloadEntryList struct {
 	Items       []*WorkloadEntry `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // `WorkloadGroup` enables specifying the properties of a single workload for bootstrap and

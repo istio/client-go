@@ -22,7 +22,6 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // AuthorizationPolicy enables access control on workloads.
@@ -73,7 +72,6 @@ type AuthorizationPolicyList struct {
 	Items           []*AuthorizationPolicy `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // <!-- crd generation tags
@@ -122,7 +120,6 @@ type PeerAuthenticationList struct {
 	Items           []*PeerAuthentication `json:"items" protobuf:"bytes,2,rep,name=items"`
 }
 
-//
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // <!-- crd generation tags

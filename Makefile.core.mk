@@ -109,8 +109,7 @@ fixup_generated_files=\
 .PHONY: generate-k8s-client
 generate-k8s-client:
 	# generate kube api type wrappers for istio types
-	# TODO(https://github.com/istio/istio/issues/54831) do not depend on gotypesalias=0 for this to work
-	@GODEBUG=gotypesalias=0 $(kubetype_gen) --input-dirs $(kube_istio_source_packages) --output-package $(kube_api_base_package) -h $(kube_go_header_text)
+	@$(kubetype_gen) --input-dirs $(kube_istio_source_packages) --output-package $(kube_api_base_package) -h $(kube_go_header_text)
 	@$(move_generated)
 	# generate deepcopy for kube api types
 	@$(deepcopy_gen) --input-dirs $(kube_api_packages) -O zz_generated.deepcopy  -h $(kube_go_header_text)

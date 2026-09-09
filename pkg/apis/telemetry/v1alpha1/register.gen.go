@@ -23,7 +23,7 @@ import (
 )
 
 var (
-	// Package-wide variables from generator "register".
+	// Package-wide variables from generator "register.go".
 	SchemeGroupVersion = schema.GroupVersion{Group: GroupName, Version: "v1alpha1"}
 	SchemeBuilder      = runtime.NewSchemeBuilder(addKnownTypes)
 	localSchemeBuilder = &SchemeBuilder
@@ -31,7 +31,7 @@ var (
 )
 
 const (
-	// Package-wide consts from generator "register".
+	// Package-wide consts from generator "register.go".
 	GroupName = "telemetry.istio.io"
 )
 
